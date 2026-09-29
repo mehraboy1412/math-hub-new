@@ -1,0 +1,6 @@
+{
+  "summary":  "Plan to fix the subtext hint answer leak across all question types by replacing dynamic answer interpolation with static generic formatting examples.",
+  "updatedAt":  "2026-09-29T11:35:35.023182032Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}

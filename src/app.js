@@ -1,5 +1,6 @@
 // Math Practice Hub - SSC CGL Calculation Trainer
 // Ultra-fast, competitive-exam grade mental math engine
+// Bright Alertness Canvas & Multi-Step Flow with Fraction Lab Suite
 
 (function () {
   'use strict';
@@ -53,7 +54,6 @@
       if (!this.ctx) return;
       try {
         const now = this.ctx.currentTime;
-        // Two-tone bell chime
         [523.25, 659.25, 783.99].forEach((freq, i) => {
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
@@ -120,60 +120,60 @@
   const sound = new SoundSynth();
 
   // -------------------------------------------------------------
-  // SPACES & CONSTANTS FOR SSC CGL
+  // SPACES & CONSTANTS FOR SSC CGL FRACTIONS
   // -------------------------------------------------------------
   const SSC_FRACTIONS = [
-    { fraction: '1/2', percent: '50%', decimals: ['50', '50.0'], fracStr: '1/2' },
-    { fraction: '1/3', percent: '33.33%', decimals: ['33.33', '33.3'], fracStr: '1/3' },
-    { fraction: '1/4', percent: '25%', decimals: ['25', '25.0'], fracStr: '1/4' },
-    { fraction: '1/5', percent: '20%', decimals: ['20', '20.0'], fracStr: '1/5' },
-    { fraction: '1/6', percent: '16.66%', decimals: ['16.66', '16.67'], fracStr: '1/6' },
-    { fraction: '1/7', percent: '14.28%', decimals: ['14.28', '14.29'], fracStr: '1/7' },
-    { fraction: '1/8', percent: '12.5%', decimals: ['12.5', '12.50'], fracStr: '1/8' },
-    { fraction: '1/9', percent: '11.11%', decimals: ['11.11'], fracStr: '1/9' },
-    { fraction: '1/10', percent: '10%', decimals: ['10', '10.0'], fracStr: '1/10' },
-    { fraction: '1/11', percent: '9.09%', decimals: ['9.09'], fracStr: '1/11' },
-    { fraction: '1/12', percent: '8.33%', decimals: ['8.33'], fracStr: '1/12' },
-    { fraction: '1/13', percent: '7.69%', decimals: ['7.69'], fracStr: '1/13' },
-    { fraction: '1/14', percent: '7.14%', decimals: ['7.14'], fracStr: '1/14' },
-    { fraction: '1/15', percent: '6.66%', decimals: ['6.66', '6.67'], fracStr: '1/15' },
-    { fraction: '1/16', percent: '6.25%', decimals: ['6.25'], fracStr: '1/16' },
-    { fraction: '1/17', percent: '5.88%', decimals: ['5.88'], fracStr: '1/17' },
-    { fraction: '1/18', percent: '5.55%', decimals: ['5.55'], fracStr: '1/18' },
-    { fraction: '1/19', percent: '5.26%', decimals: ['5.26'], fracStr: '1/19' },
-    { fraction: '1/20', percent: '5%', decimals: ['5', '5.0'], fracStr: '1/20' },
-    { fraction: '1/21', percent: '4.76%', decimals: ['4.76'], fracStr: '1/21' },
-    { fraction: '1/22', percent: '4.54%', decimals: ['4.54'], fracStr: '1/22' },
-    { fraction: '1/23', percent: '4.34%', decimals: ['4.34'], fracStr: '1/23' },
-    { fraction: '1/24', percent: '4.16%', decimals: ['4.16', '4.17'], fracStr: '1/24' },
-    { fraction: '1/25', percent: '4%', decimals: ['4', '4.0'], fracStr: '1/25' },
+    { fraction: '1/2', percent: '50%', mixed: '50%', decimals: ['50', '50.0'], val: 0.5, category: 'unit' },
+    { fraction: '1/3', percent: '33.33%', mixed: '33 1/3%', decimals: ['33.33', '33.3'], val: 0.3333, category: 'unit' },
+    { fraction: '1/4', percent: '25%', mixed: '25%', decimals: ['25', '25.0'], val: 0.25, category: 'unit' },
+    { fraction: '1/5', percent: '20%', mixed: '20%', decimals: ['20', '20.0'], val: 0.2, category: 'unit' },
+    { fraction: '1/6', percent: '16.66%', mixed: '16 2/3%', decimals: ['16.66', '16.67'], val: 0.1666, category: 'unit' },
+    { fraction: '1/7', percent: '14.28%', mixed: '14 2/7%', decimals: ['14.28', '14.29'], val: 0.1428, category: 'unit' },
+    { fraction: '1/8', percent: '12.5%', mixed: '12 1/2%', decimals: ['12.5', '12.50'], val: 0.125, category: 'unit' },
+    { fraction: '1/9', percent: '11.11%', mixed: '11 1/9%', decimals: ['11.11'], val: 0.1111, category: 'unit' },
+    { fraction: '1/10', percent: '10%', mixed: '10%', decimals: ['10', '10.0'], val: 0.1, category: 'unit' },
+    { fraction: '1/11', percent: '9.09%', mixed: '9 1/11%', decimals: ['9.09'], val: 0.0909, category: 'unit' },
+    { fraction: '1/12', percent: '8.33%', mixed: '8 1/3%', decimals: ['8.33'], val: 0.0833, category: 'unit' },
+    { fraction: '1/13', percent: '7.69%', mixed: '7 9/13%', decimals: ['7.69'], val: 0.0769, category: 'unit' },
+    { fraction: '1/14', percent: '7.14%', mixed: '7 1/7%', decimals: ['7.14'], val: 0.0714, category: 'unit' },
+    { fraction: '1/15', percent: '6.66%', mixed: '6 2/3%', decimals: ['6.66', '6.67'], val: 0.0666, category: 'unit' },
+    { fraction: '1/16', percent: '6.25%', mixed: '6 1/4%', decimals: ['6.25'], val: 0.0625, category: 'unit' },
+    { fraction: '1/17', percent: '5.88%', mixed: '5 15/17%', decimals: ['5.88'], val: 0.0588, category: 'unit' },
+    { fraction: '1/18', percent: '5.55%', mixed: '5 5/9%', decimals: ['5.55'], val: 0.0555, category: 'unit' },
+    { fraction: '1/19', percent: '5.26%', mixed: '5 5/19%', decimals: ['5.26'], val: 0.0526, category: 'unit' },
+    { fraction: '1/20', percent: '5%', mixed: '5%', decimals: ['5', '5.0'], val: 0.05, category: 'unit' },
+    { fraction: '1/21', percent: '4.76%', mixed: '4 16/21%', decimals: ['4.76'], val: 0.0476, category: 'unit' },
+    { fraction: '1/22', percent: '4.54%', mixed: '4 6/11%', decimals: ['4.54'], val: 0.0454, category: 'unit' },
+    { fraction: '1/23', percent: '4.34%', mixed: '4 8/23%', decimals: ['4.34'], val: 0.0434, category: 'unit' },
+    { fraction: '1/24', percent: '4.16%', mixed: '4 1/6%', decimals: ['4.16', '4.17'], val: 0.0416, category: 'unit' },
+    { fraction: '1/25', percent: '4%', mixed: '4%', decimals: ['4', '4.0'], val: 0.04, category: 'unit' },
     // Popular SSC Multi-Fractions
-    { fraction: '3/8', percent: '37.5%', decimals: ['37.5', '37.50'], fracStr: '3/8' },
-    { fraction: '5/8', percent: '62.5%', decimals: ['62.5', '62.50'], fracStr: '5/8' },
-    { fraction: '7/8', percent: '87.5%', decimals: ['87.5', '87.50'], fracStr: '7/8' },
-    { fraction: '2/3', percent: '66.66%', decimals: ['66.66', '66.67'], fracStr: '2/3' },
-    { fraction: '3/4', percent: '75%', decimals: ['75', '75.0'], fracStr: '3/4' },
-    { fraction: '2/7', percent: '28.57%', decimals: ['28.57'], fracStr: '2/7' },
-    { fraction: '4/7', percent: '57.14%', decimals: ['57.14'], fracStr: '4/7' },
-    { fraction: '5/6', percent: '83.33%', decimals: ['83.33'], fracStr: '5/6' },
-    { fraction: '7/12', percent: '58.33%', decimals: ['58.33'], fracStr: '7/12' }
+    { fraction: '2/3', percent: '66.66%', mixed: '66 2/3%', decimals: ['66.66', '66.67'], val: 0.6666, category: 'ssc' },
+    { fraction: '3/4', percent: '75%', mixed: '75%', decimals: ['75', '75.0'], val: 0.75, category: 'ssc' },
+    { fraction: '2/7', percent: '28.57%', mixed: '28 4/7%', decimals: ['28.57'], val: 0.2857, category: 'ssc' },
+    { fraction: '3/7', percent: '42.85%', mixed: '42 6/7%', decimals: ['42.85'], val: 0.4285, category: 'ssc' },
+    { fraction: '4/7', percent: '57.14%', mixed: '57 1/7%', decimals: ['57.14'], val: 0.5714, category: 'ssc' },
+    { fraction: '5/7', percent: '71.42%', mixed: '71 3/7%', decimals: ['71.42'], val: 0.7142, category: 'ssc' },
+    { fraction: '3/8', percent: '37.5%', mixed: '37 1/2%', decimals: ['37.5', '37.50'], val: 0.375, category: 'ssc' },
+    { fraction: '5/8', percent: '62.5%', mixed: '62 1/2%', decimals: ['62.5', '62.50'], val: 0.625, category: 'ssc' },
+    { fraction: '7/8', percent: '87.5%', mixed: '87 1/2%', decimals: ['87.5', '87.50'], val: 0.875, category: 'ssc' },
+    { fraction: '5/6', percent: '83.33%', mixed: '83 1/3%', decimals: ['83.33'], val: 0.8333, category: 'ssc' },
+    { fraction: '7/12', percent: '58.33%', mixed: '58 1/3%', decimals: ['58.33'], val: 0.5833, category: 'ssc' },
+    { fraction: '11/12', percent: '91.66%', mixed: '91 2/3%', decimals: ['91.66'], val: 0.9166, category: 'ssc' }
   ];
 
   const CGL_PRIMES = [17, 19, 23, 29, 31, 37, 41, 43, 47];
 
-  // Helper for digital root (sum of digits reduced to 1-9)
   function getDigitalRoot(n) {
     let num = Math.abs(Math.round(n));
     if (num === 0) return 0;
     return 1 + ((num - 1) % 9);
   }
 
-  // Helper for random integer in range [min, max]
   function randInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  // Helper to shuffle array
   function shuffleArray(arr) {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
@@ -181,6 +181,91 @@
       [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
+  }
+
+  function gcd(a, b) {
+    let x = Math.abs(Math.round(a));
+    let y = Math.abs(Math.round(b));
+    while (y) {
+      const t = y;
+      y = x % y;
+      x = t;
+    }
+    return x || 1;
+  }
+
+  function simplifyFraction(num, den) {
+    if (!den || den === 0) return { num: 0, den: 1 };
+    const divisor = gcd(num, den);
+    return { num: Math.round(num / divisor), den: Math.round(den / divisor) };
+  }
+
+  function fractionToMixedString(num, den) {
+    if (!den || den === 0) return '0%';
+    const pct = (num / den) * 100;
+    const whole = Math.floor(pct);
+    const rem = Math.round((pct - whole) * den);
+    if (rem === 0 || Math.abs(pct - whole) < 0.0001) {
+      return `${whole}%`;
+    }
+    const simp = simplifyFraction(rem, den);
+    return `${whole} ${simp.num}/${simp.den}%`;
+  }
+
+  function parseMixedFractionString(str) {
+    if (!str || typeof str !== 'string') return null;
+    const clean = str.trim().replace(/%/g, '').trim();
+    if (!clean) return null;
+
+    // Mixed fraction "14 2/7" or "14-2/7" or "14_2/7"
+    const mixedMatch = clean.match(/^(\d+)[\s\-_\+](\d+)\s*\/\s*(\d+)$/);
+    if (mixedMatch) {
+      const whole = parseInt(mixedMatch[1], 10);
+      const num = parseInt(mixedMatch[2], 10);
+      const den = parseInt(mixedMatch[3], 10);
+      if (den > 0) {
+        return {
+          isMixed: true,
+          whole,
+          num,
+          den,
+          value: whole + (num / den),
+          normalized: `${whole} ${num}/${den}`
+        };
+      }
+    }
+
+    // Simple fraction "1/7"
+    const fracMatch = clean.match(/^(\d+)\s*\/\s*(\d+)$/);
+    if (fracMatch) {
+      const num = parseInt(fracMatch[1], 10);
+      const den = parseInt(fracMatch[2], 10);
+      if (den > 0) {
+        return {
+          isMixed: false,
+          whole: 0,
+          num,
+          den,
+          value: num / den,
+          normalized: `${num}/${den}`
+        };
+      }
+    }
+
+    // Pure number / decimal e.g. "14.28"
+    const numVal = parseFloat(clean);
+    if (!isNaN(numVal)) {
+      return {
+        isMixed: false,
+        whole: Math.floor(numVal),
+        num: 0,
+        den: 1,
+        value: numVal,
+        normalized: String(numVal)
+      };
+    }
+
+    return null;
   }
 
   // -------------------------------------------------------------
@@ -233,7 +318,6 @@
       const idx = this.items.findIndex(item => item.prompt === prompt);
       if (idx !== -1) {
         this.items[idx].consecutiveCorrect = (this.items[idx].consecutiveCorrect || 0) + 1;
-        // Graduation rule: 2 consecutive correct answers under time limit
         if (this.items[idx].consecutiveCorrect >= 2) {
           this.items.splice(idx, 1);
         }
@@ -306,7 +390,6 @@
   // QUESTION GENERATORS ENGINE
   // -------------------------------------------------------------
   const QuestionGenerators = {
-    // 1. Multiplication Tables (1 to 50)
     tables(selectedTables, maxMultiplier) {
       const bases = selectedTables.length > 0 ? selectedTables : [12, 13, 14, 15, 16, 17, 18, 19, 23, 29];
       const base = bases[randInt(0, bases.length - 1)];
@@ -324,7 +407,6 @@
       };
     },
 
-    // 2. Squares & Cubes
     powers(options) {
       const pool = [];
       if (options.sq1_25) pool.push('sq1_25');
@@ -388,47 +470,68 @@
       }
     },
 
-    // 3. Fractions to % & Decimals
     fractions(options) {
       let subset = SSC_FRACTIONS;
       if (!options.common) {
-        subset = subset.filter(f => f.fracStr.startsWith('1/'));
+        subset = subset.filter(f => f.category === 'unit');
       }
       const item = subset[randInt(0, subset.length - 1)];
       const askPercentToFrac = options.bidirectional && Math.random() < 0.5;
 
       if (askPercentToFrac) {
-        // e.g. "37.5% = ?" -> Ans "3/8"
+        // Test Percentage to Fraction: can ask either mixed fraction or decimal percentage!
+        const useMixedPrompt = Math.random() < 0.5 && item.mixed !== item.percent;
+        const promptLabel = useMixedPrompt ? item.mixed : item.percent;
         return {
           category: 'Percentage to Fraction',
           type: 'direct',
-          prompt: `${item.percent} = ?`,
-          formulaDisplay: `${item.percent} = ?`,
-          answer: item.fracStr,
-          acceptedAnswers: [item.fracStr, item.fracStr.replace('/', ' / ')],
-          subtext: 'Enter fraction as numerator/denominator (e.g. 3/8)',
+          prompt: `${promptLabel} = ?`,
+          formulaDisplay: `${promptLabel} = ?`,
+          answer: item.fraction,
+          acceptedAnswers: [
+            item.fraction,
+            item.fraction.replace('/', ' / '),
+            item.fraction.replace('/', ' /'),
+            item.fraction.replace('/', '/ ')
+          ],
+          targetFractionRatio: item.val,
+          subtext: 'Enter reduced fraction (e.g. 1/4 or 3/8)',
           hasFractionKeys: true,
-          explanation: `${item.percent} = ${item.fracStr}`
+          explanation: `${item.fraction} = ${item.percent} = ${item.mixed}`
         };
       } else {
-        // e.g. "1/7 = ?" -> Ans "14.28" or "14.28%"
-        const primaryAns = item.decimals[0];
-        const accepted = [...item.decimals, item.percent, item.percent.replace('%', '')];
+        // Test Fraction to Percentage: accept BOTH mixed fraction (e.g. 14 2/7) and decimal (e.g. 14.28)
+        const primaryAns = item.mixed.replace('%', '').trim();
+        const mixedRaw = item.mixed.replace('%', '').trim();
+        const mixedHyphen = mixedRaw.replace(' ', '-');
+        
+        const accepted = [
+          mixedRaw,
+          item.mixed,
+          mixedHyphen,
+          `${mixedHyphen}%`,
+          mixedRaw.replace(' ', ''),
+          ...item.decimals,
+          ...item.decimals.map(d => `${d}%`),
+          item.percent,
+          item.percent.replace('%', '').trim()
+        ];
+
         return {
           category: 'Fraction to Percentage',
           type: 'direct',
-          prompt: `${item.fracStr} = ? %`,
-          formulaDisplay: `${item.fracStr}`,
-          answer: primaryAns,
+          prompt: `${item.fraction} = ? %`,
+          formulaDisplay: `${item.fraction}`,
+          answer: `${item.mixed} (or ${item.decimals[0]}%)`,
           acceptedAnswers: accepted,
-          subtext: `Percentage value (e.g. ${primaryAns} or ${item.percent})`,
+          targetPercentValue: item.val * 100,
+          subtext: 'Enter as mixed fraction (e.g. 16 2/3) or decimal (16.66)',
           hasFractionKeys: true,
-          explanation: `${item.fracStr} = ${item.percent} (${primaryAns}%)`
+          explanation: `${item.fraction} = ${item.mixed} = ${item.percent}`
         };
       }
     },
 
-    // 4. Arithmetic Sprints
     arithmetic(options) {
       const ops = [];
       if (options.add2) ops.push('add2');
@@ -450,7 +553,7 @@
           formulaDisplay: `${a} + ${b}`,
           answer: String(ans),
           acceptedAnswers: [String(ans)],
-          subtext: `Mental Split & Merge: (${Math.floor(a/10)*10} + ${Math.floor(b/10)*10}) + (${a%10} + ${b%10})`,
+          subtext: 'Left-to-right mental addition: split tens, then units',
           explanation: `${a} + ${b} = ${ans}`
         };
       } else if (op === 'add3') {
@@ -478,7 +581,7 @@
           formulaDisplay: `${a} - ${b}`,
           answer: String(ans),
           acceptedAnswers: [String(ans)],
-          subtext: `Split: ${a} - ${Math.floor(b/10)*10} - ${b%10}`,
+          subtext: 'Left-to-right mental split: subtract tens first, then units',
           explanation: `${a} - ${b} = ${ans}`
         };
       } else if (op === 'mult2x2') {
@@ -496,7 +599,6 @@
           explanation: `${a} × ${b} = ${ans}`
         };
       } else {
-        // Percentage shortcuts (e.g. 16% of 450, 35% of 240, 12.5% of 640)
         const presets = [
           { p: 16, base: 450, ans: 72, tip: '16% = 10% (45) + 5% (22.5) + 1% (4.5) = 72' },
           { p: 35, base: 240, ans: 84, tip: '35% = 30% (72) + 5% (12) = 84' },
@@ -522,7 +624,6 @@
       }
     },
 
-    // 5. Option Elimination Drill (SSC CGL Mode)
     elimination(options) {
       const techniques = [];
       if (options.unit) techniques.push('unit');
@@ -533,8 +634,6 @@
       const tech = techniques.length > 0 ? techniques[randInt(0, techniques.length - 1)] : 'unit';
 
       if (tech === 'unit') {
-        // Unit digit elimination: (a * b) + (c * d)
-        // Ensure distinct unit digits across options
         const a = randInt(123, 789);
         const b = randInt(12, 98);
         const c = randInt(111, 456);
@@ -542,7 +641,6 @@
         const correctVal = (a * b) + (c * d);
         const correctUnit = Math.abs(correctVal % 10);
 
-        // Generate 3 wrong options that differ in the unit digit!
         const distractors = new Set();
         const otherUnits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter(u => u !== correctUnit);
         shuffleArray(otherUnits);
@@ -565,10 +663,9 @@
           correctIndex: correctIdx,
           answer: String(correctVal),
           subtext: 'Eliminate by Unit Digit alone!',
-          explanation: `Unit digit: (${a%10} × ${b%10}) + (${c%10} × ${d%10}) = ${(a%10)*(b%10)} + ${(c%10)*(d%10)} ➔ ends in ${correctUnit}. Only Option ${String.fromCharCode(65 + correctIdx)} matches!`
+          explanation: `Unit digit: (${a%10} × ${b%10}) + (${c%10} × ${d%10}) = ${(a%10)*(b%10)} + ${(c%10)*(d%10)} ➔ ends in ${correctUnit}. Option ${String.fromCharCode(65 + correctIdx)} matches!`
         };
       } else if (tech === 'root') {
-        // Digital Root (Casting out nines)
         const a = randInt(34, 88);
         const b = randInt(25, 76);
         const correctVal = a * b;
@@ -599,7 +696,6 @@
           explanation: `Digital Root: ${getDigitalRoot(a)} × ${getDigitalRoot(b)} = ${getDigitalRoot(a) * getDigitalRoot(b)} ➔ Root ${correctRoot}. Option ${String.fromCharCode(65 + correctIdx)} is the only match!`
         };
       } else if (tech === 'tens') {
-        // Tens digit verification
         const a = randInt(35, 95);
         const b = randInt(15, 65);
         const correctVal = a * b;
@@ -625,7 +721,6 @@
           explanation: `Last 2 digits of ${a} × ${b} are ${lastTwo < 10 ? '0' + lastTwo : lastTwo}. Option ${String.fromCharCode(65 + correctIdx)} matches!`
         };
       } else {
-        // Approximation / Magnitude elimination
         const a = randInt(189, 495);
         const b = randInt(21, 62);
         const correctVal = a * b;
@@ -659,12 +754,15 @@
   };
 
   // -------------------------------------------------------------
-  // APP STATE CONTROLLER
+  // APP STATE CONTROLLER & MULTI-STEP WIZARD
   // -------------------------------------------------------------
   class MathHubApp {
     constructor() {
+      // Wizard Step state: 1 (Topic), 2 (Scope), 3 (Mode & Pace)
+      this.currentStep = 1;
+
       // Configuration
-      this.mode = 'blitz'; // blitz, marathon, classic, error_drill
+      this.mode = 'blitz';
       this.blitzDuration = 3;
       this.marathonDuration = 120;
       this.classicTarget = 25;
@@ -689,20 +787,19 @@
       this.sessionMistakes = [];
       this.errorDrillPool = [];
 
-      // Timer IDs
       this.animFrameId = null;
       this.marathonInterval = null;
 
       this.cacheDom();
       this.bindEvents();
       this.renderTableNumbersGrid();
+      this.renderFractionLabTable('all');
       this.updateErrorBadges();
       this.updateSoundIcon();
-      this.updateConfigSummary();
+      this.updateWizardStepView();
     }
 
     cacheDom() {
-      // Views & Modals
       this.dom = {
         viewSetup: document.getElementById('viewSetup'),
         viewDrill: document.getElementById('viewDrill'),
@@ -710,9 +807,23 @@
         modalSummary: document.getElementById('modalSummary'),
         modalErrorBank: document.getElementById('modalErrorBank'),
         modalStats: document.getElementById('modalStats'),
+        modalFractionLab: document.getElementById('modalFractionLab'),
+
+        // Stepper Header
+        stepBadgeNum: document.getElementById('stepBadgeNum'),
+        stepTitle: document.getElementById('stepTitle'),
+        stepProgressText: document.getElementById('stepProgressText'),
+        stepProgressBar: document.getElementById('stepProgressBar'),
+        step1Container: document.getElementById('step1Container'),
+        step2Container: document.getElementById('step2Container'),
+        step3Container: document.getElementById('step3Container'),
+        btnWizardBack: document.getElementById('btnWizardBack'),
+        btnWizardNext: document.getElementById('btnWizardNext'),
+        btnStartSprint: document.getElementById('btnStartSprint'),
 
         // Header controls
         btnNavHome: document.getElementById('btnNavHome'),
+        btnOpenFractionLab: document.getElementById('btnOpenFractionLab'),
         btnOpenErrorBank: document.getElementById('btnOpenErrorBank'),
         btnOpenStats: document.getElementById('btnOpenStats'),
         btnToggleSound: document.getElementById('btnToggleSound'),
@@ -720,25 +831,27 @@
         iconSoundOff: document.getElementById('iconSoundOff'),
         headerErrorBadge: document.getElementById('headerErrorBadge'),
         setupErrorCount: document.getElementById('setupErrorCount'),
+        setupErrorCountText: document.getElementById('setupErrorCountText'),
+        btnQuickDrillErrors: document.getElementById('btnQuickDrillErrors'),
 
-        // Setup controls
-        btnStartTraining: document.getElementById('btnStartTraining'),
-        btnDrillErrorsSetup: document.getElementById('btnDrillErrorsSetup'),
+        // Step 2 Scope Elements
+        step2ModuleHeading: document.getElementById('step2ModuleHeading'),
+        step2Badge: document.getElementById('step2Badge'),
+        scopePanelTables: document.getElementById('scopePanelTables'),
+        scopePanelPowers: document.getElementById('scopePanelPowers'),
+        scopePanelFractions: document.getElementById('scopePanelFractions'),
+        scopePanelArithmetic: document.getElementById('scopePanelArithmetic'),
+        scopePanelElimination: document.getElementById('scopePanelElimination'),
+        tableNumbersGrid: document.getElementById('tableNumbersGrid'),
+        selectedTablesCount: document.getElementById('selectedTablesCount'),
+        btnStudyFractionsLink: document.getElementById('btnStudyFractionsLink'),
+
+        // Step 3 Preferences
         chkAutoSubmit: document.getElementById('chkAutoSubmit'),
         btnKeypadVirtual: document.getElementById('btnKeypadVirtual'),
         btnKeypadNative: document.getElementById('btnKeypadNative'),
-        summaryConfigText: document.getElementById('summaryConfigText'),
 
-        // Module config panels
-        cfgTables: document.getElementById('cfgTables'),
-        cfgPowers: document.getElementById('cfgPowers'),
-        cfgFractions: document.getElementById('cfgFractions'),
-        cfgArithmetic: document.getElementById('cfgArithmetic'),
-        cfgElimination: document.getElementById('cfgElimination'),
-        tableNumbersGrid: document.getElementById('tableNumbersGrid'),
-        selectedTablesCount: document.getElementById('selectedTablesCount'),
-
-        // Session status
+        // Drill Session Elements
         drillStreak: document.getElementById('drillStreak'),
         timerBar: document.getElementById('timerBar'),
         timerText: document.getElementById('timerText'),
@@ -749,8 +862,7 @@
         btnResumeSession: document.getElementById('btnResumeSession'),
         btnExitSession: document.getElementById('btnExitSession'),
 
-        // Question display
-        questionStage: document.getElementById('questionStage'),
+        // Question stage
         drillCategoryBadge: document.getElementById('drillCategoryBadge'),
         drillQuestionText: document.getElementById('drillQuestionText'),
         drillQuestionSubtext: document.getElementById('drillQuestionSubtext'),
@@ -772,6 +884,15 @@
         // MCQ
         cglShortcutBanner: document.getElementById('cglShortcutBanner'),
         cglShortcutText: document.getElementById('cglShortcutText'),
+
+        // Fraction Lab Elements
+        btnCloseFractionLab: document.getElementById('btnCloseFractionLab'),
+        calcFractionInput: document.getElementById('calcFractionInput'),
+        calcPercentInput: document.getElementById('calcPercentInput'),
+        calcResultDisplay: document.getElementById('calcResultDisplay'),
+        searchFractionTable: document.getElementById('searchFractionTable'),
+        fractionTableBody: document.getElementById('fractionTableBody'),
+        btnLaunchFractionSprintFromLab: document.getElementById('btnLaunchFractionSprintFromLab'),
 
         // Summary elements
         summaryModeLabel: document.getElementById('summaryModeLabel'),
@@ -805,20 +926,57 @@
     bindEvents() {
       const d = this.dom;
 
-      // Nav and Header
+      // Nav Home
       d.btnNavHome.addEventListener('click', () => {
         if (this.sessionActive) {
           if (confirm('Leave current practice drill?')) this.exitSessionToSetup();
         } else {
+          this.currentStep = 1;
+          this.updateWizardStepView();
           this.showView('setup');
         }
       });
 
+      // Sound Toggle
       d.btnToggleSound.addEventListener('click', () => {
         sound.toggle();
         this.updateSoundIcon();
       });
 
+      // Fraction Lab Modal
+      d.btnOpenFractionLab.addEventListener('click', () => {
+        this.openFractionLabModal();
+      });
+      d.btnCloseFractionLab.addEventListener('click', () => {
+        d.modalFractionLab.classList.add('hidden');
+      });
+      if (d.btnStudyFractionsLink) {
+        d.btnStudyFractionsLink.addEventListener('click', () => {
+          this.openFractionLabModal();
+        });
+      }
+      d.btnLaunchFractionSprintFromLab.addEventListener('click', () => {
+        d.modalFractionLab.classList.add('hidden');
+        this.currentModule = 'fractions';
+        this.startSession();
+      });
+
+      // Fraction Lab Calculator Input Handlers
+      d.calcFractionInput.addEventListener('input', () => this.handleFractionCalcFromFrac());
+      d.calcPercentInput.addEventListener('input', () => this.handleFractionCalcFromPercent());
+      d.searchFractionTable.addEventListener('input', (e) => this.filterFractionTable(e.target.value));
+
+      document.querySelectorAll('.fl-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.fl-filter-btn').forEach(b => {
+            b.className = 'fl-filter-btn px-2.5 py-1 text-xs font-bold rounded-md bg-slate-100 text-slate-700 hover:bg-slate-200';
+          });
+          btn.className = 'fl-filter-btn px-2.5 py-1 text-xs font-bold rounded-md bg-amber-500 text-white shadow-2xs';
+          this.renderFractionLabTable(btn.dataset.flFilter, d.searchFractionTable.value);
+        });
+      });
+
+      // Error Bank
       d.btnOpenErrorBank.addEventListener('click', () => this.openErrorBankModal());
       d.btnCloseErrorBank.addEventListener('click', () => d.modalErrorBank.classList.add('hidden'));
       d.btnClearErrors.addEventListener('click', () => {
@@ -832,8 +990,9 @@
         d.modalErrorBank.classList.add('hidden');
         this.startErrorDrillSession();
       });
-      d.btnDrillErrorsSetup.addEventListener('click', () => this.startErrorDrillSession());
+      d.btnQuickDrillErrors.addEventListener('click', () => this.startErrorDrillSession());
 
+      // Stats Modal
       d.btnOpenStats.addEventListener('click', () => this.openStatsModal());
       d.btnCloseStats.addEventListener('click', () => d.modalStats.classList.add('hidden'));
       d.btnDoneStats.addEventListener('click', () => d.modalStats.classList.add('hidden'));
@@ -844,99 +1003,52 @@
         }
       });
 
-      // Mode Selection
-      document.querySelectorAll('.mode-card').forEach(card => {
+      // Wizard Stepper Actions
+      d.btnWizardNext.addEventListener('click', () => {
+        if (this.currentStep < 3) {
+          this.currentStep += 1;
+          this.updateWizardStepView();
+          sound.tick();
+        }
+      });
+
+      d.btnWizardBack.addEventListener('click', () => {
+        if (this.currentStep > 1) {
+          this.currentStep -= 1;
+          this.updateWizardStepView();
+          sound.tick();
+        }
+      });
+
+      d.btnStartSprint.addEventListener('click', () => this.startSession());
+
+      // Step 1: Module Cards Selection
+      document.querySelectorAll('.module-card').forEach(card => {
         card.addEventListener('click', () => {
-          document.querySelectorAll('.mode-card').forEach(c => {
-            c.classList.remove('border-indigo-500', 'bg-indigo-950/20');
-            c.classList.add('border-zinc-800', 'bg-zinc-900/60');
+          document.querySelectorAll('.module-card').forEach(c => {
+            c.classList.remove('border-amber-500', 'bg-amber-50/60');
+            c.classList.add('border-slate-200', 'bg-white');
           });
-          card.classList.remove('border-zinc-800', 'bg-zinc-900/60');
-          card.classList.add('border-indigo-500', 'bg-indigo-950/20');
-          this.mode = card.dataset.mode;
-          this.updateConfigSummary();
+          card.classList.remove('border-slate-200', 'bg-white');
+          card.classList.add('border-amber-500', 'bg-amber-50/60');
+          this.currentModule = card.dataset.module;
           sound.tick();
         });
       });
 
-      // Blitz Time buttons
-      document.querySelectorAll('.blitz-time-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          document.querySelectorAll('.blitz-time-btn').forEach(b => {
-            b.className = 'blitz-time-btn px-2 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700';
-          });
-          btn.className = 'blitz-time-btn px-2 py-1 rounded-md text-[11px] font-bold bg-indigo-600 text-white border border-indigo-400';
-          this.blitzDuration = parseInt(btn.dataset.blitzTime, 10);
-          this.mode = 'blitz';
-          this.selectModeCard('blitz');
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      // Marathon Time buttons
-      document.querySelectorAll('.marathon-time-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          document.querySelectorAll('.marathon-time-btn').forEach(b => {
-            b.className = 'marathon-time-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700';
-          });
-          btn.className = 'marathon-time-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-indigo-600 text-white border border-indigo-400';
-          this.marathonDuration = parseInt(btn.dataset.marathonTime, 10);
-          this.mode = 'marathon';
-          this.selectModeCard('marathon');
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      // Classic Count buttons
-      document.querySelectorAll('.classic-count-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          document.querySelectorAll('.classic-count-btn').forEach(b => {
-            b.className = 'classic-count-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700';
-          });
-          btn.className = 'classic-count-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-indigo-600 text-white border border-indigo-400';
-          this.classicTarget = parseInt(btn.dataset.classicCount, 10);
-          this.mode = 'classic';
-          this.selectModeCard('classic');
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      // Module Selection
-      document.querySelectorAll('.module-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          document.querySelectorAll('.module-tab').forEach(t => {
-            t.classList.remove('border-indigo-500', 'bg-indigo-950/20');
-            t.classList.add('border-zinc-800', 'bg-zinc-900/60');
-          });
-          tab.classList.remove('border-zinc-800', 'bg-zinc-900/60');
-          tab.classList.add('border-indigo-500', 'bg-indigo-950/20');
-          this.currentModule = tab.dataset.module;
-          this.showModuleConfig(this.currentModule);
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      // Multiplier depth
+      // Step 2: Multiplier Depth
       document.querySelectorAll('.depth-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('.depth-btn').forEach(b => {
-            b.className = 'depth-btn px-2 py-0.5 rounded text-xs font-bold text-zinc-400 hover:text-white';
+            b.className = 'depth-btn px-2 py-0.5 rounded text-xs font-bold text-slate-600 hover:text-slate-900';
           });
-          btn.className = 'depth-btn px-2 py-0.5 rounded text-xs font-bold bg-indigo-600 text-white';
+          btn.className = 'depth-btn px-2 py-0.5 rounded text-xs font-bold bg-amber-500 text-white shadow-xs';
           this.maxMultiplier = parseInt(btn.dataset.multDepth, 10);
-          this.updateConfigSummary();
           sound.tick();
         });
       });
 
-      // Quick Chips for Tables
+      // Step 2: Quick Chips for Tables
       document.querySelectorAll('.table-chip').forEach(chip => {
         chip.addEventListener('click', () => {
           const type = chip.dataset.chip;
@@ -949,7 +1061,65 @@
           else if (type === 'clear') this.selectedTables = [];
           
           this.syncTableGridSelection();
-          this.updateConfigSummary();
+          sound.tick();
+        });
+      });
+
+      // Step 3: Mode Cards Selection
+      document.querySelectorAll('.mode-select-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.mode-select-card').forEach(c => {
+            c.classList.remove('border-amber-500', 'bg-amber-50/60');
+            c.classList.add('border-slate-200', 'bg-white');
+          });
+          card.classList.remove('border-slate-200', 'bg-white');
+          card.classList.add('border-amber-500', 'bg-amber-50/60');
+          this.mode = card.dataset.modeCard;
+          sound.tick();
+        });
+      });
+
+      // Blitz Time buttons
+      document.querySelectorAll('.blitz-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          document.querySelectorAll('.blitz-btn').forEach(b => {
+            b.className = 'blitz-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400';
+          });
+          btn.className = 'blitz-btn px-2.5 py-1 rounded-md text-xs font-bold bg-amber-500 text-white border border-amber-500 shadow-2xs';
+          this.blitzDuration = parseInt(btn.dataset.blitz, 10);
+          this.mode = 'blitz';
+          this.selectModeCardInDom('blitz');
+          sound.tick();
+        });
+      });
+
+      // Marathon Time buttons
+      document.querySelectorAll('.marathon-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          document.querySelectorAll('.marathon-btn').forEach(b => {
+            b.className = 'marathon-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400';
+          });
+          btn.className = 'marathon-btn px-2.5 py-1 rounded-md text-xs font-bold bg-amber-500 text-white border border-amber-500 shadow-2xs';
+          this.marathonDuration = parseInt(btn.dataset.marathon, 10);
+          this.mode = 'marathon';
+          this.selectModeCardInDom('marathon');
+          sound.tick();
+        });
+      });
+
+      // Classic Count buttons
+      document.querySelectorAll('.classic-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          document.querySelectorAll('.classic-btn').forEach(b => {
+            b.className = 'classic-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400';
+          });
+          btn.className = 'classic-btn px-2.5 py-1 rounded-md text-xs font-bold bg-amber-500 text-white border border-amber-500 shadow-2xs';
+          this.classicTarget = parseInt(btn.dataset.classic, 10);
+          this.mode = 'classic';
+          this.selectModeCardInDom('classic');
           sound.tick();
         });
       });
@@ -962,28 +1132,25 @@
 
       d.btnKeypadVirtual.addEventListener('click', () => {
         this.useNativeKeypad = false;
-        d.btnKeypadVirtual.className = 'px-2 py-0.5 rounded text-xs font-bold bg-indigo-600 text-white';
-        d.btnKeypadNative.className = 'px-2 py-0.5 rounded text-xs font-bold text-zinc-400 hover:text-white';
+        d.btnKeypadVirtual.className = 'px-2.5 py-1 rounded text-xs font-bold bg-amber-500 text-white shadow-2xs';
+        d.btnKeypadNative.className = 'px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900';
         d.virtualKeypad.classList.remove('hidden');
         sound.tick();
       });
 
       d.btnKeypadNative.addEventListener('click', () => {
         this.useNativeKeypad = true;
-        d.btnKeypadNative.className = 'px-2 py-0.5 rounded text-xs font-bold bg-indigo-600 text-white';
-        d.btnKeypadVirtual.className = 'px-2 py-0.5 rounded text-xs font-bold text-zinc-400 hover:text-white';
+        d.btnKeypadNative.className = 'px-2.5 py-1 rounded text-xs font-bold bg-amber-500 text-white shadow-2xs';
+        d.btnKeypadVirtual.className = 'px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900';
         d.virtualKeypad.classList.add('hidden');
         d.mathInput.focus();
         sound.tick();
       });
 
-      // Launch session
-      d.btnStartTraining.addEventListener('click', () => this.startSession());
-
-      // Physical Keyboard Handlers
+      // Keyboard routing
       window.addEventListener('keydown', (e) => this.handleGlobalKeyDown(e));
 
-      // Virtual Keypad clicks
+      // Keypad buttons
       document.querySelectorAll('.numpad-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -1009,7 +1176,7 @@
         });
       });
 
-      // MCQ Choice click handlers
+      // MCQ option buttons
       document.querySelectorAll('.mcq-option-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();
@@ -1018,7 +1185,7 @@
         });
       });
 
-      // Direct Input typing & auto-submit check
+      // Direct Input typing & auto-submit
       d.mathInput.addEventListener('input', () => {
         sound.tick();
         if (this.autoSubmit && this.currentQuestion && this.currentQuestion.type === 'direct') {
@@ -1031,7 +1198,7 @@
       d.btnResumeSession.addEventListener('click', () => this.resumeSession());
       d.btnExitSession.addEventListener('click', () => this.exitSessionToSetup());
 
-      // Summary Modal
+      // Summary
       d.btnRetrySession.addEventListener('click', () => {
         d.modalSummary.classList.add('hidden');
         this.startSession();
@@ -1046,31 +1213,83 @@
       });
     }
 
-    selectModeCard(mode) {
-      document.querySelectorAll('.mode-card').forEach(c => {
-        if (c.dataset.mode === mode) {
-          c.classList.remove('border-zinc-800', 'bg-zinc-900/60');
-          c.classList.add('border-indigo-500', 'bg-indigo-950/20');
+    selectModeCardInDom(mode) {
+      document.querySelectorAll('.mode-select-card').forEach(c => {
+        if (c.dataset.modeCard === mode) {
+          c.classList.remove('border-slate-200', 'bg-white');
+          c.classList.add('border-amber-500', 'bg-amber-50/60');
         } else {
-          c.classList.remove('border-indigo-500', 'bg-indigo-950/20');
-          c.classList.add('border-zinc-800', 'bg-zinc-900/60');
+          c.classList.remove('border-amber-500', 'bg-amber-50/60');
+          c.classList.add('border-slate-200', 'bg-white');
         }
       });
     }
 
-    showModuleConfig(moduleName) {
+    updateWizardStepView() {
       const d = this.dom;
-      d.cfgTables.classList.add('hidden');
-      d.cfgPowers.classList.add('hidden');
-      d.cfgFractions.classList.add('hidden');
-      d.cfgArithmetic.classList.add('hidden');
-      d.cfgElimination.classList.add('hidden');
+      
+      // Step indicator headers
+      d.stepBadgeNum.textContent = this.currentStep;
+      d.stepProgressText.textContent = `${this.currentStep} of 3`;
+      d.stepProgressBar.style.width = `${(this.currentStep / 3) * 100}%`;
 
-      if (moduleName === 'tables') d.cfgTables.classList.remove('hidden');
-      else if (moduleName === 'powers') d.cfgPowers.classList.remove('hidden');
-      else if (moduleName === 'fractions') d.cfgFractions.classList.remove('hidden');
-      else if (moduleName === 'arithmetic') d.cfgArithmetic.classList.remove('hidden');
-      else if (moduleName === 'elimination') d.cfgElimination.classList.remove('hidden');
+      if (this.currentStep === 1) {
+        d.stepTitle.textContent = 'Step 1: Choose Calculation Topic';
+        d.step1Container.classList.remove('hidden');
+        d.step2Container.classList.add('hidden');
+        d.step3Container.classList.add('hidden');
+        d.btnWizardBack.classList.add('hidden');
+        d.btnWizardNext.classList.remove('hidden');
+        d.btnStartSprint.classList.add('hidden');
+      } else if (this.currentStep === 2) {
+        d.stepTitle.textContent = 'Step 2: Customize Scope & Presets';
+        d.step1Container.classList.add('hidden');
+        d.step2Container.classList.remove('hidden');
+        d.step3Container.classList.add('hidden');
+        d.btnWizardBack.classList.remove('hidden');
+        d.btnWizardNext.classList.remove('hidden');
+        d.btnStartSprint.classList.add('hidden');
+        this.updateStep2Panels();
+      } else if (this.currentStep === 3) {
+        d.stepTitle.textContent = 'Step 3: Select Clock & Constraints';
+        d.step1Container.classList.add('hidden');
+        d.step2Container.classList.add('hidden');
+        d.step3Container.classList.remove('hidden');
+        d.btnWizardBack.classList.remove('hidden');
+        d.btnWizardNext.classList.add('hidden');
+        d.btnStartSprint.classList.remove('hidden');
+      }
+    }
+
+    updateStep2Panels() {
+      const d = this.dom;
+      d.scopePanelTables.classList.add('hidden');
+      d.scopePanelPowers.classList.add('hidden');
+      d.scopePanelFractions.classList.add('hidden');
+      d.scopePanelArithmetic.classList.add('hidden');
+      d.scopePanelElimination.classList.add('hidden');
+
+      if (this.currentModule === 'tables') {
+        d.step2ModuleHeading.textContent = 'Multiplication Tables Scope (1 to 50)';
+        d.step2Badge.textContent = 'Tables 1–50';
+        d.scopePanelTables.classList.remove('hidden');
+      } else if (this.currentModule === 'powers') {
+        d.step2ModuleHeading.textContent = 'Squares & Cubes Scope';
+        d.step2Badge.textContent = 'x² & x³';
+        d.scopePanelPowers.classList.remove('hidden');
+      } else if (this.currentModule === 'fractions') {
+        d.step2ModuleHeading.textContent = 'Fraction ↔ Percentage Recall Scope';
+        d.step2Badge.textContent = 'Fractions ↔ %';
+        d.scopePanelFractions.classList.remove('hidden');
+      } else if (this.currentModule === 'arithmetic') {
+        d.step2ModuleHeading.textContent = 'Mental Arithmetic Operations';
+        d.step2Badge.textContent = 'Arithmetic';
+        d.scopePanelArithmetic.classList.remove('hidden');
+      } else if (this.currentModule === 'elimination') {
+        d.step2ModuleHeading.textContent = 'SSC CGL Option Elimination Techniques';
+        d.step2Badge.textContent = 'MCQ Shortcuts';
+        d.scopePanelElimination.classList.remove('hidden');
+      }
     }
 
     renderTableNumbersGrid() {
@@ -1080,7 +1299,7 @@
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = `table-num-btn h-6 text-xs font-mono font-bold rounded flex items-center justify-center transition-colors ${
-          this.selectedTables.includes(i) ? 'bg-indigo-600 text-white' : 'bg-zinc-800/80 text-zinc-400 hover:text-white'
+          this.selectedTables.includes(i) ? 'bg-amber-500 text-white shadow-2xs' : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
         }`;
         btn.textContent = i;
         btn.addEventListener('click', () => {
@@ -1091,7 +1310,6 @@
             this.selectedTables.sort((a, b) => a - b);
           }
           this.syncTableGridSelection();
-          this.updateConfigSummary();
           sound.tick();
         });
         grid.appendChild(btn);
@@ -1104,35 +1322,117 @@
       btns.forEach(btn => {
         const val = parseInt(btn.textContent, 10);
         if (this.selectedTables.includes(val)) {
-          btn.className = 'table-num-btn h-6 text-xs font-mono font-bold rounded flex items-center justify-center transition-colors bg-indigo-600 text-white';
+          btn.className = 'table-num-btn h-6 text-xs font-mono font-bold rounded flex items-center justify-center transition-colors bg-amber-500 text-white shadow-2xs';
         } else {
-          btn.className = 'table-num-btn h-6 text-xs font-mono font-bold rounded flex items-center justify-center transition-colors bg-zinc-800/80 text-zinc-400 hover:text-white';
+          btn.className = 'table-num-btn h-6 text-xs font-mono font-bold rounded flex items-center justify-center transition-colors bg-white text-slate-700 hover:bg-slate-100 border border-slate-200';
         }
       });
       this.dom.selectedTablesCount.textContent = this.selectedTables.length;
     }
 
-    updateConfigSummary() {
-      let modeText = 'Blitz (3s)';
-      if (this.mode === 'blitz') modeText = `Blitz (${this.blitzDuration}s)`;
-      else if (this.mode === 'marathon') modeText = `Marathon (${this.marathonDuration}s)`;
-      else if (this.mode === 'classic') modeText = `Classic (${this.classicTarget} Qs)`;
-      else if (this.mode === 'error_drill') modeText = `Error Drill (Graduation 2×)`;
+    // -------------------------------------------------------------
+    // FRACTION ↔ PERCENTAGE LAB SUITE
+    // -------------------------------------------------------------
+    openFractionLabModal() {
+      this.renderFractionLabTable('all');
+      this.dom.modalFractionLab.classList.remove('hidden');
+    }
 
-      let modText = 'Tables';
-      if (this.currentModule === 'tables') modText = `Tables (${this.selectedTables.length} numbers, ≤x${this.maxMultiplier})`;
-      else if (this.currentModule === 'powers') modText = 'Squares & Cubes';
-      else if (this.currentModule === 'fractions') modText = 'Fractions ↔ %';
-      else if (this.currentModule === 'arithmetic') modText = 'Mental Arithmetic';
-      else if (this.currentModule === 'elimination') modText = 'Option Elimination (MCQ)';
+    renderFractionLabTable(filter = 'all', query = '') {
+      const tbody = this.dom.fractionTableBody;
+      tbody.innerHTML = '';
 
-      this.dom.summaryConfigText.textContent = `${modeText} · ${modText}`;
+      let list = SSC_FRACTIONS;
+      if (filter === 'unit') list = list.filter(f => f.category === 'unit');
+      else if (filter === 'ssc') list = list.filter(f => f.category === 'ssc');
+
+      if (query && query.trim()) {
+        const q = query.trim().toLowerCase();
+        list = list.filter(f => f.fraction.includes(q) || f.percent.toLowerCase().includes(q) || f.mixed.toLowerCase().includes(q));
+      }
+
+      list.forEach(item => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-amber-50/50 transition-colors';
+        tr.innerHTML = `
+          <td class="py-2.5 px-3 font-bold text-slate-900">${item.fraction}</td>
+          <td class="py-2.5 px-3 font-bold text-amber-600">${item.percent}</td>
+          <td class="py-2.5 px-3 text-slate-600 font-medium">${item.mixed}</td>
+          <td class="py-2.5 px-3 text-right text-slate-600">${item.val}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    filterFractionTable(query) {
+      const activeFilterBtn = document.querySelector('.fl-filter-btn.bg-amber-500');
+      const filter = activeFilterBtn ? activeFilterBtn.dataset.flFilter : 'all';
+      this.renderFractionLabTable(filter, query);
+    }
+
+    handleFractionCalcFromFrac() {
+      const val = this.dom.calcFractionInput.value.trim();
+      if (!val) return;
+      const parsed = parseMixedFractionString(val);
+      if (!parsed || parsed.den === 0) return;
+
+      let totalNum = parsed.num;
+      let totalDen = parsed.den;
+      if (parsed.isMixed) {
+        totalNum = (parsed.whole * parsed.den) + parsed.num;
+      }
+      
+      const ratio = (totalNum / totalDen) * 100;
+      const mixedStr = fractionToMixedString(totalNum, totalDen);
+      const dec = totalNum / totalDen;
+
+      this.dom.calcPercentInput.value = mixedStr;
+      this.dom.calcResultDisplay.innerHTML = `Equivalent: <span class="font-bold font-mono text-slate-900">${val}</span> = <span class="font-bold text-amber-700 font-mono">${mixedStr}</span> = <span class="font-bold font-mono text-indigo-700">${ratio.toFixed(2)}%</span> <span class="text-slate-600">(Decimal: ${dec.toFixed(4)})</span>`;
+    }
+
+    handleFractionCalcFromPercent() {
+      const val = this.dom.calcPercentInput.value.trim();
+      if (!val) return;
+
+      const parsed = parseMixedFractionString(val);
+      if (!parsed) return;
+
+      if (parsed.isMixed) {
+        // e.g. 14 2/7% -> 100/7% -> fraction 1/7
+        const totalNum = (parsed.whole * parsed.den) + parsed.num;
+        const totalDen = parsed.den * 100;
+        const simp = simplifyFraction(totalNum, totalDen);
+        const dec = (parsed.whole + (parsed.num / parsed.den)) / 100;
+
+        this.dom.calcFractionInput.value = `${simp.num}/${simp.den}`;
+        this.dom.calcResultDisplay.innerHTML = `Equivalent: <span class="font-bold font-mono text-amber-700">${parsed.normalized}%</span> = <span class="font-bold font-mono text-slate-900">${simp.num}/${simp.den}</span> <span class="text-slate-600">(Decimal: ${dec.toFixed(4)})</span>`;
+      } else {
+        // Decimal percentage e.g. 37.5% -> 375/1000 = 3/8
+        const p = parsed.value;
+        if (p > 0) {
+          const dec = p / 100;
+          // Precision conversion up to 4 decimal places
+          const mult = 10000;
+          const simp = simplifyFraction(Math.round(p * 100), 10000);
+          const whole = Math.floor(p);
+          const rem = Math.round((p - whole) * 100);
+          let mixedStr = `${p}%`;
+          if (rem > 0) {
+            const remSimp = simplifyFraction(rem, 100);
+            mixedStr = `${whole} ${remSimp.num}/${remSimp.den}%`;
+          }
+
+          this.dom.calcFractionInput.value = `${simp.num}/${simp.den}`;
+          this.dom.calcResultDisplay.innerHTML = `Equivalent: <span class="font-bold font-mono text-slate-900">${p}%</span> = <span class="font-bold font-mono text-amber-700">${mixedStr}</span> = <span class="font-bold font-mono text-indigo-700">${simp.num}/${simp.den}</span> <span class="text-slate-600">(Decimal: ${dec.toFixed(4)})</span>`;
+        }
+      }
     }
 
     updateErrorBadges() {
       const count = errorBank.getCount();
       this.dom.headerErrorBadge.textContent = count;
       this.dom.setupErrorCount.textContent = count;
+      this.dom.setupErrorCountText.textContent = `${count} item${count === 1 ? '' : 's'}`;
       if (this.dom.sumErrorBadge) this.dom.sumErrorBadge.textContent = count;
     }
 
@@ -1160,9 +1460,9 @@
       }
     }
 
-    // -----------------------------------------------------------
-    // SESSION LIFECYCLE
-    // -----------------------------------------------------------
+    // -------------------------------------------------------------
+    // ACTIVE DRILL LIFECYCLE
+    // -------------------------------------------------------------
     startSession() {
       this.sessionActive = true;
       this.sessionPaused = false;
@@ -1178,17 +1478,14 @@
       this.dom.drillScore.textContent = '0';
       this.dom.drillTotalCount.textContent = this.mode === 'classic' ? this.classicTarget : '∞';
 
-      // Switch to Drill View
       this.showView('drill');
 
-      // Keypad preference check
       if (this.useNativeKeypad) {
         this.dom.virtualKeypad.classList.add('hidden');
       } else {
         this.dom.virtualKeypad.classList.remove('hidden');
       }
 
-      // Marathon timer handling
       if (this.marathonInterval) clearInterval(this.marathonInterval);
       if (this.mode === 'marathon') {
         let remaining = this.marathonDuration;
@@ -1202,9 +1499,9 @@
             if (pct < 20) {
               this.dom.timerBar.className = 'h-full bg-rose-500 rounded-full transition-all duration-100 origin-left';
             } else if (pct < 40) {
-              this.dom.timerBar.className = 'h-full bg-amber-400 rounded-full transition-all duration-100 origin-left';
+              this.dom.timerBar.className = 'h-full bg-amber-500 rounded-full transition-all duration-100 origin-left';
             } else {
-              this.dom.timerBar.className = 'h-full bg-indigo-500 rounded-full transition-all duration-100 origin-left';
+              this.dom.timerBar.className = 'h-full bg-indigo-600 rounded-full transition-all duration-100 origin-left';
             }
 
             if (remaining <= 0) {
@@ -1232,10 +1529,8 @@
     nextQuestion() {
       if (!this.sessionActive) return;
 
-      // Cancel previous animation frame
       if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
 
-      // Check Classic mode completion
       if (this.mode === 'classic' && this.totalQuestionsAnswered >= this.classicTarget) {
         this.endSession();
         return;
@@ -1245,23 +1540,19 @@
       this.currentQuestion = this.generateNextQuestion();
       this.questionStartTime = Date.now();
 
-      // Render Question Prompt
       this.dom.drillCategoryBadge.textContent = this.currentQuestion.category;
       this.dom.drillQuestionText.textContent = this.currentQuestion.prompt;
       this.dom.drillQuestionSubtext.textContent = this.currentQuestion.subtext || '';
 
-      // Reset feedback banner & input
       this.dom.drillFeedbackBanner.style.opacity = '0';
-      this.dom.inputBoxWrapper.className = 'relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-zinc-900 border-2 border-zinc-700 transition-colors shadow-inner';
+      this.dom.inputBoxWrapper.className = 'relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-white border-2 border-slate-300 shadow-sm transition-colors';
       this.dom.mathInput.value = '';
 
-      // Direct Input vs MCQ
       if (this.currentQuestion.type === 'mcq') {
         this.dom.containerDirectInput.classList.add('hidden');
         this.dom.containerMcqOptions.classList.remove('hidden');
-        this.dom.cglShortcutBanner.classList.add('hidden'); // hidden until answered
+        this.dom.cglShortcutBanner.classList.add('hidden');
 
-        // Set choices
         for (let i = 0; i < 4; i++) {
           const optEl = document.getElementById(`optText${i}`);
           if (optEl && this.currentQuestion.options[i] !== undefined) {
@@ -1269,25 +1560,22 @@
           }
           const btn = document.querySelector(`[data-option-idx="${i}"]`);
           if (btn) {
-            btn.className = 'mcq-option-btn p-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 active:scale-98 text-left transition-all flex items-center justify-between group';
+            btn.className = 'mcq-option-btn p-3.5 rounded-xl bg-white hover:bg-amber-50/60 border-2 border-slate-200 active:scale-98 text-left transition-all flex items-center justify-between shadow-xs';
           }
         }
       } else {
         this.dom.containerDirectInput.classList.remove('hidden');
         this.dom.containerMcqOptions.classList.add('hidden');
 
-        // Show/hide fraction aux keys
         if (this.currentQuestion.hasFractionKeys) {
           this.dom.fractionHelperRow.classList.remove('hidden');
         } else {
           this.dom.fractionHelperRow.classList.add('hidden');
         }
 
-        // Focus input
         this.dom.mathInput.focus();
       }
 
-      // Start Blitz per-question countdown
       if (this.mode === 'blitz' || this.mode === 'error_drill') {
         const durationSec = this.mode === 'blitz' ? this.blitzDuration : 4;
         const totalDurationMs = durationSec * 1000;
@@ -1304,20 +1592,18 @@
           const remainingMs = Math.max(0, totalDurationMs - elapsed);
           const ratio = remainingMs / totalDurationMs;
 
-          // Bar and label
           this.dom.timerBar.style.width = `${ratio * 100}%`;
           this.dom.timerText.textContent = `${(remainingMs / 1000).toFixed(1)}s`;
 
-          // Color shift
           if (ratio < 0.25) {
             this.dom.timerBar.className = 'h-full bg-rose-500 rounded-full transition-all duration-75 origin-left';
-            this.dom.timerText.className = 'font-mono-numbers text-xs font-bold text-rose-400 w-9 text-right';
+            this.dom.timerText.className = 'font-mono-numbers text-xs font-bold text-rose-600 w-10 text-right';
           } else if (ratio < 0.5) {
-            this.dom.timerBar.className = 'h-full bg-amber-400 rounded-full transition-all duration-75 origin-left';
-            this.dom.timerText.className = 'font-mono-numbers text-xs font-bold text-amber-400 w-9 text-right';
+            this.dom.timerBar.className = 'h-full bg-amber-500 rounded-full transition-all duration-75 origin-left';
+            this.dom.timerText.className = 'font-mono-numbers text-xs font-bold text-amber-600 w-10 text-right';
           } else {
-            this.dom.timerBar.className = 'h-full bg-indigo-500 rounded-full transition-all duration-75 origin-left';
-            this.dom.timerText.className = 'font-mono-numbers text-xs font-bold text-zinc-300 w-9 text-right';
+            this.dom.timerBar.className = 'h-full bg-indigo-600 rounded-full transition-all duration-75 origin-left';
+            this.dom.timerText.className = 'font-mono-numbers text-xs font-bold text-slate-800 w-10 text-right';
           }
 
           if (remainingMs <= 0) {
@@ -1335,7 +1621,6 @@
     }
 
     generateNextQuestion() {
-      // If error drill session
       if (this.mode === 'error_drill' && this.errorDrillPool.length > 0) {
         const item = this.errorDrillPool.pop();
         return {
@@ -1349,7 +1634,6 @@
         };
       }
 
-      // Standard Module Generators
       if (this.currentModule === 'tables') {
         return QuestionGenerators.tables(this.selectedTables, this.maxMultiplier);
       } else if (this.currentModule === 'powers') {
@@ -1390,18 +1674,46 @@
       return QuestionGenerators.tables(this.selectedTables, 12);
     }
 
-    // -----------------------------------------------------------
-    // ANSWER PROCESSING & FEEDBACK
-    // -----------------------------------------------------------
+    isAnswerCorrect(userVal) {
+      if (!this.currentQuestion || !userVal) return false;
+      const cleanVal = userVal.trim().toLowerCase();
+      const cleanNoPct = cleanVal.replace(/%/g, '').trim();
+
+      const accepted = (this.currentQuestion.acceptedAnswers || [String(this.currentQuestion.answer)]).map(a => a.trim().toLowerCase());
+
+      // 1. Direct match in accepted list (with or without %)
+      if (accepted.includes(cleanVal) || accepted.includes(cleanNoPct)) {
+        return true;
+      }
+
+      // 2. Tolerance check for fractions to percentages (e.g. 14 2/7, 14.28, 14.29)
+      if (typeof this.currentQuestion.targetPercentValue === 'number') {
+        const parsed = parseMixedFractionString(cleanVal);
+        if (parsed && typeof parsed.value === 'number') {
+          if (Math.abs(parsed.value - this.currentQuestion.targetPercentValue) < 0.06) {
+            return true;
+          }
+        }
+      }
+
+      // 3. Tolerance check for percentage to fractions (e.g. 1/7, 3/8)
+      if (typeof this.currentQuestion.targetFractionRatio === 'number') {
+        const parsed = parseMixedFractionString(cleanVal);
+        if (parsed && typeof parsed.value === 'number') {
+          if (Math.abs(parsed.value - this.currentQuestion.targetFractionRatio) < 0.005) {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    }
+
     checkAutoSubmit() {
       const val = this.dom.mathInput.value.trim();
       if (!val || !this.currentQuestion) return;
 
-      const ans = String(this.currentQuestion.answer).trim();
-      const accepted = this.currentQuestion.acceptedAnswers || [ans];
-
-      // Exact match check
-      if (accepted.some(a => a.toLowerCase() === val.toLowerCase())) {
+      if (this.isAnswerCorrect(val)) {
         this.submitDirectAnswer();
       }
     }
@@ -1411,8 +1723,7 @@
       const userVal = this.dom.mathInput.value.trim().toLowerCase();
       if (!userVal) return;
 
-      const accepted = (this.currentQuestion.acceptedAnswers || [String(this.currentQuestion.answer)]).map(a => a.trim().toLowerCase());
-      const isCorrect = accepted.includes(userVal);
+      const isCorrect = this.isAnswerCorrect(userVal);
       this.finalizeQuestionAnswer(isCorrect, userVal);
     }
 
@@ -1420,20 +1731,17 @@
       if (this.isProcessingAnswer || !this.currentQuestion || this.currentQuestion.type !== 'mcq') return;
       const isCorrect = choiceIndex === this.currentQuestion.correctIndex;
       
-      // Highlight choice
       const btn = document.querySelector(`[data-option-idx="${choiceIndex}"]`);
       if (btn) {
         if (isCorrect) {
-          btn.classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-300');
+          btn.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-800');
         } else {
-          btn.classList.add('bg-rose-500/20', 'border-rose-500', 'text-rose-300');
-          // Also highlight correct choice
+          btn.classList.add('bg-rose-50', 'border-rose-500', 'text-rose-800');
           const correctBtn = document.querySelector(`[data-option-idx="${this.currentQuestion.correctIndex}"]`);
-          if (correctBtn) correctBtn.classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-300');
+          if (correctBtn) correctBtn.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-800');
         }
       }
 
-      // Show CGL Shortcut Hint banner
       if (this.currentQuestion.explanation) {
         this.dom.cglShortcutBanner.classList.remove('hidden');
         this.dom.cglShortcutText.textContent = this.currentQuestion.explanation;
@@ -1467,13 +1775,10 @@
           sound.streakMilestone();
         }
 
-        // Error bank graduation check
         errorBank.recordSuccess(this.currentQuestion.prompt);
 
-        // Visual success flash
-        this.dom.inputBoxWrapper.className = 'relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-emerald-950/40 border-2 border-emerald-500 shadow-inner transition-colors';
+        this.dom.inputBoxWrapper.className = 'relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-emerald-50 border-2 border-emerald-500 shadow-sm transition-colors';
         
-        // Progress to next question swiftly
         const delay = this.currentQuestion.type === 'mcq' ? 800 : 180;
         setTimeout(() => {
           this.updateSessionStatsHeader();
@@ -1485,7 +1790,6 @@
         sound.wrong();
         sound.vibrate([100]);
 
-        // Log mistake into Error Bank
         errorBank.recordMistake(this.currentQuestion);
         this.sessionMistakes.push({
           q: this.currentQuestion.prompt,
@@ -1495,14 +1799,12 @@
         });
         this.updateErrorBadges();
 
-        // Visual error shake & flash correct answer banner
-        this.dom.inputBoxWrapper.className = 'relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-rose-950/40 border-2 border-rose-500 shadow-inner animate-shake transition-colors';
+        this.dom.inputBoxWrapper.className = 'relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-rose-50 border-2 border-rose-500 shadow-sm animate-shake transition-colors';
         
         this.dom.feedbackText.textContent = userVal === 'TIMEOUT' ? '⏰ Time Out' : '❌ Wrong';
         this.dom.feedbackAnswer.textContent = `Correct: ${this.currentQuestion.answer}`;
-        this.dom.drillFeedbackBanner.className = 'absolute -bottom-2 inset-x-2 py-2 px-3 rounded-xl border border-rose-500/50 bg-rose-950/90 text-rose-200 flex items-center justify-between text-xs font-semibold opacity-100 transition-opacity z-20 shadow-lg';
+        this.dom.drillFeedbackBanner.className = 'absolute -bottom-2 inset-x-2 py-2.5 px-4 rounded-xl border border-rose-300 bg-rose-50 text-rose-800 flex items-center justify-between text-xs font-bold opacity-100 transition-opacity z-20 shadow-md';
 
-        // Flash answer for 0.8s as requested
         const delay = this.currentQuestion.type === 'mcq' ? 1200 : 850;
         setTimeout(() => {
           this.updateSessionStatsHeader();
@@ -1510,7 +1812,6 @@
         }, delay);
       }
 
-      // Record lifetime stats
       lifetimeStats.record(isCorrect, reactionTimeMs, this.streak);
     }
 
@@ -1524,11 +1825,7 @@
       }
     }
 
-    // -----------------------------------------------------------
-    // KEYBOARD & INPUT ROUTING
-    // -----------------------------------------------------------
     handleGlobalKeyDown(e) {
-      // Esc to Pause/Resume
       if (e.key === 'Escape') {
         e.preventDefault();
         if (this.sessionActive) {
@@ -1538,7 +1835,6 @@
         return;
       }
 
-      // If paused, space resumes
       if (this.sessionPaused && e.code === 'Space') {
         e.preventDefault();
         this.resumeSession();
@@ -1547,7 +1843,6 @@
 
       if (!this.sessionActive || this.sessionPaused) return;
 
-      // In MCQ Mode: keys 1, 2, 3, 4 trigger option A, B, C, D
       if (this.currentQuestion && this.currentQuestion.type === 'mcq') {
         if (['1', '2', '3', '4'].includes(e.key)) {
           e.preventDefault();
@@ -1556,14 +1851,12 @@
         }
       }
 
-      // In Direct Input Mode: Enter submits
       if (e.key === 'Enter') {
         e.preventDefault();
         this.submitDirectAnswer();
         return;
       }
 
-      // Ensure focus on input field
       if (this.currentQuestion && this.currentQuestion.type === 'direct') {
         if (document.activeElement !== this.dom.mathInput) {
           this.dom.mathInput.focus();
@@ -1584,9 +1877,6 @@
       sound.tick();
     }
 
-    // -----------------------------------------------------------
-    // PAUSE & SUMMARY
-    // -----------------------------------------------------------
     pauseSession() {
       this.sessionPaused = true;
       this.dom.modalPause.classList.remove('hidden');
@@ -1631,9 +1921,6 @@
       this.updateErrorBadges();
     }
 
-    // -----------------------------------------------------------
-    // ERROR BANK & STATS MODALS
-    // -----------------------------------------------------------
     openErrorBankModal() {
       this.renderErrorBankItems();
       this.dom.modalErrorBank.classList.remove('hidden');
@@ -1646,10 +1933,10 @@
 
       if (items.length === 0) {
         list.innerHTML = `
-          <div class="py-8 text-center text-zinc-400">
+          <div class="py-8 text-center text-slate-600">
             <div class="text-3xl mb-2">🎉</div>
-            <div class="text-sm font-semibold text-zinc-300">Clean Slate!</div>
-            <div class="text-xs text-zinc-400 mt-1">No logged mistakes. Any misses will be queued here for spaced repetition.</div>
+            <div class="text-sm font-bold text-slate-800">Clean Slate!</div>
+            <div class="text-xs text-slate-600 mt-1">No logged mistakes. Any misses will be queued here for spaced repetition.</div>
           </div>
         `;
         return;
@@ -1657,14 +1944,14 @@
 
       items.forEach((item) => {
         const div = document.createElement('div');
-        div.className = 'p-3 rounded-xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between gap-3';
+        div.className = 'p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-3';
         div.innerHTML = `
           <div>
-            <div class="text-sm font-bold text-white font-mono-numbers">${item.prompt}</div>
-            <div class="text-xs text-emerald-400 font-semibold mt-0.5">${item.explanation || 'Ans: ' + item.answer}</div>
+            <div class="text-sm font-bold text-slate-900 font-mono-numbers">${item.prompt}</div>
+            <div class="text-xs text-emerald-700 font-semibold mt-0.5">${item.explanation || 'Ans: ' + item.answer}</div>
           </div>
           <div class="text-right shrink-0">
-            <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">
+            <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-700">
               ${item.consecutiveCorrect || 0}/2 Correct
             </span>
           </div>
@@ -1690,7 +1977,6 @@
     }
   }
 
-  // Initialize on DOMContentLoaded
   document.addEventListener('DOMContentLoaded', () => {
     window.__mathApp = new MathHubApp();
   });

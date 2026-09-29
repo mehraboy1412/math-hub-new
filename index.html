@@ -12,18 +12,17 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
           colors: {
-            brand: { 500: '#6366f1', 600: '#4f46e5' }
+            brand: { 500: '#f59e0b', 600: '#d97706', 700: '#b45309' }
           }
         }
       }
     }
   </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
     :root {
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
       touch-action: manipulation;
@@ -32,7 +31,6 @@
       font-family: 'JetBrains Mono', monospace;
       font-variant-numeric: tabular-nums;
     }
-    /* Touch optimization */
     button, input {
       -webkit-tap-highlight-color: transparent;
       user-select: none;
@@ -40,7 +38,6 @@
     input {
       user-select: text;
     }
-    /* Shake animation */
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       20%, 60% { transform: translateX(-6px); }
@@ -49,7 +46,6 @@
     .animate-shake {
       animation: shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
     }
-    /* Pop flash animation */
     @keyframes popFlash {
       0% { transform: scale(0.96); opacity: 0.8; }
       50% { transform: scale(1.02); }
@@ -58,31 +54,33 @@
     .animate-pop {
       animation: popFlash 0.2s ease-out forwards;
     }
-    /* Custom scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #090d16;
+      background: #f8fafc;
     }
     ::-webkit-scrollbar-thumb {
-      background: #27272a;
+      background: #cbd5e1;
       border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
     }
   </style>
 </head>
-<body class="bg-slate-950 text-zinc-100 min-h-[100dvh] h-[100dvh] flex flex-col antialiased selection:bg-indigo-500/30 selection:text-white overflow-hidden">
+<body class="bg-amber-50/40 text-slate-800 min-h-[100dvh] h-[100dvh] flex flex-col antialiased selection:bg-amber-500/20 selection:text-amber-900 overflow-hidden">
   
-  <!-- APP HEADER (Top Bar Contract: Single brand element, actions, responsive) -->
-  <header class="h-14 border-b border-zinc-800/80 bg-slate-950/90 backdrop-blur px-4 flex items-center justify-between shrink-0 z-30">
+  <!-- APP HEADER (Clean Bright Top Bar) -->
+  <header class="h-14 border-b border-amber-200/80 bg-white/90 backdrop-blur px-4 flex items-center justify-between shrink-0 z-30 shadow-xs">
     <div class="flex items-center gap-3">
-      <button id="btnNavHome" class="flex items-center gap-2 hover:opacity-80 transition-opacity text-left">
-        <span class="w-8 h-8 rounded-lg bg-indigo-600/20 border border-indigo-500/40 text-indigo-400 font-extrabold flex items-center justify-center text-sm shadow-inner">Σ</span>
+      <button id="btnNavHome" class="flex items-center gap-2.5 hover:opacity-85 transition-opacity text-left">
+        <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-extrabold flex items-center justify-center text-sm shadow-sm shadow-amber-500/30">Σ</span>
         <div>
-          <h1 class="text-sm font-bold tracking-tight text-white flex items-center gap-1.5">
+          <h1 class="text-sm font-bold tracking-tight text-slate-900 flex items-center gap-1.5">
             Math Practice Hub
-            <span class="text-[10px] uppercase tracking-wider font-semibold px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">SSC CGL</span>
+            <span class="text-[10px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-200">SSC CGL</span>
           </h1>
         </div>
       </button>
@@ -90,29 +88,35 @@
 
     <!-- Header Actions -->
     <div class="flex items-center gap-2">
-      <!-- Error Bank button -->
-      <button id="btnOpenErrorBank" title="View Error Bank" class="relative px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-xs font-medium text-zinc-300 flex items-center gap-1.5 transition-colors">
-        <svg class="w-3.5 h-3.5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <!-- Dedicated Fraction Lab Button -->
+      <button id="btnOpenFractionLab" title="Open Fraction ↔ % Lab" class="px-2.5 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200/80 border border-amber-300/80 text-xs font-bold text-amber-900 flex items-center gap-1.5 transition-colors shadow-2xs">
+        <span class="font-mono text-xs font-black">½%</span>
+        <span class="hidden sm:inline">Fraction Lab</span>
+      </button>
+
+      <!-- Error Bank Button with Counter Badge -->
+      <button id="btnOpenErrorBank" title="View Error Bank" class="relative px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-slate-300 text-xs font-semibold text-slate-700 flex items-center gap-1.5 transition-colors shadow-2xs">
+        <svg class="w-3.5 h-3.5 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
         </svg>
         <span>Errors</span>
-        <span id="headerErrorBadge" class="font-mono-numbers px-1.5 py-0.2 rounded-full bg-rose-500/20 text-rose-400 text-[10px] font-bold">0</span>
+        <span id="headerErrorBadge" class="font-mono-numbers px-1.5 py-0.2 rounded-full bg-rose-100 text-rose-700 text-[10px] font-bold">0</span>
       </button>
 
       <!-- Lifetime Stats -->
-      <button id="btnOpenStats" title="Lifetime Stats" class="px-2.5 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-xs font-medium text-zinc-300 flex items-center gap-1.5 transition-colors">
-        <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <button id="btnOpenStats" title="Lifetime Stats" class="px-2.5 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-slate-300 text-xs font-semibold text-slate-700 flex items-center gap-1.5 transition-colors shadow-2xs">
+        <svg class="w-3.5 h-3.5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
         </svg>
         <span class="hidden sm:inline">Stats</span>
       </button>
 
       <!-- Audio Mute Toggle -->
-      <button id="btnToggleSound" title="Toggle Sound (Web Audio)" class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-300 transition-colors">
-        <svg id="iconSoundOn" class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <button id="btnToggleSound" title="Toggle Sound" class="p-2 rounded-lg bg-white border border-slate-200 hover:border-slate-300 text-slate-700 transition-colors shadow-2xs">
+        <svg id="iconSoundOn" class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
         </svg>
-        <svg id="iconSoundOff" class="w-4 h-4 text-zinc-500 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg id="iconSoundOff" class="w-4 h-4 text-slate-400 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/>
         </svg>
@@ -122,347 +126,421 @@
 
   <!-- MAIN VIEWPORT CONTAINER -->
   <main class="flex-1 relative overflow-y-auto overflow-x-hidden flex flex-col">
-    <!-- SETUP VIEW -->
-    <div id="viewSetup" class="flex-1 p-3 sm:p-6 max-w-4xl w-full mx-auto flex flex-col justify-between gap-6 overflow-y-auto">
+
+    <!-- VIEW 1: MULTI-STEP WIZARD SETUP (Clutter-Free, Bright Daylight Aesthetic) -->
+    <div id="viewSetup" class="flex-1 p-3 sm:p-6 max-w-3xl w-full mx-auto flex flex-col justify-between overflow-y-auto">
       
-      <div class="space-y-6">
-        <!-- Hero Banner with Quick Stats -->
-        <div class="p-4 sm:p-5 rounded-2xl bg-zinc-900/60 border border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <!-- Stepper Header Progress Indicator -->
+      <div class="mb-4 sm:mb-6">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <span id="stepBadgeNum" class="w-6 h-6 rounded-full bg-amber-500 text-white font-bold text-xs flex items-center justify-center">1</span>
+            <span id="stepTitle" class="text-sm font-bold text-slate-900">Step 1: Choose Calculation Topic</span>
+          </div>
+          <span id="stepProgressText" class="text-xs font-semibold text-slate-600">1 of 3</span>
+        </div>
+        <!-- Progress Bar Line -->
+        <div class="w-full h-1.5 bg-amber-100 rounded-full overflow-hidden">
+          <div id="stepProgressBar" class="h-full bg-amber-500 rounded-full transition-all duration-300" style="width: 33.3%;"></div>
+        </div>
+      </div>
+
+      <!-- Quick Action Pill: Drill My Errors Bypass -->
+      <div class="mb-4 flex items-center justify-between p-3 rounded-xl bg-white border border-amber-200/90 shadow-xs">
+        <div class="flex items-center gap-2 text-xs">
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span>
+          <span class="text-slate-600 font-medium">Logged weak spots:</span>
+          <span id="setupErrorCountText" class="font-bold text-slate-900 font-mono-numbers">0 items</span>
+        </div>
+        <button id="btnQuickDrillErrors" class="px-3 py-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 text-xs font-bold transition-all flex items-center gap-1.5">
+          <span>Drill Errors Now</span>
+          <span id="setupErrorCount" class="font-mono-numbers bg-rose-200/80 px-1.5 py-0.2 rounded-full text-[10px]">0</span>
+        </button>
+      </div>
+
+      <!-- STEP CONTAINER 1: TOPIC SELECTION -->
+      <div id="step1Container" class="space-y-3 flex-1">
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Select Module to Train</div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Tables 1 to 50 -->
+          <button type="button" data-module="tables" class="module-card p-4 rounded-xl border-2 border-amber-500 bg-amber-50/60 text-left transition-all hover:shadow-sm group relative">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-amber-500 text-white flex items-center justify-center font-black text-xs shadow-2xs">✖</span>
+                <span>Multiplication Tables</span>
+              </span>
+              <span class="text-[11px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-md">1 to 50</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">Master rapid table multiplication with presets, primes & multipliers up to ×20.</p>
+          </button>
+
+          <!-- Squares & Cubes -->
+          <button type="button" data-module="powers" class="module-card p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-amber-300 text-left transition-all hover:shadow-sm group">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-emerald-500 text-white flex items-center justify-center font-black text-xs shadow-2xs">x²</span>
+                <span>Squares & Cubes</span>
+              </span>
+              <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">Up to 50 / 30</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">Squares up to 50, cubes up to 30, and inverse square & cube root recall.</p>
+          </button>
+
+          <!-- Fractions to Percentages -->
+          <button type="button" data-module="fractions" class="module-card p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-amber-300 text-left transition-all hover:shadow-sm group">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-xs shadow-2xs">½%</span>
+                <span>Fractions ↔ Percentages</span>
+              </span>
+              <span class="text-[11px] font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md">CGL Core</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">Bidirectional recall: 1/2 through 1/25, plus common 3/8, 5/8, 4/7, 5/6, 7/12.</p>
+          </button>
+
+          <!-- Arithmetic Sprints -->
+          <button type="button" data-module="arithmetic" class="module-card p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-amber-300 text-left transition-all hover:shadow-sm group">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-rose-500 text-white flex items-center justify-center font-black text-xs shadow-2xs">⚡</span>
+                <span>Mental Arithmetic Sprints</span>
+              </span>
+              <span class="text-[11px] font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md">Split & Merge</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">2-digit/3-digit addition, subtraction, 2×2 cross-multiplication, and % shortcuts.</p>
+          </button>
+
+          <!-- Option Elimination Drill -->
+          <button type="button" data-module="elimination" class="module-card sm:col-span-2 p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-amber-300 text-left transition-all hover:shadow-sm group">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-sm font-bold text-slate-900 flex items-center gap-2">
+                <span class="w-7 h-7 rounded-lg bg-amber-600 text-white flex items-center justify-center font-black text-xs shadow-2xs">🎯</span>
+                <span>SSC CGL Option Elimination (MCQ Drill)</span>
+              </span>
+              <span class="text-[11px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-md">Exam Strategy</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">Crack big expressions in seconds using Unit Digit, Tens Digit, Digital Root (Digit Sum), and Approximation.</p>
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP CONTAINER 2: CONTEXT-AWARE SCOPE & RANGE (Only shows active module parameters!) -->
+      <div id="step2Container" class="space-y-4 flex-1 hidden">
+        <div class="flex items-center justify-between border-b border-amber-200/80 pb-2">
           <div>
-            <div class="text-xs font-semibold text-amber-400 tracking-wider uppercase mb-1">Competitive Quantitative Aptitude</div>
-            <h2 class="text-xl sm:text-2xl font-extrabold text-white">Speed & Accuracy Drill Master</h2>
-            <p class="text-xs sm:text-sm text-zinc-400 mt-1">Engineered for sub-3-second mental arithmetic, shortcuts & elimination techniques.</p>
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-600">Module Parameters</div>
+            <div id="step2ModuleHeading" class="text-base font-extrabold text-slate-900">Configure Multiplication Tables</div>
           </div>
-          <div class="flex items-center gap-3 shrink-0">
-            <button id="btnDrillErrorsSetup" class="px-3.5 py-2 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 text-xs font-semibold flex items-center gap-2 transition-all">
-              <span class="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></span>
-              <span>Drill My Errors (<span id="setupErrorCount">0</span>)</span>
-            </button>
+          <span id="step2Badge" class="text-xs font-bold px-2 py-0.5 rounded-md bg-amber-100 text-amber-800">Tables 1–50</span>
+        </div>
+
+        <!-- Scope Panel: Tables -->
+        <div id="scopePanelTables" class="space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="text-xs font-bold text-slate-700">1-Tap Range Presets:</div>
+            <div class="flex items-center gap-1.5 text-xs">
+              <span class="text-slate-600">Max Multiplier:</span>
+              <div class="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+                <button type="button" data-mult-depth="10" class="depth-btn px-2 py-0.5 rounded text-xs font-bold text-slate-600 hover:text-slate-900">x10</button>
+                <button type="button" data-mult-depth="12" class="depth-btn px-2 py-0.5 rounded text-xs font-bold bg-amber-500 text-white shadow-xs">x12</button>
+                <button type="button" data-mult-depth="20" class="depth-btn px-2 py-0.5 rounded text-xs font-bold text-slate-600 hover:text-slate-900">x20</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Chips -->
+          <div class="flex flex-wrap gap-1.5">
+            <button type="button" data-chip="1-20" class="table-chip px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-300 hover:border-amber-400 text-slate-700 shadow-2xs">1–20</button>
+            <button type="button" data-chip="21-30" class="table-chip px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-300 hover:border-amber-400 text-slate-700 shadow-2xs">21–30</button>
+            <button type="button" data-chip="31-40" class="table-chip px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-300 hover:border-amber-400 text-slate-700 shadow-2xs">31–40</button>
+            <button type="button" data-chip="41-50" class="table-chip px-3 py-1.5 rounded-lg text-xs font-bold bg-white border border-slate-300 hover:border-amber-400 text-slate-700 shadow-2xs">41–50</button>
+            <button type="button" data-chip="primes" class="table-chip px-3 py-1.5 rounded-lg text-xs font-bold bg-amber-100 border border-amber-300 hover:bg-amber-200 text-amber-900 shadow-2xs">Primes (17, 19, 23, 29, 31, 37, 41, 43, 47)</button>
+            <button type="button" data-chip="all" class="table-chip px-3 py-1.5 rounded-lg text-xs font-bold bg-indigo-50 border border-indigo-200 text-indigo-800 hover:bg-indigo-100 shadow-2xs">All 1–50</button>
+            <button type="button" data-chip="clear" class="px-2 py-1 rounded-lg text-xs text-rose-600 hover:underline">Clear</button>
+          </div>
+
+          <!-- Numbers Selector Grid -->
+          <div class="p-3 rounded-xl bg-white border border-slate-200 shadow-xs">
+            <div class="text-xs text-slate-600 mb-2 flex items-center justify-between">
+              <span class="font-semibold text-slate-800">Selected Tables (<span id="selectedTablesCount" class="text-amber-600 font-bold">10</span>/50):</span>
+              <span class="text-[11px] text-slate-600">Tap number to toggle</span>
+            </div>
+            <div id="tableNumbersGrid" class="grid grid-cols-10 sm:grid-cols-25 gap-1 max-h-32 overflow-y-auto p-1 bg-amber-50/30 rounded-lg border border-amber-100">
+              <!-- Injected via JS -->
+            </div>
           </div>
         </div>
 
-        <!-- 1. TIME MODE SELECTOR -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">1. Select Mode & Clock Constraints</label>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-            <!-- Blitz Mode -->
-            <button type="button" data-mode="blitz" class="mode-card p-3.5 rounded-xl border border-indigo-500 bg-indigo-950/20 text-left transition-all relative">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-sm font-bold text-white flex items-center gap-1.5">
-                  <span class="text-amber-400">⚡</span> Blitz Mode
-                </span>
-                <span class="text-[10px] font-bold text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded">Per-Question</span>
-              </div>
-              <p class="text-xs text-zinc-400 mb-2.5">High-pressure countdown. Unanswered questions auto-fail into Error Bank.</p>
-              <!-- Blitz sub-options -->
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button type="button" data-blitz-time="2" class="blitz-time-btn px-2 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700">2s (God)</button>
-                <button type="button" data-blitz-time="3" class="blitz-time-btn px-2 py-1 rounded-md text-[11px] font-bold bg-indigo-600 text-white border border-indigo-400">3s (CGL)</button>
-                <button type="button" data-blitz-time="5" class="blitz-time-btn px-2 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700">5s</button>
-                <button type="button" data-blitz-time="8" class="blitz-time-btn px-2 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700">8s</button>
-              </div>
-            </button>
-
-            <!-- Marathon Mode -->
-            <button type="button" data-mode="marathon" class="mode-card p-3.5 rounded-xl border border-zinc-800 bg-zinc-900/60 text-left transition-all">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-sm font-bold text-white flex items-center gap-1.5">
-                  <span class="text-emerald-400">⏱️</span> Marathon Mode
-                </span>
-                <span class="text-[10px] font-bold text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded">Session Timer</span>
-              </div>
-              <p class="text-xs text-zinc-400 mb-2.5">Fixed total time limit. Solve maximum questions with sustained accuracy.</p>
-              <!-- Marathon sub-options -->
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button type="button" data-marathon-time="60" class="marathon-time-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700">60s</button>
-                <button type="button" data-marathon-time="120" class="marathon-time-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-indigo-600 text-white border border-indigo-400">120s</button>
-                <button type="button" data-marathon-time="300" class="marathon-time-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700">300s</button>
-              </div>
-            </button>
-
-            <!-- Classic Mode -->
-            <button type="button" data-mode="classic" class="mode-card p-3.5 rounded-xl border border-zinc-800 bg-zinc-900/60 text-left transition-all">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-sm font-bold text-white flex items-center gap-1.5">
-                  <span class="text-sky-400">🎯</span> Classic Mode
-                </span>
-                <span class="text-[10px] font-bold text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded">Target Count</span>
-              </div>
-              <p class="text-xs text-zinc-400 mb-2.5">Untimed per-question. Focus on accuracy and mastering methods at your pace.</p>
-              <!-- Classic sub-options -->
-              <div class="flex items-center gap-1.5" onclick="event.stopPropagation()">
-                <button type="button" data-classic-count="25" class="classic-count-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-indigo-600 text-white border border-indigo-400">25 Qs</button>
-                <button type="button" data-classic-count="50" class="classic-count-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700">50 Qs</button>
-                <button type="button" data-classic-count="100" class="classic-count-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700">100 Qs</button>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        <!-- 2. CONTENT MODULE SELECTOR -->
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-2">2. Calculation Drill Module</label>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
-            
-            <!-- Module 1: Tables 1-50 -->
-            <button type="button" data-module="tables" class="module-tab p-3 rounded-xl border border-indigo-500 bg-indigo-950/20 text-left transition-all">
-              <div class="text-xs font-bold text-white mb-1 flex items-center gap-1.5">
-                <span class="text-indigo-400">✖</span> Tables 1–50
-              </div>
-              <p class="text-[11px] text-zinc-400 leading-tight">Multiplication tables with customizable ranges & primes.</p>
-            </button>
-
-            <!-- Module 2: Squares & Cubes -->
-            <button type="button" data-module="powers" class="module-tab p-3 rounded-xl border border-zinc-800 bg-zinc-900/60 text-left transition-all">
-              <div class="text-xs font-bold text-white mb-1 flex items-center gap-1.5">
-                <span class="text-emerald-400">x²</span> Squares & Cubes
-              </div>
-              <p class="text-[11px] text-zinc-400 leading-tight">Squares up to 50 & Cubes up to 30 with square roots.</p>
-            </button>
-
-            <!-- Module 3: Fractions to % -->
-            <button type="button" data-module="fractions" class="module-tab p-3 rounded-xl border border-zinc-800 bg-zinc-900/60 text-left transition-all">
-              <div class="text-xs font-bold text-white mb-1 flex items-center gap-1.5">
-                <span class="text-amber-400">½%</span> Fractions ↔ %
-              </div>
-              <p class="text-[11px] text-zinc-400 leading-tight">1/2 to 1/25, 3/8, 5/8 bidirectional CGL recall.</p>
-            </button>
-
-            <!-- Module 4: Arithmetic Sprints -->
-            <button type="button" data-module="arithmetic" class="module-tab p-3 rounded-xl border border-zinc-800 bg-zinc-900/60 text-left transition-all">
-              <div class="text-xs font-bold text-white mb-1 flex items-center gap-1.5">
-                <span class="text-rose-400">⚡</span> Mental Arithmetic
-              </div>
-              <p class="text-[11px] text-zinc-400 leading-tight">Split & merge addition, subtraction, 2x2 cross-mult, % of.</p>
-            </button>
-
-            <!-- Module 5: Option Elimination Drill -->
-            <button type="button" data-module="elimination" class="module-tab p-3 rounded-xl border border-zinc-800 bg-zinc-900/60 text-left transition-all">
-              <div class="text-xs font-bold text-white mb-1 flex items-center gap-1.5">
-                <span class="text-sky-400">🎯</span> Elimination Drill
-              </div>
-              <p class="text-[11px] text-zinc-400 leading-tight">CGL MCQ shortcuts: Unit digit, Tens digit & Digital Root.</p>
-            </button>
-
-          </div>
-        </div>
-
-        <!-- 3. DYNAMIC CONFIG PANEL PER MODULE -->
-        <div id="moduleConfigPanel" class="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800">
-          
-          <!-- Tables Config Panel -->
-          <div id="cfgTables" class="space-y-3">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <div class="text-xs font-bold text-zinc-300">Quick Range Selectors (Multiplication Tables 1 to 50):</div>
-              <div class="flex items-center gap-2">
-                <span class="text-xs text-zinc-400">Max Multiplier:</span>
-                <div class="flex items-center bg-zinc-900 p-0.5 rounded-lg border border-zinc-800">
-                  <button type="button" data-mult-depth="10" class="depth-btn px-2 py-0.5 rounded text-xs font-bold text-zinc-400 hover:text-white">x10</button>
-                  <button type="button" data-mult-depth="12" class="depth-btn px-2 py-0.5 rounded text-xs font-bold bg-indigo-600 text-white">x12</button>
-                  <button type="button" data-mult-depth="20" class="depth-btn px-2 py-0.5 rounded text-xs font-bold text-zinc-400 hover:text-white">x20</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Quick Chips -->
-            <div class="flex flex-wrap gap-1.5">
-              <button type="button" data-chip="1-20" class="table-chip px-2.5 py-1 rounded-lg text-xs font-semibold bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 text-zinc-200">1–20</button>
-              <button type="button" data-chip="21-30" class="table-chip px-2.5 py-1 rounded-lg text-xs font-semibold bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 text-zinc-200">21–30</button>
-              <button type="button" data-chip="31-40" class="table-chip px-2.5 py-1 rounded-lg text-xs font-semibold bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 text-zinc-200">31–40</button>
-              <button type="button" data-chip="41-50" class="table-chip px-2.5 py-1 rounded-lg text-xs font-semibold bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 text-zinc-200">41–50</button>
-              <button type="button" data-chip="primes" class="table-chip px-2.5 py-1 rounded-lg text-xs font-semibold bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20 text-amber-300">Primes Only (17, 19, 23, 29, 31, 37, 41, 43, 47)</button>
-              <button type="button" data-chip="all" class="table-chip px-2.5 py-1 rounded-lg text-xs font-semibold bg-indigo-600/20 border border-indigo-500/40 hover:bg-indigo-600/30 text-indigo-300">All 1–50</button>
-              <button type="button" data-chip="clear" class="px-2 py-1 rounded-lg text-xs text-zinc-400 hover:text-rose-400 underline">Clear</button>
-            </div>
-
-            <!-- Table Number Grid Multi-Select -->
-            <div>
-              <div class="text-[11px] text-zinc-400 mb-1.5 flex items-center justify-between">
-                <span>Active Table Base Numbers: (<span id="selectedTablesCount">12</span> selected)</span>
-                <span class="text-zinc-400">Click to toggle individual numbers</span>
-              </div>
-              <div id="tableNumbersGrid" class="grid grid-cols-10 sm:grid-cols-25 gap-1 max-h-36 overflow-y-auto p-1 bg-slate-950/60 rounded-lg border border-zinc-800">
-                <!-- Injected via JS -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Powers Config Panel -->
-          <div id="cfgPowers" class="space-y-3 hidden">
-            <div class="text-xs font-bold text-zinc-300 mb-2">Squares & Cubes Scope:</div>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              <label class="flex items-center gap-2 p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer hover:border-zinc-700">
-                <input type="checkbox" id="chkSquares1_25" checked class="w-4 h-4 rounded text-indigo-600 bg-zinc-800 border-zinc-700" />
-                <span class="text-xs font-medium text-zinc-200">Squares 1–25</span>
-              </label>
-              <label class="flex items-center gap-2 p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer hover:border-zinc-700">
-                <input type="checkbox" id="chkSquares26_50" checked class="w-4 h-4 rounded text-indigo-600 bg-zinc-800 border-zinc-700" />
-                <span class="text-xs font-medium text-zinc-200">Squares 26–50</span>
-              </label>
-              <label class="flex items-center gap-2 p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer hover:border-zinc-700">
-                <input type="checkbox" id="chkCubes1_15" checked class="w-4 h-4 rounded text-indigo-600 bg-zinc-800 border-zinc-700" />
-                <span class="text-xs font-medium text-zinc-200">Cubes 1–15</span>
-              </label>
-              <label class="flex items-center gap-2 p-2.5 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer hover:border-zinc-700">
-                <input type="checkbox" id="chkCubes16_30" checked class="w-4 h-4 rounded text-indigo-600 bg-zinc-800 border-zinc-700" />
-                <span class="text-xs font-medium text-zinc-200">Cubes 16–30</span>
-              </label>
-            </div>
-            <div class="flex items-center gap-4 text-xs text-zinc-400 pt-1">
-              <label class="flex items-center gap-1.5 cursor-pointer">
-                <input type="checkbox" id="chkIncludeRoots" checked class="w-3.5 h-3.5 rounded text-indigo-600 bg-zinc-800 border-zinc-700" />
-                <span>Include Inverse Roots (√x and ∛x)</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Fractions Config Panel -->
-          <div id="cfgFractions" class="space-y-3 hidden">
-            <div class="text-xs font-bold text-zinc-300">Fractions to Percentages Recall (SSC CGL Core):</div>
-            <p class="text-xs text-zinc-400">Tests rapid bidirectional conversion: <span class="text-amber-400">1/7 ➔ 14.28%</span>, <span class="text-indigo-400">37.5% ➔ 3/8</span>, <span class="text-emerald-400">1/19 ➔ 5.26%</span>.</p>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkUnitFractions" checked class="w-4 h-4 rounded text-indigo-600 bg-zinc-800" />
-                <span class="text-xs font-medium text-zinc-200">Unit Fractions (1/2 to 1/25)</span>
-              </label>
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkCommonFractions" checked class="w-4 h-4 rounded text-indigo-600 bg-zinc-800" />
-                <span class="text-xs font-medium text-zinc-200">Common SSC (3/8, 5/8, 4/7, 5/6, 7/12)</span>
-              </label>
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkPercentToFraction" checked class="w-4 h-4 rounded text-indigo-600 bg-zinc-800" />
-                <span class="text-xs font-medium text-zinc-200">Bidirectional (% to Fraction)</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Arithmetic Config Panel -->
-          <div id="cfgArithmetic" class="space-y-3 hidden">
-            <div class="text-xs font-bold text-zinc-300">Arithmetic Sprint Operations:</div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkAdd2Digit" checked class="w-4 h-4 rounded text-indigo-600" />
-                <span class="text-xs font-medium text-zinc-200">2-digit + 2-digit</span>
-              </label>
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkAdd3Digit" checked class="w-4 h-4 rounded text-indigo-600" />
-                <span class="text-xs font-medium text-zinc-200">3-digit + 3-digit (Split & Merge)</span>
-              </label>
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkSub2Digit" checked class="w-4 h-4 rounded text-indigo-600" />
-                <span class="text-xs font-medium text-zinc-200">2-digit - 2-digit</span>
-              </label>
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkMult2x2" checked class="w-4 h-4 rounded text-indigo-600" />
-                <span class="text-xs font-medium text-zinc-200">2x2 Cross-Multiplication</span>
-              </label>
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkPercentShortcut" checked class="w-4 h-4 rounded text-indigo-600" />
-                <span class="text-xs font-medium text-zinc-200">Percentage Shortcuts ("16% of 450")</span>
-              </label>
-            </div>
-          </div>
-
-          <!-- Elimination Drill Config Panel -->
-          <div id="cfgElimination" class="space-y-3 hidden">
-            <div class="text-xs font-bold text-zinc-300">SSC CGL Option Elimination Techniques:</div>
-            <p class="text-xs text-zinc-400">Presents full exam expressions with 4 options designed to be eliminated instantly via mental shortcuts.</p>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkUnitDigit" checked class="w-4 h-4 rounded text-indigo-600" />
-                <span class="text-xs font-medium text-zinc-200">Unit Digit Hack</span>
-              </label>
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkTensDigit" checked class="w-4 h-4 rounded text-indigo-600" />
-                <span class="text-xs font-medium text-zinc-200">Tens Digit Hack</span>
-              </label>
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkDigitalRoot" checked class="w-4 h-4 rounded text-indigo-600" />
-                <span class="text-xs font-medium text-zinc-200">Digital Root (Digit Sum)</span>
-              </label>
-              <label class="flex items-center gap-2 p-2 rounded-lg bg-zinc-900 border border-zinc-800 cursor-pointer">
-                <input type="checkbox" id="chkApprox" checked class="w-4 h-4 rounded text-indigo-600" />
-                <span class="text-xs font-medium text-zinc-200">Approximation</span>
-              </label>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- 4. UX & INPUT PREFERENCES -->
-        <div class="p-3.5 rounded-xl bg-zinc-900/40 border border-zinc-800 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex items-center gap-6">
-            <!-- Auto-Submit Toggle -->
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" id="chkAutoSubmit" checked class="w-4 h-4 rounded text-indigo-600 bg-zinc-800 border-zinc-700" />
+        <!-- Scope Panel: Powers -->
+        <div id="scopePanelPowers" class="space-y-3 hidden">
+          <div class="text-xs font-bold text-slate-700 mb-1">Select Number Ranges to Include:</div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkSquares1_25" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
               <div>
-                <div class="text-xs font-bold text-zinc-200">Auto-Submit on Match</div>
-                <div class="text-[10px] text-zinc-400">Submits as soon as the correct digits are entered</div>
+                <div class="text-xs font-bold text-slate-900">Squares 1–25</div>
+                <div class="text-[10px] text-slate-600">Fundamental values (1 to 625)</div>
               </div>
             </label>
-
-            <!-- Keypad Preference -->
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-medium text-zinc-400">Keypad:</span>
-              <div class="flex items-center bg-zinc-900 p-0.5 rounded-lg border border-zinc-800">
-                <button type="button" id="btnKeypadVirtual" class="px-2 py-0.5 rounded text-xs font-bold bg-indigo-600 text-white">3x4 Keypad</button>
-                <button type="button" id="btnKeypadNative" class="px-2 py-0.5 rounded text-xs font-bold text-zinc-400 hover:text-white">Device</button>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkSquares26_50" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Squares 26–50</div>
+                <div class="text-[10px] text-slate-600">Advanced speed base (676 to 2500)</div>
               </div>
-            </div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkCubes1_15" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Cubes 1–15</div>
+                <div class="text-[10px] text-slate-600">Common exam cubes (1 to 3375)</div>
+              </div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkCubes16_30" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Cubes 16–30</div>
+                <div class="text-[10px] text-slate-600">High-tier memory drill (4096 to 27000)</div>
+              </div>
+            </label>
           </div>
+          <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200/80">
+            <label class="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-800">
+              <input type="checkbox" id="chkIncludeRoots" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <span>Include Inverse Roots (√x and ∛x recall)</span>
+            </label>
+          </div>
+        </div>
 
-          <div class="text-xs text-zinc-400 flex items-center gap-1.5">
-            <kbd class="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px] font-mono">Enter</kbd>
-            <span>submit</span>
-            <span class="text-zinc-600">·</span>
-            <kbd class="px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-[10px] font-mono">Esc</kbd>
-            <span>pause/exit</span>
+        <!-- Scope Panel: Fractions -->
+        <div id="scopePanelFractions" class="space-y-3 hidden">
+          <div class="text-xs font-bold text-slate-700 mb-1">Fraction to Percentage Conversion Drill:</div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkUnitFractions" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Unit 1/2 to 1/25</div>
+                <div class="text-[10px] text-slate-600">Standard base fractions</div>
+              </div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkCommonFractions" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Common SSC Fractions</div>
+                <div class="text-[10px] text-slate-600">3/8, 5/8, 4/7, 5/6, 7/12</div>
+              </div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkPercentToFraction" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Bidirectional Recall</div>
+                <div class="text-[10px] text-slate-600">Percentage ➔ Fraction (e.g. 37.5% ➔ 3/8)</div>
+              </div>
+            </label>
+          </div>
+          <div class="p-3 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-between">
+            <div class="text-xs text-indigo-900">Need to study the tables first?</div>
+            <button type="button" id="btnStudyFractionsLink" class="text-xs font-bold text-indigo-700 hover:text-indigo-900 underline flex items-center gap-1">
+              Open Interactive Study Chart
+            </button>
+          </div>
+        </div>
+
+        <!-- Scope Panel: Arithmetic -->
+        <div id="scopePanelArithmetic" class="space-y-3 hidden">
+          <div class="text-xs font-bold text-slate-700 mb-1">Mental Arithmetic Operations:</div>
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkAdd2Digit" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div class="text-xs font-bold text-slate-900">2-digit + 2-digit</div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkAdd3Digit" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div class="text-xs font-bold text-slate-900">3-digit + 3-digit (Split & Merge)</div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkSub2Digit" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div class="text-xs font-bold text-slate-900">2-digit - 2-digit</div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkMult2x2" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div class="text-xs font-bold text-slate-900">2×2 Cross-Multiplication</div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs sm:col-span-2">
+              <input type="checkbox" id="chkPercentShortcut" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div class="text-xs font-bold text-slate-900">Percentage Shortcuts ("16% of 450", "35% of 240")</div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Scope Panel: Option Elimination -->
+        <div id="scopePanelElimination" class="space-y-3 hidden">
+          <div class="text-xs font-bold text-slate-700 mb-1">Option Elimination Hacks to Test:</div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkUnitDigit" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Unit Digit Hack</div>
+                <div class="text-[10px] text-slate-600">Solve instantly by last digit</div>
+              </div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkTensDigit" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Tens Digit Hack</div>
+                <div class="text-[10px] text-slate-600">Inspect last 2 digits</div>
+              </div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkDigitalRoot" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Digital Root (Digit Sum)</div>
+                <div class="text-[10px] text-slate-600">Casting out nines technique</div>
+              </div>
+            </label>
+            <label class="flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 cursor-pointer hover:border-amber-300 shadow-2xs">
+              <input type="checkbox" id="chkApprox" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+              <div>
+                <div class="text-xs font-bold text-slate-900">Approximation Hack</div>
+                <div class="text-[10px] text-slate-600">Order of magnitude elimination</div>
+              </div>
+            </label>
           </div>
         </div>
       </div>
 
-      <!-- LAUNCH BAR -->
-      <div class="pt-4 border-t border-zinc-800 flex items-center justify-between gap-4">
-        <div class="text-xs text-zinc-400">
-          Ready for test sprint: <span id="summaryConfigText" class="text-indigo-400 font-semibold">Blitz (3s) · Tables 1–20</span>
+      <!-- STEP CONTAINER 3: TIME CONSTRAINTS & PACE -->
+      <div id="step3Container" class="space-y-4 flex-1 hidden">
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Select Time Pressure & Mode</div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <!-- Blitz Mode -->
+          <div data-mode-card="blitz" class="mode-select-card p-4 rounded-xl border-2 border-amber-500 bg-amber-50/60 text-left transition-all cursor-pointer">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                <span class="text-amber-600 text-base">⚡</span> Blitz Mode
+              </span>
+              <span class="text-[10px] font-bold text-amber-800 bg-amber-200/80 px-1.5 py-0.5 rounded">Per-Question</span>
+            </div>
+            <p class="text-xs text-slate-600 mb-3">High-pressure clock. Timeout marks question wrong & logs to Error Bank.</p>
+            <div class="flex flex-wrap gap-1.5" onclick="event.stopPropagation()">
+              <button type="button" data-blitz="2" class="blitz-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400">2s (God)</button>
+              <button type="button" data-blitz="3" class="blitz-btn px-2.5 py-1 rounded-md text-xs font-bold bg-amber-500 text-white border border-amber-500 shadow-2xs">3s (CGL)</button>
+              <button type="button" data-blitz="5" class="blitz-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400">5s</button>
+              <button type="button" data-blitz="8" class="blitz-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400">8s</button>
+            </div>
+          </div>
+
+          <!-- Marathon Mode -->
+          <div data-mode-card="marathon" class="mode-select-card p-4 rounded-xl border-2 border-slate-200 bg-white text-left transition-all cursor-pointer hover:border-amber-300">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                <span class="text-emerald-600 text-base">⏱️</span> Marathon
+              </span>
+              <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded">Total Time</span>
+            </div>
+            <p class="text-xs text-slate-600 mb-3">Solve maximum questions within a sustained countdown window.</p>
+            <div class="flex flex-wrap gap-1.5" onclick="event.stopPropagation()">
+              <button type="button" data-marathon="60" class="marathon-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400">60s</button>
+              <button type="button" data-marathon="120" class="marathon-btn px-2.5 py-1 rounded-md text-xs font-bold bg-amber-500 text-white border border-amber-500 shadow-2xs">120s</button>
+              <button type="button" data-marathon="300" class="marathon-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400">300s</button>
+            </div>
+          </div>
+
+          <!-- Classic Mode -->
+          <div data-mode-card="classic" class="mode-select-card p-4 rounded-xl border-2 border-slate-200 bg-white text-left transition-all cursor-pointer hover:border-amber-300">
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm font-bold text-slate-900 flex items-center gap-1.5">
+                <span class="text-indigo-600 text-base">🎯</span> Classic
+              </span>
+              <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-1.5 py-0.5 rounded">Fixed Qs</span>
+            </div>
+            <p class="text-xs text-slate-600 mb-3">Untimed per-question. Solve targeted volume with reaction logging.</p>
+            <div class="flex flex-wrap gap-1.5" onclick="event.stopPropagation()">
+              <button type="button" data-classic="25" class="classic-btn px-2.5 py-1 rounded-md text-xs font-bold bg-amber-500 text-white border border-amber-500 shadow-2xs">25 Qs</button>
+              <button type="button" data-classic="50" class="classic-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400">50 Qs</button>
+              <button type="button" data-classic="100" class="classic-btn px-2.5 py-1 rounded-md text-xs font-bold bg-white text-slate-700 border border-slate-300 hover:border-amber-400">100 Qs</button>
+            </div>
+          </div>
         </div>
-        <button id="btnStartTraining" class="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-sm tracking-wide flex items-center gap-2 shadow-lg shadow-indigo-600/25 transition-all">
-          <span>Start Training</span>
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-          </svg>
-        </button>
+
+        <!-- Training Preferences -->
+        <div class="p-3.5 rounded-xl bg-white border border-slate-200 flex flex-wrap items-center justify-between gap-4 shadow-xs">
+          <label class="flex items-center gap-2.5 cursor-pointer">
+            <input type="checkbox" id="chkAutoSubmit" checked class="w-4 h-4 rounded text-amber-600 accent-amber-500" />
+            <div>
+              <div class="text-xs font-bold text-slate-900">Auto-Submit on Match</div>
+              <div class="text-[10px] text-slate-600">Submits the instant the exact digits match</div>
+            </div>
+          </label>
+
+          <div class="flex items-center gap-2 text-xs">
+            <span class="text-slate-600 font-medium">Keypad:</span>
+            <div class="flex bg-slate-100 p-0.5 rounded-lg border border-slate-200">
+              <button type="button" id="btnKeypadVirtual" class="px-2.5 py-1 rounded text-xs font-bold bg-amber-500 text-white shadow-2xs">3x4 Keypad</button>
+              <button type="button" id="btnKeypadNative" class="px-2.5 py-1 rounded text-xs font-bold text-slate-600 hover:text-slate-900">Device</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WIZARD STEP NAVIGATION FOOTER -->
+      <div class="pt-4 border-t border-amber-200/80 flex items-center justify-between gap-3 mt-4">
+        <div>
+          <button id="btnWizardBack" class="px-4 py-2.5 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-700 text-xs font-bold transition-all hidden flex items-center gap-1.5 shadow-2xs">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+            </svg>
+            <span>Back</span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="btnWizardNext" class="px-6 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-95 text-white text-xs font-bold flex items-center gap-2 shadow-sm shadow-amber-500/30 transition-all">
+            <span>Continue</span>
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+
+          <button id="btnStartSprint" class="px-7 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-95 text-white text-sm font-extrabold flex items-center gap-2 shadow-md shadow-amber-500/30 transition-all hidden">
+            <span>⚡ Start Sprint</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- DRILL SESSION VIEW (Full Height, Touch-Optimized, Centered Focus) -->
-    <div id="viewDrill" class="flex-1 flex flex-col justify-between max-w-2xl w-full mx-auto p-3 sm:p-5 relative hidden select-none">
+    <!-- VIEW 2: ACTIVE DRILL ARENA (Centered, Crisp Daylight Stage, High Energy) -->
+    <div id="viewDrill" class="flex-1 flex flex-col justify-between max-w-xl w-full mx-auto p-3 sm:p-5 relative hidden select-none">
       
       <!-- Top Session Status Bar -->
-      <div class="flex items-center justify-between gap-3 text-xs shrink-0 py-1 border-b border-zinc-800/60">
+      <div class="flex items-center justify-between gap-3 text-xs shrink-0 py-2 border-b border-amber-200/80 bg-white/80 rounded-xl px-3 shadow-2xs">
         <!-- Streak Counter -->
         <div class="flex items-center gap-1.5 font-bold">
-          <span class="text-amber-400 text-sm">🔥</span>
-          <span id="drillStreak" class="font-mono-numbers text-amber-300 text-sm">0</span>
-          <span class="text-zinc-400 text-[11px]">streak</span>
+          <span class="text-amber-500 text-sm">🔥</span>
+          <span id="drillStreak" class="font-mono-numbers text-amber-600 text-base font-extrabold">0</span>
+          <span class="text-slate-600 text-[11px]">streak</span>
         </div>
 
-        <!-- Timer / Progress Display -->
+        <!-- Realtime Timer Bar & Counter -->
         <div id="timerContainer" class="flex-1 max-w-[200px] flex items-center gap-2">
-          <!-- Realtime Progress Bar -->
-          <div class="flex-1 h-2 rounded-full bg-zinc-800 overflow-hidden relative">
-            <div id="timerBar" class="h-full bg-indigo-500 rounded-full transition-all duration-75 origin-left" style="width: 100%;"></div>
+          <div class="flex-1 h-2.5 rounded-full bg-slate-200 overflow-hidden relative shadow-inner">
+            <div id="timerBar" class="h-full bg-amber-500 rounded-full transition-all duration-75 origin-left" style="width: 100%;"></div>
           </div>
-          <span id="timerText" class="font-mono-numbers text-xs font-bold text-zinc-300 w-9 text-right">3.0s</span>
+          <span id="timerText" class="font-mono-numbers text-xs font-bold text-slate-800 w-10 text-right">3.0s</span>
         </div>
 
-        <!-- Score & Question Counter -->
-        <div class="flex items-center gap-3">
+        <!-- Score & Pause -->
+        <div class="flex items-center gap-2.5">
           <div class="text-right">
-            <span id="drillScore" class="font-mono-numbers font-bold text-white text-sm">0</span>
-            <span class="text-zinc-400 text-[11px]">/<span id="drillTotalCount">0</span></span>
+            <span id="drillScore" class="font-mono-numbers font-extrabold text-slate-900 text-sm">0</span>
+            <span class="text-slate-600 text-[11px]">/<span id="drillTotalCount">0</span></span>
           </div>
-          <button id="btnPauseSession" title="Pause session (Esc)" class="p-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-700 text-zinc-400 hover:text-white transition-colors">
+          <button id="btnPauseSession" title="Pause session (Esc)" class="p-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 transition-colors">
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
@@ -470,82 +548,84 @@
         </div>
       </div>
 
-      <!-- Question Prompt Area -->
-      <div id="questionStage" class="my-auto flex flex-col items-center justify-center text-center py-4 px-2 relative">
-        <!-- Module Badge / Tag -->
-        <div id="drillCategoryBadge" class="text-[11px] font-semibold tracking-wider text-indigo-400 uppercase mb-2">
+      <!-- Question Stage (High-Luminance Typography, Anti-Fatigue) -->
+      <div id="questionStage" class="my-auto flex flex-col items-center justify-center text-center py-6 px-2 relative">
+        <div id="drillCategoryBadge" class="text-xs font-bold tracking-wider text-amber-700 bg-amber-100 px-3 py-1 rounded-full uppercase mb-3">
           Multiplication Table
         </div>
 
-        <!-- Main Question Formula -->
-        <div id="drillQuestionText" class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white my-2 font-mono-numbers transition-transform">
+        <!-- Big Expressive Formula -->
+        <div id="drillQuestionText" class="text-5xl sm:text-6xl font-black tracking-tight text-slate-900 my-2 font-mono-numbers drop-shadow-2xs">
           19 × 7 = ?
         </div>
 
-        <!-- Optional Subtitle / Hint -->
-        <div id="drillQuestionSubtext" class="text-xs sm:text-sm text-zinc-400 min-h-[20px]">
-          Enter the product
+        <div id="drillQuestionSubtext" class="text-xs sm:text-sm text-slate-600 min-h-[20px] font-medium">
+          Multiply 19 by 7
         </div>
 
-        <!-- Feedback Flash Notification (for wrong answer / timeout) -->
-        <div id="drillFeedbackBanner" class="absolute -bottom-2 inset-x-2 py-2 px-3 rounded-xl border flex items-center justify-between text-xs font-semibold opacity-0 transition-opacity pointer-events-none z-20">
+        <!-- Floating Result Banner (for timeout/mistake) -->
+        <div id="drillFeedbackBanner" class="absolute -bottom-2 inset-x-2 py-2.5 px-4 rounded-xl border flex items-center justify-between text-xs font-bold opacity-0 transition-opacity pointer-events-none z-20 shadow-md">
           <span id="feedbackText">Wrong</span>
-          <span id="feedbackAnswer" class="font-mono-numbers font-bold">133</span>
+          <span id="feedbackAnswer" class="font-mono-numbers text-sm">133</span>
         </div>
       </div>
 
       <!-- Input Stage: Direct Input or MCQ Options -->
       <div class="w-full shrink-0 flex flex-col gap-3">
         
-        <!-- DIRECT INPUT MODE CONTAINER -->
-        <div id="containerDirectInput" class="w-full max-w-md mx-auto space-y-3">
-          <!-- Text / Value Display -->
-          <div id="inputBoxWrapper" class="relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-zinc-900 border-2 border-zinc-700 transition-colors shadow-inner">
+        <!-- DIRECT INPUT MODE -->
+        <div id="containerDirectInput" class="w-full max-w-sm mx-auto space-y-3">
+          <!-- Text Input Display Box -->
+          <div id="inputBoxWrapper" class="relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-white border-2 border-slate-300 shadow-sm transition-colors">
             <input 
               type="text" 
               id="mathInput" 
-              class="w-full h-full bg-transparent text-center font-mono-numbers text-2xl sm:text-3xl font-extrabold text-white tracking-widest outline-none px-4" 
+              class="w-full h-full bg-transparent text-center font-mono-numbers text-3xl font-black text-slate-900 tracking-wider outline-none px-4" 
               placeholder="?" 
               autocomplete="off" 
               autocapitalize="off" 
               spellcheck="false"
               inputmode="numeric"
             />
-            <span id="autoSubmitBadge" class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-zinc-400 uppercase tracking-wider">
+            <span id="autoSubmitBadge" class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-amber-600 uppercase tracking-wider bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">
               Auto
             </span>
           </div>
 
-          <!-- Helper Keys for Fractions Mode (/ and .) -->
-          <div id="fractionHelperRow" class="grid grid-cols-2 gap-2 hidden">
-            <button type="button" class="aux-key py-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700 font-mono text-sm font-bold text-zinc-200 border border-zinc-700 active:scale-95" data-val="/">/</button>
-            <button type="button" class="aux-key py-2 rounded-xl bg-zinc-800/80 hover:bg-zinc-700 font-mono text-sm font-bold text-zinc-200 border border-zinc-700 active:scale-95" data-val=".">.</button>
+          <!-- Helper Keys for Fractions Mode (/, Space, and .) -->
+          <div id="fractionHelperRow" class="grid grid-cols-3 gap-2 hidden">
+            <button type="button" class="aux-key py-2 rounded-xl bg-white hover:bg-slate-50 font-mono text-sm font-bold text-slate-800 border border-slate-300 active:scale-95 shadow-2xs" data-val="/">/ (Slash)</button>
+            <button type="button" class="aux-key py-2 rounded-xl bg-amber-50 hover:bg-amber-100 font-mono text-sm font-bold text-amber-900 border border-amber-300 active:scale-95 shadow-2xs flex items-center justify-center gap-1" data-val=" ">
+              <span>⎵</span>
+              <span class="text-xs">Space</span>
+            </button>
+            <button type="button" class="aux-key py-2 rounded-xl bg-white hover:bg-slate-50 font-mono text-sm font-bold text-slate-800 border border-slate-300 active:scale-95 shadow-2xs" data-val=".">.</button>
           </div>
 
           <!-- 3x4 Touch Numeric Keypad -->
           <div id="virtualKeypad" class="grid grid-cols-3 gap-2 select-none">
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="1">1</button>
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="2">2</button>
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="3">3</button>
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="1">1</button>
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="2">2</button>
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="3">3</button>
 
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="4">4</button>
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="5">5</button>
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="6">6</button>
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="4">4</button>
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="5">5</button>
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="6">6</button>
 
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="7">7</button>
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="8">8</button>
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="9">9</button>
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="7">7</button>
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="8">8</button>
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="9">9</button>
 
             <!-- Bottom Row: Backspace / 0 / Submit -->
-            <button type="button" id="btnKeypadClear" class="h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 text-rose-400 font-bold text-base transition-all shadow-sm flex items-center justify-center" title="Backspace">
+            <button type="button" id="btnKeypadClear" class="h-12 sm:h-14 rounded-xl bg-rose-50 hover:bg-rose-100 border border-rose-200 active:scale-95 text-rose-600 font-bold transition-all shadow-xs flex items-center justify-center" title="Backspace">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6-7h12a1 1 0 011 1v12a1 1 0 01-1 1H9l-6-7z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6-7h12a1 1 0 011 1v12a1 1 0 01-1 1H9l-6-7z"/>
               </svg>
             </button>
-            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 active:scale-95 font-mono-numbers text-xl sm:text-2xl font-bold text-white transition-all shadow-sm flex items-center justify-center" data-key="0">0</button>
-            <button type="button" id="btnKeypadSubmit" class="h-12 sm:h-14 rounded-xl bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white font-bold text-base transition-all shadow-sm flex items-center justify-center" title="Submit">
+            <button type="button" class="numpad-btn h-12 sm:h-14 rounded-xl bg-white hover:bg-amber-50/50 border border-slate-200 active:scale-95 font-mono-numbers text-2xl font-bold text-slate-900 transition-all shadow-xs flex items-center justify-center" data-key="0">0</button>
+            <button type="button" id="btnKeypadSubmit" class="h-12 sm:h-14 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-95 text-white font-bold transition-all shadow-xs flex items-center justify-center" title="Submit">
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
               </svg>
             </button>
           </div>
@@ -554,43 +634,43 @@
         <!-- MCQ OPTION ELIMINATION CONTAINER (SSC CGL Mode) -->
         <div id="containerMcqOptions" class="w-full max-w-lg mx-auto space-y-2 hidden">
           <div class="grid grid-cols-2 gap-2.5">
-            <button type="button" data-option-idx="0" class="mcq-option-btn p-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 active:scale-98 text-left transition-all flex items-center justify-between group">
+            <button type="button" data-option-idx="0" class="mcq-option-btn p-3.5 rounded-xl bg-white hover:bg-amber-50/60 border-2 border-slate-200 active:scale-98 text-left transition-all flex items-center justify-between shadow-xs">
               <div class="flex items-center gap-3">
-                <span class="w-7 h-7 rounded-lg bg-zinc-800 group-hover:bg-zinc-700 text-zinc-300 font-mono text-xs font-bold flex items-center justify-center border border-zinc-700">A</span>
-                <span id="optText0" class="font-mono-numbers text-lg sm:text-xl font-bold text-white">0</span>
+                <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 font-mono text-xs font-black flex items-center justify-center border border-slate-300">A</span>
+                <span id="optText0" class="font-mono-numbers text-xl font-bold text-slate-900">0</span>
               </div>
-              <span class="text-[10px] text-zinc-400 group-hover:text-zinc-400">Press 1</span>
+              <span class="text-[10px] text-slate-600 font-semibold">Key 1</span>
             </button>
 
-            <button type="button" data-option-idx="1" class="mcq-option-btn p-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 active:scale-98 text-left transition-all flex items-center justify-between group">
+            <button type="button" data-option-idx="1" class="mcq-option-btn p-3.5 rounded-xl bg-white hover:bg-amber-50/60 border-2 border-slate-200 active:scale-98 text-left transition-all flex items-center justify-between shadow-xs">
               <div class="flex items-center gap-3">
-                <span class="w-7 h-7 rounded-lg bg-zinc-800 group-hover:bg-zinc-700 text-zinc-300 font-mono text-xs font-bold flex items-center justify-center border border-zinc-700">B</span>
-                <span id="optText1" class="font-mono-numbers text-lg sm:text-xl font-bold text-white">0</span>
+                <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 font-mono text-xs font-black flex items-center justify-center border border-slate-300">B</span>
+                <span id="optText1" class="font-mono-numbers text-xl font-bold text-slate-900">0</span>
               </div>
-              <span class="text-[10px] text-zinc-400 group-hover:text-zinc-400">Press 2</span>
+              <span class="text-[10px] text-slate-600 font-semibold">Key 2</span>
             </button>
 
-            <button type="button" data-option-idx="2" class="mcq-option-btn p-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 active:scale-98 text-left transition-all flex items-center justify-between group">
+            <button type="button" data-option-idx="2" class="mcq-option-btn p-3.5 rounded-xl bg-white hover:bg-amber-50/60 border-2 border-slate-200 active:scale-98 text-left transition-all flex items-center justify-between shadow-xs">
               <div class="flex items-center gap-3">
-                <span class="w-7 h-7 rounded-lg bg-zinc-800 group-hover:bg-zinc-700 text-zinc-300 font-mono text-xs font-bold flex items-center justify-center border border-zinc-700">C</span>
-                <span id="optText2" class="font-mono-numbers text-lg sm:text-xl font-bold text-white">0</span>
+                <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 font-mono text-xs font-black flex items-center justify-center border border-slate-300">C</span>
+                <span id="optText2" class="font-mono-numbers text-xl font-bold text-slate-900">0</span>
               </div>
-              <span class="text-[10px] text-zinc-400 group-hover:text-zinc-400">Press 3</span>
+              <span class="text-[10px] text-slate-600 font-semibold">Key 3</span>
             </button>
 
-            <button type="button" data-option-idx="3" class="mcq-option-btn p-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 active:scale-98 text-left transition-all flex items-center justify-between group">
+            <button type="button" data-option-idx="3" class="mcq-option-btn p-3.5 rounded-xl bg-white hover:bg-amber-50/60 border-2 border-slate-200 active:scale-98 text-left transition-all flex items-center justify-between shadow-xs">
               <div class="flex items-center gap-3">
-                <span class="w-7 h-7 rounded-lg bg-zinc-800 group-hover:bg-zinc-700 text-zinc-300 font-mono text-xs font-bold flex items-center justify-center border border-zinc-700">D</span>
-                <span id="optText3" class="font-mono-numbers text-lg sm:text-xl font-bold text-white">0</span>
+                <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 font-mono text-xs font-black flex items-center justify-center border border-slate-300">D</span>
+                <span id="optText3" class="font-mono-numbers text-xl font-bold text-slate-900">0</span>
               </div>
-              <span class="text-[10px] text-zinc-400 group-hover:text-zinc-400">Press 4</span>
+              <span class="text-[10px] text-slate-600 font-semibold">Key 4</span>
             </button>
           </div>
 
-          <!-- Shortcut Explanation Banner -->
-          <div id="cglShortcutBanner" class="p-2.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30 text-xs text-zinc-300 flex items-start gap-2 min-h-[44px]">
-            <span class="text-amber-400 font-bold shrink-0">💡 CGL Trick:</span>
-            <span id="cglShortcutText" class="text-zinc-300">Eliminate options using Unit Digit or Digit Sum.</span>
+          <!-- CGL Shortcut Hint Banner -->
+          <div id="cglShortcutBanner" class="p-3 rounded-xl bg-amber-100 border border-amber-300 text-xs text-amber-950 flex items-start gap-2 shadow-2xs">
+            <span class="text-amber-700 font-black shrink-0">💡 CGL Trick:</span>
+            <span id="cglShortcutText" class="font-medium text-slate-800">Eliminate options using Unit Digit or Digit Sum.</span>
           </div>
         </div>
 
@@ -598,1727 +678,201 @@
 
     </div>
 
+    <!-- MODAL: FRACTION ↔ PERCENTAGE MASTERY LAB -->
+    <div id="modalFractionLab" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+      <div class="w-full max-w-2xl rounded-2xl bg-white border border-amber-200 p-5 space-y-4 shadow-xl flex flex-col max-h-[90vh]">
+        
+        <div class="flex items-center justify-between pb-3 border-b border-slate-200 shrink-0">
+          <div class="flex items-center gap-2.5">
+            <span class="w-8 h-8 rounded-xl bg-amber-500 text-white font-black text-sm flex items-center justify-center shadow-xs">½%</span>
+            <div>
+              <h3 class="text-base font-extrabold text-slate-900">Fraction ↔ Percentage Mastery Lab</h3>
+              <p class="text-xs text-slate-600">Standard SSC CGL conversion chart, mixed fraction equivalents & live calculator.</p>
+            </div>
+          </div>
+          <button id="btnCloseFractionLab" class="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200">✕</button>
+        </div>
+
+        <!-- 2-Way Instant Interactive Converter -->
+        <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 shrink-0 space-y-2">
+          <div class="text-xs font-bold text-slate-800 flex items-center justify-between">
+            <span>⚡ Live Two-Way Calculator</span>
+            <span class="text-[10px] text-amber-700">Type fraction (e.g. 5/8) or percent (e.g. 37.5)</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="flex-1">
+              <input type="text" id="calcFractionInput" placeholder="Fraction (e.g. 1/7)" class="w-full px-3 py-2 text-sm font-mono font-bold rounded-lg border border-slate-300 bg-white text-slate-900 outline-none focus:border-amber-500" />
+            </div>
+            <div class="text-slate-600 font-bold">⇄</div>
+            <div class="flex-1">
+              <input type="text" id="calcPercentInput" placeholder="Percentage (e.g. 14.28)" class="w-full px-3 py-2 text-sm font-mono font-bold rounded-lg border border-slate-300 bg-white text-slate-900 outline-none focus:border-amber-500" />
+            </div>
+          </div>
+          <div id="calcResultDisplay" class="text-xs font-medium text-amber-900 bg-white p-2 rounded-lg border border-amber-200/80">
+            Equivalent: <span class="font-bold font-mono">1/7 = 14.28% = 14 2/7%</span> (Decimal: 0.1428)
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar for Cheat Sheet -->
+        <div class="flex items-center justify-between gap-3 shrink-0">
+          <div class="relative flex-1">
+            <input type="text" id="searchFractionTable" placeholder="Search fraction or % (e.g. 1/8, 12.5%, 3/8)..." class="w-full px-3 py-1.5 text-xs rounded-lg border border-slate-300 bg-white text-slate-800 outline-none focus:border-amber-500" />
+          </div>
+          <div class="flex gap-1">
+            <button type="button" data-fl-filter="all" class="fl-filter-btn px-2.5 py-1 text-xs font-bold rounded-md bg-amber-500 text-white shadow-2xs">All</button>
+            <button type="button" data-fl-filter="unit" class="fl-filter-btn px-2.5 py-1 text-xs font-bold rounded-md bg-slate-100 text-slate-700 hover:bg-slate-200">1/2–1/25</button>
+            <button type="button" data-fl-filter="ssc" class="fl-filter-btn px-2.5 py-1 text-xs font-bold rounded-md bg-slate-100 text-slate-700 hover:bg-slate-200">SSC Common</button>
+          </div>
+        </div>
+
+        <!-- Scrollable Conversion Table -->
+        <div class="flex-1 overflow-y-auto border border-slate-200 rounded-xl">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-100 text-slate-700 font-bold sticky top-0 border-b border-slate-200">
+              <tr>
+                <th class="py-2.5 px-3">Fraction</th>
+                <th class="py-2.5 px-3">Percentage</th>
+                <th class="py-2.5 px-3">Mixed Form</th>
+                <th class="py-2.5 px-3 text-right">Decimal</th>
+              </tr>
+            </thead>
+            <tbody id="fractionTableBody" class="divide-y divide-slate-100 font-mono-numbers">
+              <!-- Injected via JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bottom Action -->
+        <div class="pt-2 border-t border-slate-200 flex items-center justify-between shrink-0">
+          <span class="text-xs text-slate-600">Ready to test recall?</span>
+          <button id="btnLaunchFractionSprintFromLab" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-xs">
+            Start Fractions Drill Sprint ➔
+          </button>
+        </div>
+
+      </div>
+    </div>
+
     <!-- MODAL: PAUSE SESSION -->
-    <div id="modalPause" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-      <div class="w-full max-w-sm rounded-2xl bg-zinc-900 border border-zinc-800 p-5 space-y-4 shadow-2xl">
-        <h3 class="text-lg font-bold text-white">Session Paused</h3>
-        <p class="text-xs text-zinc-400">Clock is suspended. Take a breather or return to dashboard.</p>
+    <div id="modalPause" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+      <div class="w-full max-w-sm rounded-2xl bg-white border border-slate-200 p-5 space-y-4 shadow-xl">
+        <h3 class="text-lg font-bold text-slate-900">Drill Paused</h3>
+        <p class="text-xs text-slate-600">Timer is frozen. Take a quick breath or return to setup.</p>
         <div class="flex flex-col gap-2 pt-2">
-          <button id="btnResumeSession" class="w-full py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold">Resume (Space or Esc)</button>
-          <button id="btnExitSession" class="w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold">Exit to Setup</button>
+          <button id="btnResumeSession" class="w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold shadow-xs">Resume Practice (Space / Esc)</button>
+          <button id="btnExitSession" class="w-full py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold">Exit to Setup</button>
         </div>
       </div>
     </div>
 
     <!-- MODAL: SUMMARY REPORT -->
-    <div id="modalSummary" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
-      <div class="w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-800 p-6 space-y-5 shadow-2xl animate-pop">
+    <div id="modalSummary" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 overflow-y-auto hidden">
+      <div class="w-full max-w-md rounded-2xl bg-white border border-amber-200 p-6 space-y-5 shadow-2xl animate-pop">
         <div class="text-center space-y-1">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/30 text-2xl font-bold mb-1">🎯</div>
-          <h3 class="text-xl font-extrabold text-white">Session Complete</h3>
-          <p id="summaryModeLabel" class="text-xs text-zinc-400">Blitz 3s · Tables</p>
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 text-2xl font-bold mb-1 shadow-xs">🎯</div>
+          <h3 class="text-xl font-black text-slate-900">Sprint Complete!</h3>
+          <p id="summaryModeLabel" class="text-xs text-slate-600 font-semibold">Blitz 3s · Tables</p>
         </div>
 
-        <!-- 4 Grid Metrics -->
         <div class="grid grid-cols-2 gap-2.5">
-          <div class="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80 text-center">
-            <div class="text-[11px] text-zinc-400 uppercase font-semibold">Accuracy</div>
-            <div id="sumAccuracy" class="text-2xl font-mono-numbers font-extrabold text-emerald-400 mt-0.5">100%</div>
-            <div id="sumScore" class="text-[10px] text-zinc-400">25/25 correct</div>
+          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
+            <div class="text-[11px] text-emerald-800 uppercase font-bold">Accuracy</div>
+            <div id="sumAccuracy" class="text-2xl font-mono-numbers font-black text-emerald-700 mt-0.5">100%</div>
+            <div id="sumScore" class="text-[10px] text-emerald-700">25/25 correct</div>
           </div>
-          <div class="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80 text-center">
-            <div class="text-[11px] text-zinc-400 uppercase font-semibold">Avg Reaction</div>
-            <div id="sumAvgSpeed" class="text-2xl font-mono-numbers font-extrabold text-indigo-400 mt-0.5">1.4s</div>
-            <div class="text-[10px] text-zinc-400">per question</div>
+          <div class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-center">
+            <div class="text-[11px] text-amber-800 uppercase font-bold">Avg Reaction</div>
+            <div id="sumAvgSpeed" class="text-2xl font-mono-numbers font-black text-amber-700 mt-0.5">1.4s</div>
+            <div class="text-[10px] text-amber-700">per question</div>
           </div>
-          <div class="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80 text-center">
-            <div class="text-[11px] text-zinc-400 uppercase font-semibold">Best Streak</div>
-            <div id="sumBestStreak" class="text-2xl font-mono-numbers font-extrabold text-amber-400 mt-0.5">14</div>
-            <div class="text-[10px] text-zinc-400">unbroken</div>
+          <div class="p-3 rounded-xl bg-indigo-50 border border-indigo-200 text-center">
+            <div class="text-[11px] text-indigo-800 uppercase font-bold">Best Streak</div>
+            <div id="sumBestStreak" class="text-2xl font-mono-numbers font-black text-indigo-700 mt-0.5">14</div>
+            <div class="text-[10px] text-indigo-700">unbroken</div>
           </div>
-          <div class="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800/80 text-center">
-            <div class="text-[11px] text-zinc-400 uppercase font-semibold">Mistakes Logged</div>
-            <div id="sumErrorsLogged" class="text-2xl font-mono-numbers font-extrabold text-rose-400 mt-0.5">2</div>
-            <div class="text-[10px] text-zinc-400">in Weak Bank</div>
+          <div class="p-3 rounded-xl bg-rose-50 border border-rose-200 text-center">
+            <div class="text-[11px] text-rose-800 uppercase font-bold">Weak Spots Added</div>
+            <div id="sumErrorsLogged" class="text-2xl font-mono-numbers font-black text-rose-700 mt-0.5">2</div>
+            <div class="text-[10px] text-rose-700">in Error Bank</div>
           </div>
         </div>
 
         <div class="flex gap-2 pt-2">
-          <button id="btnRetrySession" class="flex-1 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-lg shadow-indigo-600/20">
-            <span>Train Again</span>
+          <button id="btnRetrySession" class="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm shadow-amber-500/30">
+            <span>Sprint Again</span>
           </button>
-          <button id="btnDrillErrorsFromSummary" class="flex-1 py-2.5 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 border border-rose-500/40 text-rose-300 text-xs font-bold flex items-center justify-center gap-1.5">
+          <button id="btnDrillErrorsFromSummary" class="flex-1 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 text-xs font-bold flex items-center justify-center gap-1.5">
             <span>Drill Errors (<span id="sumErrorBadge">0</span>)</span>
           </button>
-          <button id="btnCloseSummary" class="px-4 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-xs font-semibold">
+          <button id="btnCloseSummary" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold">
             Done
           </button>
         </div>
       </div>
     </div>
 
-    <!-- MODAL: ERROR BANK (Spaced Repetition Review) -->
-    <div id="modalErrorBank" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-      <div class="w-full max-w-lg rounded-2xl bg-zinc-900 border border-zinc-800 p-5 space-y-4 shadow-2xl flex flex-col max-h-[85vh]">
-        <div class="flex items-center justify-between pb-2 border-b border-zinc-800">
+    <!-- MODAL: ERROR BANK (Spaced Repetition) -->
+    <div id="modalErrorBank" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+      <div class="w-full max-w-lg rounded-2xl bg-white border border-slate-200 p-5 space-y-4 shadow-xl flex flex-col max-h-[85vh]">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-200">
           <div>
-            <h3 class="text-base font-bold text-white flex items-center gap-2">
-              <span class="text-rose-400">⚠️</span> Smart Error Bank
+            <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+              <span class="text-rose-500">⚠️</span> Smart Error Bank
             </h3>
-            <p class="text-xs text-zinc-400 mt-0.5">Graduation rule: Answered correctly 2× consecutively under time limit.</p>
+            <p class="text-xs text-slate-600 mt-0.5">Items graduate only after being answered correctly 2× consecutively under time limit.</p>
           </div>
-          <button id="btnCloseErrorBank" class="p-1.5 rounded-lg text-zinc-400 hover:text-white bg-zinc-800/80">✕</button>
+          <button id="btnCloseErrorBank" class="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 bg-slate-100">✕</button>
         </div>
 
-        <!-- Error Bank Item List -->
         <div id="errorBankList" class="flex-1 overflow-y-auto space-y-2 pr-1 min-h-[140px]">
           <!-- Injected via JS -->
         </div>
 
-        <div class="flex items-center justify-between pt-2 border-t border-zinc-800">
-          <button id="btnClearErrors" class="text-xs text-zinc-400 hover:text-rose-400 transition-colors">Clear All Weak Spots</button>
-          <button id="btnStartDrillFromModal" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold shadow-md shadow-rose-600/20">Drill Weak Spots Now</button>
+        <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+          <button id="btnClearErrors" class="text-xs text-rose-600 hover:underline">Clear Error Bank</button>
+          <button id="btnStartDrillFromModal" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold shadow-xs">Drill Weak Spots Now</button>
         </div>
       </div>
     </div>
 
     <!-- MODAL: LIFETIME STATS -->
-    <div id="modalStats" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-      <div class="w-full max-w-md rounded-2xl bg-zinc-900 border border-zinc-800 p-5 space-y-4 shadow-2xl">
-        <div class="flex items-center justify-between pb-2 border-b border-zinc-800">
-          <h3 class="text-base font-bold text-white flex items-center gap-2">
-            <span class="text-indigo-400">📊</span> Lifetime Quantitative Aptitude Stats
+    <div id="modalStats" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden">
+      <div class="w-full max-w-md rounded-2xl bg-white border border-slate-200 p-5 space-y-4 shadow-xl">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+          <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+            <span class="text-indigo-600">📊</span> Lifetime Quantitative Aptitude Stats
           </h3>
-          <button id="btnCloseStats" class="p-1.5 rounded-lg text-zinc-400 hover:text-white bg-zinc-800/80">✕</button>
+          <button id="btnCloseStats" class="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 bg-slate-100">✕</button>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
-          <div class="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800">
-            <div class="text-[11px] text-zinc-400">Total Solved</div>
-            <div id="statTotalAnswered" class="text-xl font-mono-numbers font-bold text-white mt-1">0</div>
+          <div class="p-3 rounded-xl bg-amber-50/50 border border-amber-200">
+            <div class="text-[11px] text-slate-600 font-semibold">Total Solved</div>
+            <div id="statTotalAnswered" class="text-2xl font-mono-numbers font-black text-slate-900 mt-1">0</div>
           </div>
-          <div class="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800">
-            <div class="text-[11px] text-zinc-400">Lifetime Accuracy</div>
-            <div id="statLifetimeAccuracy" class="text-xl font-mono-numbers font-bold text-emerald-400 mt-1">0%</div>
+          <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+            <div class="text-[11px] text-slate-600 font-semibold">Lifetime Accuracy</div>
+            <div id="statLifetimeAccuracy" class="text-2xl font-mono-numbers font-black text-emerald-700 mt-1">0%</div>
           </div>
-          <div class="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800">
-            <div class="text-[11px] text-zinc-400">All-Time Best Streak</div>
-            <div id="statBestStreak" class="text-xl font-mono-numbers font-bold text-amber-400 mt-1">0</div>
+          <div class="p-3 rounded-xl bg-amber-50 border border-amber-200">
+            <div class="text-[11px] text-slate-600 font-semibold">All-Time Best Streak</div>
+            <div id="statBestStreak" class="text-2xl font-mono-numbers font-black text-amber-700 mt-1">0</div>
           </div>
-          <div class="p-3 rounded-xl bg-zinc-950/60 border border-zinc-800">
-            <div class="text-[11px] text-zinc-400">Avg Reaction Time</div>
-            <div id="statAvgReaction" class="text-xl font-mono-numbers font-bold text-indigo-400 mt-1">0 ms</div>
+          <div class="p-3 rounded-xl bg-indigo-50 border border-indigo-200">
+            <div class="text-[11px] text-slate-600 font-semibold">Avg Reaction Time</div>
+            <div id="statAvgReaction" class="text-2xl font-mono-numbers font-black text-indigo-700 mt-1">0 ms</div>
           </div>
         </div>
 
-        <div class="pt-2 border-t border-zinc-800 flex justify-between items-center">
-          <button id="btnResetStats" class="text-xs text-zinc-400 hover:text-rose-400">Reset Lifetime Stats</button>
-          <button id="btnDoneStats" class="px-4 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold">Close</button>
+        <div class="pt-2 border-t border-slate-200 flex justify-between items-center">
+          <button id="btnResetStats" class="text-xs text-rose-600 hover:underline">Reset Lifetime Stats</button>
+          <button id="btnDoneStats" class="px-4 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold">Close</button>
         </div>
       </div>
     </div>
 
   </main>
 
-  <script>
-// Math Practice Hub - SSC CGL Calculation Trainer
-// Ultra-fast, competitive-exam grade mental math engine
-
-(function () {
-  'use strict';
-
-  // -------------------------------------------------------------
-  // AUDIO SYNTHESIZER (Web Audio API - 100% Offline & Pure Synth)
-  // -------------------------------------------------------------
-  class SoundSynth {
-    constructor() {
-      this.ctx = null;
-      this.enabled = localStorage.getItem('math_sound_enabled') !== 'false';
-    }
-
-    init() {
-      if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
-        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-        this.ctx = new AudioContextClass();
-      }
-      if (this.ctx && this.ctx.state === 'suspended') {
-        this.ctx.resume();
-      }
-    }
-
-    toggle() {
-      this.enabled = !this.enabled;
-      localStorage.setItem('math_sound_enabled', this.enabled ? 'true' : 'false');
-      return this.enabled;
-    }
-
-    tick() {
-      if (!this.enabled) return;
-      this.init();
-      if (!this.ctx) return;
-      try {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(800, this.ctx.currentTime);
-        gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.03);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start();
-        osc.stop(this.ctx.currentTime + 0.03);
-      } catch (e) {}
-    }
-
-    correct() {
-      if (!this.enabled) return;
-      this.init();
-      if (!this.ctx) return;
-      try {
-        const now = this.ctx.currentTime;
-        [523.25, 659.25, 783.99].forEach((freq, i) => {
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq, now + i * 0.04);
-          gain.gain.setValueAtTime(0.12, now + i * 0.04);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.04 + 0.28);
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-          osc.start(now + i * 0.04);
-          osc.stop(now + i * 0.04 + 0.3);
-        });
-      } catch (e) {}
-    }
-
-    wrong() {
-      if (!this.enabled) return;
-      this.init();
-      if (!this.ctx) return;
-      try {
-        const now = this.ctx.currentTime;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(130, now);
-        osc.frequency.linearRampToValueAtTime(95, now + 0.2);
-        gain.gain.setValueAtTime(0.15, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(now);
-        osc.stop(now + 0.24);
-      } catch (e) {}
-    }
-
-    streakMilestone() {
-      if (!this.enabled) return;
-      this.init();
-      if (!this.ctx) return;
-      try {
-        const now = this.ctx.currentTime;
-        [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now + i * 0.06);
-          gain.gain.setValueAtTime(0.12, now + i * 0.06);
-          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.25);
-          osc.connect(gain);
-          gain.connect(this.ctx.destination);
-          osc.start(now + i * 0.06);
-          osc.stop(now + i * 0.06 + 0.28);
-        });
-      } catch (e) {}
-    }
-
-    vibrate(pattern) {
-      if ('vibrate' in navigator) {
-        try { navigator.vibrate(pattern); } catch (e) {}
-      }
-    }
-  }
-
-  const sound = new SoundSynth();
-
-  // -------------------------------------------------------------
-  // SPACES & CONSTANTS FOR SSC CGL
-  // -------------------------------------------------------------
-  const SSC_FRACTIONS = [
-    { fraction: '1/2', percent: '50%', decimals: ['50', '50.0'], fracStr: '1/2' },
-    { fraction: '1/3', percent: '33.33%', decimals: ['33.33', '33.3'], fracStr: '1/3' },
-    { fraction: '1/4', percent: '25%', decimals: ['25', '25.0'], fracStr: '1/4' },
-    { fraction: '1/5', percent: '20%', decimals: ['20', '20.0'], fracStr: '1/5' },
-    { fraction: '1/6', percent: '16.66%', decimals: ['16.66', '16.67'], fracStr: '1/6' },
-    { fraction: '1/7', percent: '14.28%', decimals: ['14.28', '14.29'], fracStr: '1/7' },
-    { fraction: '1/8', percent: '12.5%', decimals: ['12.5', '12.50'], fracStr: '1/8' },
-    { fraction: '1/9', percent: '11.11%', decimals: ['11.11'], fracStr: '1/9' },
-    { fraction: '1/10', percent: '10%', decimals: ['10', '10.0'], fracStr: '1/10' },
-    { fraction: '1/11', percent: '9.09%', decimals: ['9.09'], fracStr: '1/11' },
-    { fraction: '1/12', percent: '8.33%', decimals: ['8.33'], fracStr: '1/12' },
-    { fraction: '1/13', percent: '7.69%', decimals: ['7.69'], fracStr: '1/13' },
-    { fraction: '1/14', percent: '7.14%', decimals: ['7.14'], fracStr: '1/14' },
-    { fraction: '1/15', percent: '6.66%', decimals: ['6.66', '6.67'], fracStr: '1/15' },
-    { fraction: '1/16', percent: '6.25%', decimals: ['6.25'], fracStr: '1/16' },
-    { fraction: '1/17', percent: '5.88%', decimals: ['5.88'], fracStr: '1/17' },
-    { fraction: '1/18', percent: '5.55%', decimals: ['5.55'], fracStr: '1/18' },
-    { fraction: '1/19', percent: '5.26%', decimals: ['5.26'], fracStr: '1/19' },
-    { fraction: '1/20', percent: '5%', decimals: ['5', '5.0'], fracStr: '1/20' },
-    { fraction: '1/21', percent: '4.76%', decimals: ['4.76'], fracStr: '1/21' },
-    { fraction: '1/22', percent: '4.54%', decimals: ['4.54'], fracStr: '1/22' },
-    { fraction: '1/23', percent: '4.34%', decimals: ['4.34'], fracStr: '1/23' },
-    { fraction: '1/24', percent: '4.16%', decimals: ['4.16', '4.17'], fracStr: '1/24' },
-    { fraction: '1/25', percent: '4%', decimals: ['4', '4.0'], fracStr: '1/25' },
-    { fraction: '3/8', percent: '37.5%', decimals: ['37.5', '37.50'], fracStr: '3/8' },
-    { fraction: '5/8', percent: '62.5%', decimals: ['62.5', '62.50'], fracStr: '5/8' },
-    { fraction: '7/8', percent: '87.5%', decimals: ['87.5', '87.50'], fracStr: '7/8' },
-    { fraction: '2/3', percent: '66.66%', decimals: ['66.66', '66.67'], fracStr: '2/3' },
-    { fraction: '3/4', percent: '75%', decimals: ['75', '75.0'], fracStr: '3/4' },
-    { fraction: '2/7', percent: '28.57%', decimals: ['28.57'], fracStr: '2/7' },
-    { fraction: '4/7', percent: '57.14%', decimals: ['57.14'], fracStr: '4/7' },
-    { fraction: '5/6', percent: '83.33%', decimals: ['83.33'], fracStr: '5/6' },
-    { fraction: '7/12', percent: '58.33%', decimals: ['58.33'], fracStr: '7/12' }
-  ];
-
-  const CGL_PRIMES = [17, 19, 23, 29, 31, 37, 41, 43, 47];
-
-  function getDigitalRoot(n) {
-    let num = Math.abs(Math.round(n));
-    if (num === 0) return 0;
-    return 1 + ((num - 1) % 9);
-  }
-
-  function randInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  function shuffleArray(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
-  // -------------------------------------------------------------
-  // ERROR BANK & SPACED REPETITION ENGINE
-  // -------------------------------------------------------------
-  class ErrorBankManager {
-    constructor() {
-      this.STORAGE_KEY = 'math_weak_spots';
-      this.items = this.load();
-    }
-
-    load() {
-      try {
-        const raw = localStorage.getItem(this.STORAGE_KEY);
-        return raw ? JSON.parse(raw) : [];
-      } catch (e) {
-        return [];
-      }
-    }
-
-    save() {
-      try {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.items));
-      } catch (e) {}
-    }
-
-    recordMistake(q) {
-      const existing = this.items.find(item => item.prompt === q.prompt);
-      if (existing) {
-        existing.consecutiveCorrect = 0;
-        existing.attempts = (existing.attempts || 1) + 1;
-        existing.lastSeen = Date.now();
-      } else {
-        this.items.push({
-          id: 'err_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
-          prompt: q.prompt,
-          answer: String(q.answer),
-          type: q.type || 'Standard',
-          explanation: q.explanation || `Answer: ${q.answer}`,
-          category: q.category || 'General',
-          consecutiveCorrect: 0,
-          attempts: 1,
-          createdAt: Date.now()
-        });
-      }
-      this.save();
-    }
-
-    recordSuccess(prompt) {
-      const idx = this.items.findIndex(item => item.prompt === prompt);
-      if (idx !== -1) {
-        this.items[idx].consecutiveCorrect = (this.items[idx].consecutiveCorrect || 0) + 1;
-        if (this.items[idx].consecutiveCorrect >= 2) {
-          this.items.splice(idx, 1);
-        }
-        this.save();
-      }
-    }
-
-    clear() {
-      this.items = [];
-      this.save();
-    }
-
-    getCount() {
-      return this.items.length;
-    }
-  }
-
-  const errorBank = new ErrorBankManager();
-
-  // -------------------------------------------------------------
-  // LIFETIME STATS MANAGER
-  // -------------------------------------------------------------
-  class LifetimeStatsManager {
-    constructor() {
-      this.STORAGE_KEY = 'math_lifetime_stats';
-      this.data = this.load();
-    }
-
-    load() {
-      try {
-        const raw = localStorage.getItem(this.STORAGE_KEY);
-        return raw ? JSON.parse(raw) : {
-          totalAnswered: 0,
-          totalCorrect: 0,
-          bestStreak: 0,
-          totalTimeMs: 0
-        };
-      } catch (e) {
-        return { totalAnswered: 0, totalCorrect: 0, bestStreak: 0, totalTimeMs: 0 };
-      }
-    }
-
-    save() {
-      try {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.data));
-      } catch (e) {}
-    }
-
-    record(isCorrect, reactionTimeMs, currentStreak) {
-      this.data.totalAnswered += 1;
-      if (isCorrect) {
-        this.data.totalCorrect += 1;
-      }
-      if (currentStreak > (this.data.bestStreak || 0)) {
-        this.data.bestStreak = currentStreak;
-      }
-      this.data.totalTimeMs = (this.data.totalTimeMs || 0) + reactionTimeMs;
-      this.save();
-    }
-
-    reset() {
-      this.data = { totalAnswered: 0, totalCorrect: 0, bestStreak: 0, totalTimeMs: 0 };
-      this.save();
-    }
-  }
-
-  const lifetimeStats = new LifetimeStatsManager();
-
-  // -------------------------------------------------------------
-  // QUESTION GENERATORS ENGINE
-  // -------------------------------------------------------------
-  const QuestionGenerators = {
-    tables(selectedTables, maxMultiplier) {
-      const bases = selectedTables.length > 0 ? selectedTables : [12, 13, 14, 15, 16, 17, 18, 19, 23, 29];
-      const base = bases[randInt(0, bases.length - 1)];
-      const mult = randInt(2, maxMultiplier || 12);
-      const ans = base * mult;
-      return {
-        category: `Table ${base}`,
-        type: 'direct',
-        prompt: `${base} × ${mult} = ?`,
-        formulaDisplay: `${base} × ${mult}`,
-        answer: String(ans),
-        acceptedAnswers: [String(ans)],
-        subtext: `Multiply ${base} by ${mult}`,
-        explanation: `${base} × ${mult} = ${ans}`
-      };
-    },
-
-    powers(options) {
-      const pool = [];
-      if (options.sq1_25) pool.push('sq1_25');
-      if (options.sq26_50) pool.push('sq26_50');
-      if (options.cu1_15) pool.push('cu1_15');
-      if (options.cu16_30) pool.push('cu16_30');
-
-      const pick = pool.length > 0 ? pool[randInt(0, pool.length - 1)] : 'sq1_25';
-      const allowRoots = options.includeRoots && Math.random() < 0.35;
-
-      if (pick === 'sq1_25' || pick === 'sq26_50') {
-        const n = pick === 'sq1_25' ? randInt(2, 25) : randInt(26, 50);
-        const sq = n * n;
-        if (allowRoots) {
-          return {
-            category: 'Square Root',
-            type: 'direct',
-            prompt: `√${sq} = ?`,
-            formulaDisplay: `√${sq}`,
-            answer: String(n),
-            acceptedAnswers: [String(n)],
-            subtext: `Find square root of ${sq}`,
-            explanation: `√${sq} = ${n} (since ${n}² = ${sq})`
-          };
-        }
-        return {
-          category: 'Square',
-          type: 'direct',
-          prompt: `${n}² = ?`,
-          formulaDisplay: `${n}²`,
-          answer: String(sq),
-          acceptedAnswers: [String(sq)],
-          subtext: `Square of ${n}`,
-          explanation: `${n} × ${n} = ${sq}`
-        };
-      } else {
-        const n = pick === 'cu1_15' ? randInt(2, 15) : randInt(16, 30);
-        const cube = n * n * n;
-        if (allowRoots) {
-          return {
-            category: 'Cube Root',
-            type: 'direct',
-            prompt: `∛${cube} = ?`,
-            formulaDisplay: `∛${cube}`,
-            answer: String(n),
-            acceptedAnswers: [String(n)],
-            subtext: `Find cube root of ${cube}`,
-            explanation: `∛${cube} = ${n} (since ${n}³ = ${cube})`
-          };
-        }
-        return {
-          category: 'Cube',
-          type: 'direct',
-          prompt: `${n}³ = ?`,
-          formulaDisplay: `${n}³`,
-          answer: String(cube),
-          acceptedAnswers: [String(cube)],
-          subtext: `Cube of ${n}`,
-          explanation: `${n}³ = ${cube}`
-        };
-      }
-    },
-
-    fractions(options) {
-      let subset = SSC_FRACTIONS;
-      if (!options.common) {
-        subset = subset.filter(f => f.fracStr.startsWith('1/'));
-      }
-      const item = subset[randInt(0, subset.length - 1)];
-      const askPercentToFrac = options.bidirectional && Math.random() < 0.5;
-
-      if (askPercentToFrac) {
-        return {
-          category: 'Percentage to Fraction',
-          type: 'direct',
-          prompt: `${item.percent} = ?`,
-          formulaDisplay: `${item.percent} = ?`,
-          answer: item.fracStr,
-          acceptedAnswers: [item.fracStr, item.fracStr.replace('/', ' / ')],
-          subtext: 'Enter fraction as numerator/denominator (e.g. 3/8)',
-          hasFractionKeys: true,
-          explanation: `${item.percent} = ${item.fracStr}`
-        };
-      } else {
-        const primaryAns = item.decimals[0];
-        const accepted = [...item.decimals, item.percent, item.percent.replace('%', '')];
-        return {
-          category: 'Fraction to Percentage',
-          type: 'direct',
-          prompt: `${item.fracStr} = ? %`,
-          formulaDisplay: `${item.fracStr}`,
-          answer: primaryAns,
-          acceptedAnswers: accepted,
-          subtext: `Percentage value (e.g. ${primaryAns} or ${item.percent})`,
-          hasFractionKeys: true,
-          explanation: `${item.fracStr} = ${item.percent} (${primaryAns}%)`
-        };
-      }
-    },
-
-    arithmetic(options) {
-      const ops = [];
-      if (options.add2) ops.push('add2');
-      if (options.add3) ops.push('add3');
-      if (options.sub2) ops.push('sub2');
-      if (options.mult2x2) ops.push('mult2x2');
-      if (options.pctShortcut) ops.push('pctShortcut');
-
-      const op = ops.length > 0 ? ops[randInt(0, ops.length - 1)] : 'add2';
-
-      if (op === 'add2') {
-        const a = randInt(18, 98);
-        const b = randInt(18, 98);
-        const ans = a + b;
-        return {
-          category: 'Addition 2-Digit',
-          type: 'direct',
-          prompt: `${a} + ${b} = ?`,
-          formulaDisplay: `${a} + ${b}`,
-          answer: String(ans),
-          acceptedAnswers: [String(ans)],
-          subtext: `Mental Split: (${Math.floor(a/10)*10} + ${Math.floor(b/10)*10}) + (${a%10} + ${b%10})`,
-          explanation: `${a} + ${b} = ${ans}`
-        };
-      } else if (op === 'add3') {
-        const a = randInt(150, 890);
-        const b = randInt(120, 890);
-        const ans = a + b;
-        return {
-          category: 'Addition 3-Digit (Split & Merge)',
-          type: 'direct',
-          prompt: `${a} + ${b} = ?`,
-          formulaDisplay: `${a} + ${b}`,
-          answer: String(ans),
-          acceptedAnswers: [String(ans)],
-          subtext: 'Add hundreds first, then tens, then units',
-          explanation: `${a} + ${b} = ${ans}`
-        };
-      } else if (op === 'sub2') {
-        let a = randInt(35, 99);
-        let b = randInt(15, a - 5);
-        const ans = a - b;
-        return {
-          category: 'Subtraction 2-Digit',
-          type: 'direct',
-          prompt: `${a} - ${b} = ?`,
-          formulaDisplay: `${a} - ${b}`,
-          answer: String(ans),
-          acceptedAnswers: [String(ans)],
-          subtext: `Split: ${a} - ${Math.floor(b/10)*10} - ${b%10}`,
-          explanation: `${a} - ${b} = ${ans}`
-        };
-      } else if (op === 'mult2x2') {
-        const a = randInt(12, 45);
-        const b = randInt(12, 35);
-        const ans = a * b;
-        return {
-          category: '2×2 Cross-Multiplication',
-          type: 'direct',
-          prompt: `${a} × ${b} = ?`,
-          formulaDisplay: `${a} × ${b}`,
-          answer: String(ans),
-          acceptedAnswers: [String(ans)],
-          subtext: `U×U, cross (T×U + U×T), T×T`,
-          explanation: `${a} × ${b} = ${ans}`
-        };
-      } else {
-        const presets = [
-          { p: 16, base: 450, ans: 72, tip: '16% = 10% (45) + 5% (22.5) + 1% (4.5) = 72' },
-          { p: 35, base: 240, ans: 84, tip: '35% = 30% (72) + 5% (12) = 84' },
-          { p: 45, base: 180, ans: 81, tip: '45% = 50% (90) - 5% (9) = 81' },
-          { p: 12.5, base: 640, ans: 80, tip: '12.5% = 1/8 of 640 = 80' },
-          { p: 25, base: 360, ans: 90, tip: '25% = 1/4 of 360 = 90' },
-          { p: 37.5, base: 480, ans: 180, tip: '37.5% = 3/8 of 480 = 180' },
-          { p: 14.28, base: 490, ans: 70, tip: '14.28% = 1/7 of 490 = 70' },
-          { p: 75, base: 520, ans: 390, tip: '75% = 3/4 of 520 = 390' },
-          { p: 20, base: 650, ans: 130, tip: '20% = 1/5 of 650 = 130' }
-        ];
-        const item = presets[randInt(0, presets.length - 1)];
-        return {
-          category: 'Percentage Shortcut',
-          type: 'direct',
-          prompt: `${item.p}% of ${item.base} = ?`,
-          formulaDisplay: `${item.p}% of ${item.base}`,
-          answer: String(item.ans),
-          acceptedAnswers: [String(item.ans)],
-          subtext: 'Use fraction conversions or 10%/5% breakdown',
-          explanation: item.tip
-        };
-      }
-    },
-
-    elimination(options) {
-      const techniques = [];
-      if (options.unit) techniques.push('unit');
-      if (options.tens) techniques.push('tens');
-      if (options.root) techniques.push('root');
-      if (options.approx) techniques.push('approx');
-
-      const tech = techniques.length > 0 ? techniques[randInt(0, techniques.length - 1)] : 'unit';
-
-      if (tech === 'unit') {
-        const a = randInt(123, 789);
-        const b = randInt(12, 98);
-        const c = randInt(111, 456);
-        const d = randInt(11, 55);
-        const correctVal = (a * b) + (c * d);
-        const correctUnit = Math.abs(correctVal % 10);
-
-        const distractors = new Set();
-        const otherUnits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].filter(u => u !== correctUnit);
-        shuffleArray(otherUnits);
-
-        for (let i = 0; i < 3; i++) {
-          const fakeOffset = randInt(-4, 4) * 10;
-          const fakeVal = correctVal + fakeOffset - (correctVal % 10) + otherUnits[i];
-          distractors.add(fakeVal === correctVal ? fakeVal + 1 : fakeVal);
-        }
-
-        const choices = shuffleArray([correctVal, ...Array.from(distractors).slice(0, 3)]);
-        const correctIdx = choices.indexOf(correctVal);
-
-        return {
-          category: 'Option Elimination · Unit Digit',
-          type: 'mcq',
-          prompt: `(${a} × ${b}) + (${c} × ${d}) = ?`,
-          formulaDisplay: `(${a} × ${b}) + (${c} × ${d})`,
-          options: choices.map(String),
-          correctIndex: correctIdx,
-          answer: String(correctVal),
-          subtext: 'Eliminate by Unit Digit alone!',
-          explanation: `Unit digit: (${a%10} × ${b%10}) + (${c%10} × ${d%10}) = ${(a%10)*(b%10)} + ${(c%10)*(d%10)} ➔ ends in ${correctUnit}. Only Option ${String.fromCharCode(65 + correctIdx)} matches!`
-        };
-      } else if (tech === 'root') {
-        const a = randInt(34, 88);
-        const b = randInt(25, 76);
-        const correctVal = a * b;
-        const correctRoot = getDigitalRoot(correctVal);
-
-        const distractors = new Set();
-        let delta = 2;
-        while (distractors.size < 3) {
-          const fakeVal = correctVal + delta;
-          if (getDigitalRoot(fakeVal) !== correctRoot) {
-            distractors.add(fakeVal);
-          }
-          delta += randInt(1, 3);
-        }
-
-        const choices = shuffleArray([correctVal, ...Array.from(distractors)]);
-        const correctIdx = choices.indexOf(correctVal);
-
-        return {
-          category: 'Option Elimination · Digital Root',
-          type: 'mcq',
-          prompt: `${a} × ${b} = ?`,
-          formulaDisplay: `${a} × ${b}`,
-          options: choices.map(String),
-          correctIndex: correctIdx,
-          answer: String(correctVal),
-          subtext: 'Find digit sum (Digital Root) of product',
-          explanation: `Digital Root: ${getDigitalRoot(a)} × ${getDigitalRoot(b)} = ${getDigitalRoot(a) * getDigitalRoot(b)} ➔ Root ${correctRoot}. Option ${String.fromCharCode(65 + correctIdx)} is the only match!`
-        };
-      } else if (tech === 'tens') {
-        const a = randInt(35, 95);
-        const b = randInt(15, 65);
-        const correctVal = a * b;
-        const lastTwo = correctVal % 100;
-
-        const distractors = new Set();
-        [-30, -20, 20, 40].forEach(diff => {
-          if (distractors.size < 3) distractors.add(correctVal + diff);
-        });
-
-        const choices = shuffleArray([correctVal, ...Array.from(distractors)]);
-        const correctIdx = choices.indexOf(correctVal);
-
-        return {
-          category: 'Option Elimination · Tens Digit',
-          type: 'mcq',
-          prompt: `${a} × ${b} = ?`,
-          formulaDisplay: `${a} × ${b}`,
-          options: choices.map(String),
-          correctIndex: correctIdx,
-          answer: String(correctVal),
-          subtext: 'Inspect the last 2 digits',
-          explanation: `Last 2 digits of ${a} × ${b} are ${lastTwo < 10 ? '0' + lastTwo : lastTwo}. Option ${String.fromCharCode(65 + correctIdx)} matches!`
-        };
-      } else {
-        const a = randInt(189, 495);
-        const b = randInt(21, 62);
-        const correctVal = a * b;
-
-        const approxA = Math.round(a / 50) * 50;
-        const approxB = Math.round(b / 10) * 10;
-        const rough = approxA * approxB;
-
-        const distractors = [
-          Math.round(correctVal * 1.5),
-          Math.round(correctVal * 0.65),
-          Math.round(correctVal * 2.2)
-        ];
-
-        const choices = shuffleArray([correctVal, ...distractors]);
-        const correctIdx = choices.indexOf(correctVal);
-
-        return {
-          category: 'Option Elimination · Approximation',
-          type: 'mcq',
-          prompt: `${a} × ${b} = ?`,
-          formulaDisplay: `${a} × ${b}`,
-          options: choices.map(String),
-          correctIndex: correctIdx,
-          answer: String(correctVal),
-          subtext: `Quick approx: ~${approxA} × ~${approxB} = ~${rough}`,
-          explanation: `Approximate: ${a} × ${b} ≈ ${approxA} × ${approxB} = ${rough}. Option ${String.fromCharCode(65 + correctIdx)} (${correctVal}) is closest!`
-        };
-      }
-    }
-  };
-
-  // -------------------------------------------------------------
-  // APP STATE CONTROLLER
-  // -------------------------------------------------------------
-  class MathHubApp {
-    constructor() {
-      this.mode = 'blitz';
-      this.blitzDuration = 3;
-      this.marathonDuration = 120;
-      this.classicTarget = 25;
-      this.currentModule = 'tables';
-      this.selectedTables = [12, 13, 14, 15, 16, 17, 18, 19, 23, 29];
-      this.maxMultiplier = 12;
-      this.autoSubmit = true;
-      this.useNativeKeypad = false;
-
-      this.sessionActive = false;
-      this.sessionPaused = false;
-      this.currentQuestion = null;
-      this.questionStartTime = 0;
-      this.sessionStartTime = 0;
-      this.streak = 0;
-      this.bestStreakInSession = 0;
-      this.score = 0;
-      this.totalQuestionsAnswered = 0;
-      this.totalResponseTimeMs = 0;
-      this.isProcessingAnswer = false;
-      this.sessionMistakes = [];
-      this.errorDrillPool = [];
-
-      this.animFrameId = null;
-      this.marathonInterval = null;
-
-      this.cacheDom();
-      this.bindEvents();
-      this.renderTableNumbersGrid();
-      this.updateErrorBadges();
-      this.updateSoundIcon();
-      this.updateConfigSummary();
-    }
-
-    cacheDom() {
-      this.dom = {
-        viewSetup: document.getElementById('viewSetup'),
-        viewDrill: document.getElementById('viewDrill'),
-        modalPause: document.getElementById('modalPause'),
-        modalSummary: document.getElementById('modalSummary'),
-        modalErrorBank: document.getElementById('modalErrorBank'),
-        modalStats: document.getElementById('modalStats'),
-
-        btnNavHome: document.getElementById('btnNavHome'),
-        btnOpenErrorBank: document.getElementById('btnOpenErrorBank'),
-        btnOpenStats: document.getElementById('btnOpenStats'),
-        btnToggleSound: document.getElementById('btnToggleSound'),
-        iconSoundOn: document.getElementById('iconSoundOn'),
-        iconSoundOff: document.getElementById('iconSoundOff'),
-        headerErrorBadge: document.getElementById('headerErrorBadge'),
-        setupErrorCount: document.getElementById('setupErrorCount'),
-
-        btnStartTraining: document.getElementById('btnStartTraining'),
-        btnDrillErrorsSetup: document.getElementById('btnDrillErrorsSetup'),
-        chkAutoSubmit: document.getElementById('chkAutoSubmit'),
-        btnKeypadVirtual: document.getElementById('btnKeypadVirtual'),
-        btnKeypadNative: document.getElementById('btnKeypadNative'),
-        summaryConfigText: document.getElementById('summaryConfigText'),
-
-        cfgTables: document.getElementById('cfgTables'),
-        cfgPowers: document.getElementById('cfgPowers'),
-        cfgFractions: document.getElementById('cfgFractions'),
-        cfgArithmetic: document.getElementById('cfgArithmetic'),
-        cfgElimination: document.getElementById('cfgElimination'),
-        tableNumbersGrid: document.getElementById('tableNumbersGrid'),
-        selectedTablesCount: document.getElementById('selectedTablesCount'),
-
-        drillStreak: document.getElementById('drillStreak'),
-        timerBar: document.getElementById('timerBar'),
-        timerText: document.getElementById('timerText'),
-        timerContainer: document.getElementById('timerContainer'),
-        drillScore: document.getElementById('drillScore'),
-        drillTotalCount: document.getElementById('drillTotalCount'),
-        btnPauseSession: document.getElementById('btnPauseSession'),
-        btnResumeSession: document.getElementById('btnResumeSession'),
-        btnExitSession: document.getElementById('btnExitSession'),
-
-        questionStage: document.getElementById('questionStage'),
-        drillCategoryBadge: document.getElementById('drillCategoryBadge'),
-        drillQuestionText: document.getElementById('drillQuestionText'),
-        drillQuestionSubtext: document.getElementById('drillQuestionSubtext'),
-        drillFeedbackBanner: document.getElementById('drillFeedbackBanner'),
-        feedbackText: document.getElementById('feedbackText'),
-        feedbackAnswer: document.getElementById('feedbackAnswer'),
-
-        containerDirectInput: document.getElementById('containerDirectInput'),
-        containerMcqOptions: document.getElementById('containerMcqOptions'),
-        inputBoxWrapper: document.getElementById('inputBoxWrapper'),
-        mathInput: document.getElementById('mathInput'),
-        autoSubmitBadge: document.getElementById('autoSubmitBadge'),
-        fractionHelperRow: document.getElementById('fractionHelperRow'),
-        virtualKeypad: document.getElementById('virtualKeypad'),
-        btnKeypadClear: document.getElementById('btnKeypadClear'),
-        btnKeypadSubmit: document.getElementById('btnKeypadSubmit'),
-
-        cglShortcutBanner: document.getElementById('cglShortcutBanner'),
-        cglShortcutText: document.getElementById('cglShortcutText'),
-
-        summaryModeLabel: document.getElementById('summaryModeLabel'),
-        sumAccuracy: document.getElementById('sumAccuracy'),
-        sumScore: document.getElementById('sumScore'),
-        sumAvgSpeed: document.getElementById('sumAvgSpeed'),
-        sumBestStreak: document.getElementById('sumBestStreak'),
-        sumErrorsLogged: document.getElementById('sumErrorsLogged'),
-        sumErrorBadge: document.getElementById('sumErrorBadge'),
-        btnRetrySession: document.getElementById('btnRetrySession'),
-        btnDrillErrorsFromSummary: document.getElementById('btnDrillErrorsFromSummary'),
-        btnCloseSummary: document.getElementById('btnCloseSummary'),
-
-        errorBankList: document.getElementById('errorBankList'),
-        btnCloseErrorBank: document.getElementById('btnCloseErrorBank'),
-        btnClearErrors: document.getElementById('btnClearErrors'),
-        btnStartDrillFromModal: document.getElementById('btnStartDrillFromModal'),
-
-        statTotalAnswered: document.getElementById('statTotalAnswered'),
-        statLifetimeAccuracy: document.getElementById('statLifetimeAccuracy'),
-        statBestStreak: document.getElementById('statBestStreak'),
-        statAvgReaction: document.getElementById('statAvgReaction'),
-        btnCloseStats: document.getElementById('btnCloseStats'),
-        btnDoneStats: document.getElementById('btnDoneStats'),
-        btnResetStats: document.getElementById('btnResetStats')
-      };
-    }
-
-    bindEvents() {
-      const d = this.dom;
-
-      d.btnNavHome.addEventListener('click', () => {
-        if (this.sessionActive) {
-          if (confirm('Leave current practice drill?')) this.exitSessionToSetup();
-        } else {
-          this.showView('setup');
-        }
-      });
-
-      d.btnToggleSound.addEventListener('click', () => {
-        sound.toggle();
-        this.updateSoundIcon();
-      });
-
-      d.btnOpenErrorBank.addEventListener('click', () => this.openErrorBankModal());
-      d.btnCloseErrorBank.addEventListener('click', () => d.modalErrorBank.classList.add('hidden'));
-      d.btnClearErrors.addEventListener('click', () => {
-        if (confirm('Clear all items from your error bank?')) {
-          errorBank.clear();
-          this.renderErrorBankItems();
-          this.updateErrorBadges();
-        }
-      });
-      d.btnStartDrillFromModal.addEventListener('click', () => {
-        d.modalErrorBank.classList.add('hidden');
-        this.startErrorDrillSession();
-      });
-      d.btnDrillErrorsSetup.addEventListener('click', () => this.startErrorDrillSession());
-
-      d.btnOpenStats.addEventListener('click', () => this.openStatsModal());
-      d.btnCloseStats.addEventListener('click', () => d.modalStats.classList.add('hidden'));
-      d.btnDoneStats.addEventListener('click', () => d.modalStats.classList.add('hidden'));
-      d.btnResetStats.addEventListener('click', () => {
-        if (confirm('Reset all lifetime accuracy and speed statistics?')) {
-          lifetimeStats.reset();
-          this.renderStatsModal();
-        }
-      });
-
-      document.querySelectorAll('.mode-card').forEach(card => {
-        card.addEventListener('click', () => {
-          document.querySelectorAll('.mode-card').forEach(c => {
-            c.classList.remove('border-indigo-500', 'bg-indigo-950/20');
-            c.classList.add('border-zinc-800', 'bg-zinc-900/60');
-          });
-          card.classList.remove('border-zinc-800', 'bg-zinc-900/60');
-          card.classList.add('border-indigo-500', 'bg-indigo-950/20');
-          this.mode = card.dataset.mode;
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      document.querySelectorAll('.blitz-time-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          document.querySelectorAll('.blitz-time-btn').forEach(b => {
-            b.className = 'blitz-time-btn px-2 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700';
-          });
-          btn.className = 'blitz-time-btn px-2 py-1 rounded-md text-[11px] font-bold bg-indigo-600 text-white border border-indigo-400';
-          this.blitzDuration = parseInt(btn.dataset.blitzTime, 10);
-          this.mode = 'blitz';
-          this.selectModeCard('blitz');
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      document.querySelectorAll('.marathon-time-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          document.querySelectorAll('.marathon-time-btn').forEach(b => {
-            b.className = 'marathon-time-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700';
-          });
-          btn.className = 'marathon-time-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-indigo-600 text-white border border-indigo-400';
-          this.marathonDuration = parseInt(btn.dataset.marathonTime, 10);
-          this.mode = 'marathon';
-          this.selectModeCard('marathon');
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      document.querySelectorAll('.classic-count-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          document.querySelectorAll('.classic-count-btn').forEach(b => {
-            b.className = 'classic-count-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-zinc-800 text-zinc-300 hover:text-white border border-zinc-700';
-          });
-          btn.className = 'classic-count-btn px-2.5 py-1 rounded-md text-[11px] font-bold bg-indigo-600 text-white border border-indigo-400';
-          this.classicTarget = parseInt(btn.dataset.classicCount, 10);
-          this.mode = 'classic';
-          this.selectModeCard('classic');
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      document.querySelectorAll('.module-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          document.querySelectorAll('.module-tab').forEach(t => {
-            t.classList.remove('border-indigo-500', 'bg-indigo-950/20');
-            t.classList.add('border-zinc-800', 'bg-zinc-900/60');
-          });
-          tab.classList.remove('border-zinc-800', 'bg-zinc-900/60');
-          tab.classList.add('border-indigo-500', 'bg-indigo-950/20');
-          this.currentModule = tab.dataset.module;
-          this.showModuleConfig(this.currentModule);
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      document.querySelectorAll('.depth-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.depth-btn').forEach(b => {
-            b.className = 'depth-btn px-2 py-0.5 rounded text-xs font-bold text-zinc-400 hover:text-white';
-          });
-          btn.className = 'depth-btn px-2 py-0.5 rounded text-xs font-bold bg-indigo-600 text-white';
-          this.maxMultiplier = parseInt(btn.dataset.multDepth, 10);
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      document.querySelectorAll('.table-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-          const type = chip.dataset.chip;
-          if (type === '1-20') this.selectedTables = Array.from({ length: 20 }, (_, i) => i + 1);
-          else if (type === '21-30') this.selectedTables = Array.from({ length: 10 }, (_, i) => i + 21);
-          else if (type === '31-40') this.selectedTables = Array.from({ length: 10 }, (_, i) => i + 31);
-          else if (type === '41-50') this.selectedTables = Array.from({ length: 10 }, (_, i) => i + 41);
-          else if (type === 'primes') this.selectedTables = [...CGL_PRIMES];
-          else if (type === 'all') this.selectedTables = Array.from({ length: 50 }, (_, i) => i + 1);
-          else if (type === 'clear') this.selectedTables = [];
-          
-          this.syncTableGridSelection();
-          this.updateConfigSummary();
-          sound.tick();
-        });
-      });
-
-      d.chkAutoSubmit.addEventListener('change', (e) => {
-        this.autoSubmit = e.target.checked;
-        d.autoSubmitBadge.classList.toggle('hidden', !this.autoSubmit);
-      });
-
-      d.btnKeypadVirtual.addEventListener('click', () => {
-        this.useNativeKeypad = false;
-        d.btnKeypadVirtual.className = 'px-2 py-0.5 rounded text-xs font-bold bg-indigo-600 text-white';
-        d.btnKeypadNative.className = 'px-2 py-0.5 rounded text-xs font-bold text-zinc-400 hover:text-white';
-        d.virtualKeypad.classList.remove('hidden');
-        sound.tick();
-      });
-
-      d.btnKeypadNative.addEventListener('click', () => {
-        this.useNativeKeypad = true;
-        d.btnKeypadNative.className = 'px-2 py-0.5 rounded text-xs font-bold bg-indigo-600 text-white';
-        d.btnKeypadVirtual.className = 'px-2 py-0.5 rounded text-xs font-bold text-zinc-400 hover:text-white';
-        d.virtualKeypad.classList.add('hidden');
-        d.mathInput.focus();
-        sound.tick();
-      });
-
-      d.btnStartTraining.addEventListener('click', () => this.startSession());
-
-      window.addEventListener('keydown', (e) => this.handleGlobalKeyDown(e));
-
-      document.querySelectorAll('.numpad-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.handleKeypadInput(btn.dataset.key);
-        });
-      });
-
-      d.btnKeypadClear.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.handleKeypadBackspace();
-      });
-
-      d.btnKeypadSubmit.addEventListener('click', (e) => {
-        e.preventDefault();
-        this.submitDirectAnswer();
-      });
-
-      document.querySelectorAll('.aux-key').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.handleKeypadInput(btn.dataset.val);
-        });
-      });
-
-      document.querySelectorAll('.mcq-option-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const idx = parseInt(btn.dataset.optionIdx, 10);
-          this.handleMcqSelect(idx);
-        });
-      });
-
-      d.mathInput.addEventListener('input', () => {
-        sound.tick();
-        if (this.autoSubmit && this.currentQuestion && this.currentQuestion.type === 'direct') {
-          this.checkAutoSubmit();
-        }
-      });
-
-      d.btnPauseSession.addEventListener('click', () => this.pauseSession());
-      d.btnResumeSession.addEventListener('click', () => this.resumeSession());
-      d.btnExitSession.addEventListener('click', () => this.exitSessionToSetup());
-
-      d.btnRetrySession.addEventListener('click', () => {
-        d.modalSummary.classList.add('hidden');
-        this.startSession();
-      });
-      d.btnDrillErrorsFromSummary.addEventListener('click', () => {
-        d.modalSummary.classList.add('hidden');
-        this.startErrorDrillSession();
-      });
-      d.btnCloseSummary.addEventListener('click', () => {
-        d.modalSummary.classList.add('hidden');
-        this.showView('setup');
-      });
-    }
-
-    selectModeCard(mode) {
-      document.querySelectorAll('.mode-card').forEach(c => {
-        if (c.dataset.mode === mode) {
-          c.classList.remove('border-zinc-800', 'bg-zinc-900/60');
-          c.classList.add('border-indigo-500', 'bg-indigo-950/20');
-        } else {
-          c.classList.remove('border-indigo-500', 'bg-indigo-950/20');
-          c.classList.add('border-zinc-800', 'bg-zinc-900/60');
-        }
-      });
-    }
-
-    showModuleConfig(moduleName) {
-      const d = this.dom;
-      d.cfgTables.classList.add('hidden');
-      d.cfgPowers.classList.add('hidden');
-      d.cfgFractions.classList.add('hidden');
-      d.cfgArithmetic.classList.add('hidden');
-      d.cfgElimination.classList.add('hidden');
-
-      if (moduleName === 'tables') d.cfgTables.classList.remove('hidden');
-      else if (moduleName === 'powers') d.cfgPowers.classList.remove('hidden');
-      else if (moduleName === 'fractions') d.cfgFractions.classList.remove('hidden');
-      else if (moduleName === 'arithmetic') d.cfgArithmetic.classList.remove('hidden');
-      else if (moduleName === 'elimination') d.cfgElimination.classList.remove('hidden');
-    }
-
-    renderTableNumbersGrid() {
-      const grid = this.dom.tableNumbersGrid;
-      grid.innerHTML = '';
-      for (let i = 1; i <= 50; i++) {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = `table-num-btn h-6 text-xs font-mono font-bold rounded flex items-center justify-center transition-colors ${
-          this.selectedTables.includes(i) ? 'bg-indigo-600 text-white' : 'bg-zinc-800/80 text-zinc-400 hover:text-white'
-        }`;
-        btn.textContent = i;
-        btn.addEventListener('click', () => {
-          if (this.selectedTables.includes(i)) {
-            this.selectedTables = this.selectedTables.filter(x => x !== i);
-          } else {
-            this.selectedTables.push(i);
-            this.selectedTables.sort((a, b) => a - b);
-          }
-          this.syncTableGridSelection();
-          this.updateConfigSummary();
-          sound.tick();
-        });
-        grid.appendChild(btn);
-      }
-      this.dom.selectedTablesCount.textContent = this.selectedTables.length;
-    }
-
-    syncTableGridSelection() {
-      const btns = this.dom.tableNumbersGrid.querySelectorAll('.table-num-btn');
-      btns.forEach(btn => {
-        const val = parseInt(btn.textContent, 10);
-        if (this.selectedTables.includes(val)) {
-          btn.className = 'table-num-btn h-6 text-xs font-mono font-bold rounded flex items-center justify-center transition-colors bg-indigo-600 text-white';
-        } else {
-          btn.className = 'table-num-btn h-6 text-xs font-mono font-bold rounded flex items-center justify-center transition-colors bg-zinc-800/80 text-zinc-400 hover:text-white';
-        }
-      });
-      this.dom.selectedTablesCount.textContent = this.selectedTables.length;
-    }
-
-    updateConfigSummary() {
-      let modeText = 'Blitz (3s)';
-      if (this.mode === 'blitz') modeText = `Blitz (${this.blitzDuration}s)`;
-      else if (this.mode === 'marathon') modeText = `Marathon (${this.marathonDuration}s)`;
-      else if (this.mode === 'classic') modeText = `Classic (${this.classicTarget} Qs)`;
-      else if (this.mode === 'error_drill') modeText = `Error Drill (Graduation 2×)`;
-
-      let modText = 'Tables';
-      if (this.currentModule === 'tables') modText = `Tables (${this.selectedTables.length} numbers, ≤x${this.maxMultiplier})`;
-      else if (this.currentModule === 'powers') modText = 'Squares & Cubes';
-      else if (this.currentModule === 'fractions') modText = 'Fractions ↔ %';
-      else if (this.currentModule === 'arithmetic') modText = 'Mental Arithmetic';
-      else if (this.currentModule === 'elimination') modText = 'Option Elimination (MCQ)';
-
-      this.dom.summaryConfigText.textContent = `${modeText} · ${modText}`;
-    }
-
-    updateErrorBadges() {
-      const count = errorBank.getCount();
-      this.dom.headerErrorBadge.textContent = count;
-      this.dom.setupErrorCount.textContent = count;
-      if (this.dom.sumErrorBadge) this.dom.sumErrorBadge.textContent = count;
-    }
-
-    updateSoundIcon() {
-      if (sound.enabled) {
-        this.dom.iconSoundOn.classList.remove('hidden');
-        this.dom.iconSoundOff.classList.add('hidden');
-      } else {
-        this.dom.iconSoundOn.classList.add('hidden');
-        this.dom.iconSoundOff.classList.remove('hidden');
-      }
-    }
-
-    showView(viewName) {
-      if (viewName === 'setup') {
-        this.dom.viewSetup.classList.remove('hidden');
-        this.dom.viewDrill.classList.add('hidden');
-        this.dom.modalPause.classList.add('hidden');
-        this.sessionActive = false;
-      } else if (viewName === 'drill') {
-        this.dom.viewSetup.classList.add('hidden');
-        this.dom.viewDrill.classList.remove('hidden');
-        this.dom.modalPause.classList.add('hidden');
-        this.sessionActive = true;
-      }
-    }
-
-    startSession() {
-      this.sessionActive = true;
-      this.sessionPaused = false;
-      this.score = 0;
-      this.totalQuestionsAnswered = 0;
-      this.totalResponseTimeMs = 0;
-      this.streak = 0;
-      this.bestStreakInSession = 0;
-      this.sessionMistakes = [];
-      this.sessionStartTime = Date.now();
-
-      this.dom.drillStreak.textContent = '0';
-      this.dom.drillScore.textContent = '0';
-      this.dom.drillTotalCount.textContent = this.mode === 'classic' ? this.classicTarget : '∞';
-
-      this.showView('drill');
-
-      if (this.useNativeKeypad) {
-        this.dom.virtualKeypad.classList.add('hidden');
-      } else {
-        this.dom.virtualKeypad.classList.remove('hidden');
-      }
-
-      if (this.marathonInterval) clearInterval(this.marathonInterval);
-      if (this.mode === 'marathon') {
-        let remaining = this.marathonDuration;
-        this.dom.timerText.textContent = `${remaining}s`;
-        this.marathonInterval = setInterval(() => {
-          if (!this.sessionPaused && this.sessionActive) {
-            remaining -= 1;
-            this.dom.timerText.textContent = `${remaining}s`;
-            const pct = (remaining / this.marathonDuration) * 100;
-            this.dom.timerBar.style.width = `${pct}%`;
-            if (pct < 20) {
-              this.dom.timerBar.className = 'h-full bg-rose-500 rounded-full transition-all duration-100 origin-left';
-            } else if (pct < 40) {
-              this.dom.timerBar.className = 'h-full bg-amber-400 rounded-full transition-all duration-100 origin-left';
-            } else {
-              this.dom.timerBar.className = 'h-full bg-indigo-500 rounded-full transition-all duration-100 origin-left';
-            }
-
-            if (remaining <= 0) {
-              clearInterval(this.marathonInterval);
-              this.endSession();
-            }
-          }
-        }, 1000);
-      }
-
-      this.nextQuestion();
-    }
-
-    startErrorDrillSession() {
-      const items = errorBank.load();
-      if (items.length === 0) {
-        alert('No logged mistakes in Error Bank! All weak spots conquered.');
-        return;
-      }
-      this.mode = 'error_drill';
-      this.errorDrillPool = shuffleArray([...items]);
-      this.startSession();
-    }
-
-    nextQuestion() {
-      if (!this.sessionActive) return;
-
-      if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
-
-      if (this.mode === 'classic' && this.totalQuestionsAnswered >= this.classicTarget) {
-        this.endSession();
-        return;
-      }
-
-      this.isProcessingAnswer = false;
-      this.currentQuestion = this.generateNextQuestion();
-      this.questionStartTime = Date.now();
-
-      this.dom.drillCategoryBadge.textContent = this.currentQuestion.category;
-      this.dom.drillQuestionText.textContent = this.currentQuestion.prompt;
-      this.dom.drillQuestionSubtext.textContent = this.currentQuestion.subtext || '';
-
-      this.dom.drillFeedbackBanner.style.opacity = '0';
-      this.dom.inputBoxWrapper.className = 'relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-zinc-900 border-2 border-zinc-700 transition-colors shadow-inner';
-      this.dom.mathInput.value = '';
-
-      if (this.currentQuestion.type === 'mcq') {
-        this.dom.containerDirectInput.classList.add('hidden');
-        this.dom.containerMcqOptions.classList.remove('hidden');
-        this.dom.cglShortcutBanner.classList.add('hidden');
-
-        for (let i = 0; i < 4; i++) {
-          const optEl = document.getElementById(`optText${i}`);
-          if (optEl && this.currentQuestion.options[i] !== undefined) {
-            optEl.textContent = this.currentQuestion.options[i];
-          }
-          const btn = document.querySelector(`[data-option-idx="${i}"]`);
-          if (btn) {
-            btn.className = 'mcq-option-btn p-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-850 border border-zinc-800 active:scale-98 text-left transition-all flex items-center justify-between group';
-          }
-        }
-      } else {
-        this.dom.containerDirectInput.classList.remove('hidden');
-        this.dom.containerMcqOptions.classList.add('hidden');
-
-        if (this.currentQuestion.hasFractionKeys) {
-          this.dom.fractionHelperRow.classList.remove('hidden');
-        } else {
-          this.dom.fractionHelperRow.classList.add('hidden');
-        }
-
-        this.dom.mathInput.focus();
-      }
-
-      if (this.mode === 'blitz' || this.mode === 'error_drill') {
-        const durationSec = this.mode === 'blitz' ? this.blitzDuration : 4;
-        const totalDurationMs = durationSec * 1000;
-        const startTime = performance.now();
-
-        const updateTimer = (now) => {
-          if (!this.sessionActive || this.isProcessingAnswer) return;
-          if (this.sessionPaused) {
-            this.animFrameId = requestAnimationFrame(updateTimer);
-            return;
-          }
-
-          const elapsed = now - startTime;
-          const remainingMs = Math.max(0, totalDurationMs - elapsed);
-          const ratio = remainingMs / totalDurationMs;
-
-          this.dom.timerBar.style.width = `${ratio * 100}%`;
-          this.dom.timerText.textContent = `${(remainingMs / 1000).toFixed(1)}s`;
-
-          if (ratio < 0.25) {
-            this.dom.timerBar.className = 'h-full bg-rose-500 rounded-full transition-all duration-75 origin-left';
-            this.dom.timerText.className = 'font-mono-numbers text-xs font-bold text-rose-400 w-9 text-right';
-          } else if (ratio < 0.5) {
-            this.dom.timerBar.className = 'h-full bg-amber-400 rounded-full transition-all duration-75 origin-left';
-            this.dom.timerText.className = 'font-mono-numbers text-xs font-bold text-amber-400 w-9 text-right';
-          } else {
-            this.dom.timerBar.className = 'h-full bg-indigo-500 rounded-full transition-all duration-75 origin-left';
-            this.dom.timerText.className = 'font-mono-numbers text-xs font-bold text-zinc-300 w-9 text-right';
-          }
-
-          if (remainingMs <= 0) {
-            this.handleTimeout();
-          } else {
-            this.animFrameId = requestAnimationFrame(updateTimer);
-          }
-        };
-
-        this.animFrameId = requestAnimationFrame(updateTimer);
-      } else if (this.mode === 'classic') {
-        this.dom.timerBar.style.width = `${((this.totalQuestionsAnswered) / this.classicTarget) * 100}%`;
-        this.dom.timerText.textContent = `${this.totalQuestionsAnswered}/${this.classicTarget}`;
-      }
-    }
-
-    generateNextQuestion() {
-      if (this.mode === 'error_drill' && this.errorDrillPool.length > 0) {
-        const item = this.errorDrillPool.pop();
-        return {
-          category: `Weak Spot (${item.category || 'Review'})`,
-          type: item.type === 'mcq' ? 'mcq' : 'direct',
-          prompt: item.prompt,
-          answer: String(item.answer),
-          acceptedAnswers: [String(item.answer)],
-          subtext: item.explanation || 'Answer carefully to graduate',
-          explanation: item.explanation || `Answer: ${item.answer}`
-        };
-      }
-
-      if (this.currentModule === 'tables') {
-        return QuestionGenerators.tables(this.selectedTables, this.maxMultiplier);
-      } else if (this.currentModule === 'powers') {
-        const opts = {
-          sq1_25: document.getElementById('chkSquares1_25').checked,
-          sq26_50: document.getElementById('chkSquares26_50').checked,
-          cu1_15: document.getElementById('chkCubes1_15').checked,
-          cu16_30: document.getElementById('chkCubes16_30').checked,
-          includeRoots: document.getElementById('chkIncludeRoots').checked
-        };
-        return QuestionGenerators.powers(opts);
-      } else if (this.currentModule === 'fractions') {
-        const opts = {
-          unit: document.getElementById('chkUnitFractions').checked,
-          common: document.getElementById('chkCommonFractions').checked,
-          bidirectional: document.getElementById('chkPercentToFraction').checked
-        };
-        return QuestionGenerators.fractions(opts);
-      } else if (this.currentModule === 'arithmetic') {
-        const opts = {
-          add2: document.getElementById('chkAdd2Digit').checked,
-          add3: document.getElementById('chkAdd3Digit').checked,
-          sub2: document.getElementById('chkSub2Digit').checked,
-          mult2x2: document.getElementById('chkMult2x2').checked,
-          pctShortcut: document.getElementById('chkPercentShortcut').checked
-        };
-        return QuestionGenerators.arithmetic(opts);
-      } else if (this.currentModule === 'elimination') {
-        const opts = {
-          unit: document.getElementById('chkUnitDigit').checked,
-          tens: document.getElementById('chkTensDigit').checked,
-          root: document.getElementById('chkDigitalRoot').checked,
-          approx: document.getElementById('chkApprox').checked
-        };
-        return QuestionGenerators.elimination(opts);
-      }
-
-      return QuestionGenerators.tables(this.selectedTables, 12);
-    }
-
-    checkAutoSubmit() {
-      const val = this.dom.mathInput.value.trim();
-      if (!val || !this.currentQuestion) return;
-
-      const ans = String(this.currentQuestion.answer).trim();
-      const accepted = this.currentQuestion.acceptedAnswers || [ans];
-
-      if (accepted.some(a => a.toLowerCase() === val.toLowerCase())) {
-        this.submitDirectAnswer();
-      }
-    }
-
-    submitDirectAnswer() {
-      if (this.isProcessingAnswer || !this.currentQuestion) return;
-      const userVal = this.dom.mathInput.value.trim().toLowerCase();
-      if (!userVal) return;
-
-      const accepted = (this.currentQuestion.acceptedAnswers || [String(this.currentQuestion.answer)]).map(a => a.trim().toLowerCase());
-      const isCorrect = accepted.includes(userVal);
-      this.finalizeQuestionAnswer(isCorrect, userVal);
-    }
-
-    handleMcqSelect(choiceIndex) {
-      if (this.isProcessingAnswer || !this.currentQuestion || this.currentQuestion.type !== 'mcq') return;
-      const isCorrect = choiceIndex === this.currentQuestion.correctIndex;
-      
-      const btn = document.querySelector(`[data-option-idx="${choiceIndex}"]`);
-      if (btn) {
-        if (isCorrect) {
-          btn.classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-300');
-        } else {
-          btn.classList.add('bg-rose-500/20', 'border-rose-500', 'text-rose-300');
-          const correctBtn = document.querySelector(`[data-option-idx="${this.currentQuestion.correctIndex}"]`);
-          if (correctBtn) correctBtn.classList.add('bg-emerald-500/20', 'border-emerald-500', 'text-emerald-300');
-        }
-      }
-
-      if (this.currentQuestion.explanation) {
-        this.dom.cglShortcutBanner.classList.remove('hidden');
-        this.dom.cglShortcutText.textContent = this.currentQuestion.explanation;
-      }
-
-      this.finalizeQuestionAnswer(isCorrect, choiceIndex);
-    }
-
-    handleTimeout() {
-      if (this.isProcessingAnswer || !this.currentQuestion) return;
-      this.finalizeQuestionAnswer(false, 'TIMEOUT');
-    }
-
-    finalizeQuestionAnswer(isCorrect, userVal) {
-      this.isProcessingAnswer = true;
-      if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
-
-      const reactionTimeMs = Date.now() - this.questionStartTime;
-      this.totalQuestionsAnswered += 1;
-      this.totalResponseTimeMs += reactionTimeMs;
-
-      if (isCorrect) {
-        this.score += 1;
-        this.streak += 1;
-        if (this.streak > this.bestStreakInSession) this.bestStreakInSession = this.streak;
-        
-        sound.correct();
-        sound.vibrate([30, 20, 30]);
-
-        if (this.streak > 0 && this.streak % 10 === 0) {
-          sound.streakMilestone();
-        }
-
-        errorBank.recordSuccess(this.currentQuestion.prompt);
-
-        this.dom.inputBoxWrapper.className = 'relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-emerald-950/40 border-2 border-emerald-500 shadow-inner transition-colors';
-        
-        const delay = this.currentQuestion.type === 'mcq' ? 800 : 180;
-        setTimeout(() => {
-          this.updateSessionStatsHeader();
-          this.nextQuestion();
-        }, delay);
-
-      } else {
-        this.streak = 0;
-        sound.wrong();
-        sound.vibrate([100]);
-
-        errorBank.recordMistake(this.currentQuestion);
-        this.sessionMistakes.push({
-          q: this.currentQuestion.prompt,
-          ans: this.currentQuestion.answer,
-          user: userVal,
-          explanation: this.currentQuestion.explanation
-        });
-        this.updateErrorBadges();
-
-        this.dom.inputBoxWrapper.className = 'relative flex items-center justify-center w-full h-14 sm:h-16 rounded-2xl bg-rose-950/40 border-2 border-rose-500 shadow-inner animate-shake transition-colors';
-        
-        this.dom.feedbackText.textContent = userVal === 'TIMEOUT' ? '⏰ Time Out' : '❌ Wrong';
-        this.dom.feedbackAnswer.textContent = `Correct: ${this.currentQuestion.answer}`;
-        this.dom.drillFeedbackBanner.className = 'absolute -bottom-2 inset-x-2 py-2 px-3 rounded-xl border border-rose-500/50 bg-rose-950/90 text-rose-200 flex items-center justify-between text-xs font-semibold opacity-100 transition-opacity z-20 shadow-lg';
-
-        const delay = this.currentQuestion.type === 'mcq' ? 1200 : 850;
-        setTimeout(() => {
-          this.updateSessionStatsHeader();
-          this.nextQuestion();
-        }, delay);
-      }
-
-      lifetimeStats.record(isCorrect, reactionTimeMs, this.streak);
-    }
-
-    updateSessionStatsHeader() {
-      this.dom.drillStreak.textContent = this.streak;
-      this.dom.drillScore.textContent = this.score;
-      if (this.mode === 'classic') {
-        this.dom.drillTotalCount.textContent = this.classicTarget;
-      } else {
-        this.dom.drillTotalCount.textContent = this.totalQuestionsAnswered;
-      }
-    }
-
-    handleGlobalKeyDown(e) {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        if (this.sessionActive) {
-          if (this.sessionPaused) this.resumeSession();
-          else this.pauseSession();
-        }
-        return;
-      }
-
-      if (this.sessionPaused && e.code === 'Space') {
-        e.preventDefault();
-        this.resumeSession();
-        return;
-      }
-
-      if (!this.sessionActive || this.sessionPaused) return;
-
-      if (this.currentQuestion && this.currentQuestion.type === 'mcq') {
-        if (['1', '2', '3', '4'].includes(e.key)) {
-          e.preventDefault();
-          this.handleMcqSelect(parseInt(e.key, 10) - 1);
-          return;
-        }
-      }
-
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        this.submitDirectAnswer();
-        return;
-      }
-
-      if (this.currentQuestion && this.currentQuestion.type === 'direct') {
-        if (document.activeElement !== this.dom.mathInput) {
-          this.dom.mathInput.focus();
-        }
-      }
-    }
-
-    handleKeypadInput(key) {
-      if (!this.sessionActive || !this.currentQuestion || this.currentQuestion.type !== 'direct') return;
-      this.dom.mathInput.value += key;
-      sound.tick();
-      if (this.autoSubmit) this.checkAutoSubmit();
-    }
-
-    handleKeypadBackspace() {
-      if (!this.sessionActive || !this.currentQuestion || this.currentQuestion.type !== 'direct') return;
-      this.dom.mathInput.value = this.dom.mathInput.value.slice(0, -1);
-      sound.tick();
-    }
-
-    pauseSession() {
-      this.sessionPaused = true;
-      this.dom.modalPause.classList.remove('hidden');
-    }
-
-    resumeSession() {
-      this.sessionPaused = false;
-      this.dom.modalPause.classList.add('hidden');
-      if (this.currentQuestion && this.currentQuestion.type === 'direct') {
-        this.dom.mathInput.focus();
-      }
-    }
-
-    exitSessionToSetup() {
-      this.sessionActive = false;
-      this.sessionPaused = false;
-      if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
-      if (this.marathonInterval) clearInterval(this.marathonInterval);
-      this.dom.modalPause.classList.add('hidden');
-      this.showView('setup');
-    }
-
-    endSession() {
-      this.sessionActive = false;
-      if (this.animFrameId) cancelAnimationFrame(this.animFrameId);
-      if (this.marathonInterval) clearInterval(this.marathonInterval);
-
-      const d = this.dom;
-      const total = this.totalQuestionsAnswered || 1;
-      const acc = Math.round((this.score / total) * 100);
-      const avgReaction = total > 0 ? (this.totalResponseTimeMs / total / 1000).toFixed(2) : '0.00';
-
-      d.summaryModeLabel.textContent = `${this.mode.toUpperCase()} · ${this.currentModule.toUpperCase()}`;
-      d.sumAccuracy.textContent = `${acc}%`;
-      d.sumScore.textContent = `${this.score}/${this.totalQuestionsAnswered} correct`;
-      d.sumAvgSpeed.textContent = `${avgReaction}s`;
-      d.sumBestStreak.textContent = `${this.bestStreakInSession}`;
-      d.sumErrorsLogged.textContent = `${this.sessionMistakes.length}`;
-      if (d.sumErrorBadge) d.sumErrorBadge.textContent = errorBank.getCount();
-
-      d.modalSummary.classList.remove('hidden');
-      this.updateErrorBadges();
-    }
-
-    openErrorBankModal() {
-      this.renderErrorBankItems();
-      this.dom.modalErrorBank.classList.remove('hidden');
-    }
-
-    renderErrorBankItems() {
-      const items = errorBank.load();
-      const list = this.dom.errorBankList;
-      list.innerHTML = '';
-
-      if (items.length === 0) {
-        list.innerHTML = `
-          <div class="py-8 text-center text-zinc-400">
-            <div class="text-3xl mb-2">🎉</div>
-            <div class="text-sm font-semibold text-zinc-300">Clean Slate!</div>
-            <div class="text-xs text-zinc-400 mt-1">No logged mistakes. Any misses will be queued here for spaced repetition.</div>
-          </div>
-        `;
-        return;
-      }
-
-      items.forEach((item) => {
-        const div = document.createElement('div');
-        div.className = 'p-3 rounded-xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between gap-3';
-        div.innerHTML = `
-          <div>
-            <div class="text-sm font-bold text-white font-mono-numbers">${item.prompt}</div>
-            <div class="text-xs text-emerald-400 font-semibold mt-0.5">${item.explanation || 'Ans: ' + item.answer}</div>
-          </div>
-          <div class="text-right shrink-0">
-            <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">
-              ${item.consecutiveCorrect || 0}/2 Correct
-            </span>
-          </div>
-        `;
-        list.appendChild(div);
-      });
-    }
-
-    openStatsModal() {
-      this.renderStatsModal();
-      this.dom.modalStats.classList.remove('hidden');
-    }
-
-    renderStatsModal() {
-      const s = lifetimeStats.load();
-      const d = this.dom;
-      d.statTotalAnswered.textContent = s.totalAnswered.toLocaleString();
-      const acc = s.totalAnswered > 0 ? Math.round((s.totalCorrect / s.totalAnswered) * 100) : 0;
-      d.statLifetimeAccuracy.textContent = `${acc}%`;
-      d.statBestStreak.textContent = s.bestStreak.toLocaleString();
-      const avg = s.totalAnswered > 0 ? Math.round(s.totalTimeMs / s.totalAnswered) : 0;
-      d.statAvgReaction.textContent = `${avg} ms`;
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    window.__mathApp = new MathHubApp();
-  });
-})();
-  </script>
+  <script src="/src/app.js"></script>
 </body>
 </html>
