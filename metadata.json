@@ -1,0 +1,6 @@
+{
+  "name": "Math Practice Hub - SSC CGL Speed Trainer",
+  "description": "Ultra-fast, competitive-exam grade mental math calculation trainer tailored for SSC CGL Quantitative Aptitude with Blitz mode, table mastery, option elimination, and error bank.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
