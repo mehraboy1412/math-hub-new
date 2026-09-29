@@ -1977,7 +1977,11 @@
     }
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      window.__mathApp = new MathHubApp();
+    });
+  } else {
     window.__mathApp = new MathHubApp();
-  });
+  }
 })();
