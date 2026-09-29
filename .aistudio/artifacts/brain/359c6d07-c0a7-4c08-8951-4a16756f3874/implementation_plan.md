@@ -1,51 +1,49 @@
-# Subtext Hint Fix: Prevent Answer Leakage in Question Examples
+# Fix Production Deployment Build: Module Script Bundling
 
-Resolve the issue where subtext examples dynamically interpolated the active question's actual answer, replacing them with generic, static formatting guidance.
+Fix the issue causing the application to fail after deployment on the shared URL while functioning in development.
 
 ## User Review & Critical Decisions
 
 > [!IMPORTANT]
-> In Fraction and Arithmetic drill modes, the subtext helper previously rendered the active question's exact answer (e.g., displaying `(e.g. 14 2/7 or 14.28%)` for `1/7 = ? %`). This will be replaced immediately with neutral, static format examples (e.g., `(e.g. 16 2/3 or 16.66)`), preserving the training challenge.
+> The root cause was identified: `index.html` had `<script src="/src/app.js"></script>` without `type="module"`. In development, Vite serves static root files directly; however, during the production build (`vite build`), Vite emitted:
+> `"<script src="/src/app.js"> in "/index.html" can't be bundled without type="module" attribute"`
+> As a result, `src/app.js` was completely omitted from the deployed `dist/` directory, causing a 404 error when deployed.
 
-- **Confirmed Decision**: Replace all dynamic answer template strings in `subtext` with static, educational format examples that never match the active problem.
-
----
-
-## 1. Problem Root Cause
-
-In `src/app.js`:
-1. **Fraction to Percentage**:
-   - `subtext: Enter mixed fraction (e.g. ${mixedRaw}) or decimal (${item.decimals[0]}%)`
-   - Leaked the exact mixed fraction and decimal answer to the user before they typed.
-2. **Percentage to Fraction**:
-   - `subtext: Enter fraction as numerator/denominator (e.g. ${item.fraction})`
-   - Leaked the exact fraction answer (e.g. `3/8` when asking `37.5% = ?`).
-3. **2-Digit Addition**:
-   - `subtext: Split & Merge: (${Math.floor(a/10)*10} + ${Math.floor(b/10)*10}) + (${a%10} + ${b%10})`
-   - Leaked the split values.
-4. **2-Digit Subtraction**:
-   - `subtext: Split: ${a} - ${Math.floor(b/10)*10} - ${b%10}`
-   - Leaked the split values.
+- **Confirmed Decision 1**: Add `type="module"` to the script tag in `index.html` so Vite compiles, bundles, minifies, and outputs the JavaScript bundle into `dist/assets/`.
+- **Confirmed Decision 2**: Update `src/app.js` initialization to run immediately if DOM is already parsed (`document.readyState !== 'loading'`) or on `DOMContentLoaded`, ensuring instant execution in both bundled and unbundled modes.
+- **Confirmed Decision 3**: Update `vite.config.ts` alias to use `import.meta.dirname` to clear build warnings.
 
 ---
 
-## 2. Solution & Static Format Guidelines
+## 1. Root Cause Analysis
 
-- **Fraction to Percentage**:
-  - `subtext: 'Enter as mixed fraction (e.g. 16 2/3) or decimal (16.66)'`
-- **Percentage to Fraction**:
-  - `subtext: 'Enter reduced fraction (e.g. 1/4 or 3/8)'`
-- **Addition**:
-  - `subtext: 'Left-to-right mental split: add tens first, then units'`
-- **Subtraction**:
-  - `subtext: 'Left-to-right mental split: subtract tens first, then units'`
-- **Squares & Cubes**:
-  - Keep clean generic labels (`'Calculate square'` / `'Find cube root'`).
+1. In Dev Server (`npm run dev`):
+   - Vite acts as an HTTP server that maps `/src/app.js` on demand.
+2. In Production Deployment (`npm run build` ➔ Cloud Run serving `dist/`):
+   - Vite parses `index.html`. Because `<script src="/src/app.js">` lacked `type="module"`, Vite ignored it and did not bundle it into `dist/`.
+   - `dist/index.html` was generated with a dead reference to `/src/app.js`.
+   - On the deployed URL, requests to `/src/app.js` failed with a 404 (or served fallback HTML), preventing any script from executing.
 
 ---
 
-## 3. Implementation Steps
+## 2. Technical Implementation Plan
 
-1. In `src/app.js`, edit `QuestionGenerators.fractions` and `QuestionGenerators.arithmetic` to eliminate all active variable interpolations from `subtext`.
-2. Ensure both `src/app.js` and `index.html` maintain these neutral static guidelines.
-3. Validate compilation with `compile_applet` and `lint_applet`.
+1. **`index.html`**:
+   - Change:
+     ```html
+     <script type="module" src="/src/app.js"></script>
+     ```
+2. **`src/app.js`**:
+   - Ensure the app instantiates whether the module script executes before or after `DOMContentLoaded`:
+     ```javascript
+     if (document.readyState === 'loading') {
+       document.addEventListener('DOMContentLoaded', () => { window.__mathApp = new MathHubApp(); });
+     } else {
+       window.__mathApp = new MathHubApp();
+     }
+     ```
+3. **`vite.config.ts`**:
+   - Replace `__dirname` with `import.meta.dirname` to adhere to modern Vite config standards.
+4. **Verification**:
+   - Run `npm run build` and inspect `dist/` to verify that `dist/assets/index-*.js` is produced and referenced in `dist/index.html`.
+   - Run `compile_applet` and `lint_applet`.

@@ -1,6 +1,6 @@
 {
-  "summary":  "Plan to fix the subtext hint answer leak across all question types by replacing dynamic answer interpolation with static generic formatting examples.",
-  "updatedAt":  "2026-09-29T11:35:35.023182032Z",
+  "summary":  "Plan to fix the production deployment bug where Vite skipped bundling /src/app.js due to missing type='module' attribute, causing a 404 script failure in production.",
+  "updatedAt":  "2026-09-29T11:59:01.067251433Z",
   "requestFeedback":  true,
   "userFacing":  true
 }
